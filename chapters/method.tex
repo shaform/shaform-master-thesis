@@ -23,13 +23,15 @@ with the connective component lexicon, we use connective lexicon and only extrac
 a component candidate when it forms a single connective or pairs with
 other candidates to form a paired connective. This leaves us with 12,526 candidates.
 
-To further reduce the number of candidates, Stanford Chinese
-segmenter~\citep{chang2008optimizing} is employed to segment paragraphs into tokens. We use
-the token boundary as clues for eliminating spurious candidates. In particular,
-we only extract a component when it can be composed by complete tokens. For example,
-in (S~\ref{sent:keyissue}) we extract ``不是...而是'' (not ... but) as a candidate
+One reason for many incorrect instances is that many characters used for connectives
+appear in other unrelated words. For example, even though ``如'' (if) is a connective,
+this character appears in an unrelated word ``如是说'' (says). To alleviate this problem,
+Stanford Chinese segmenter~\citep{chang2008optimizing} is employed to segment paragraphs
+into tokens. These token boundaries can be used as clues for eliminating spurious candidates.
+In particular, we only extract a component when it can be composed by complete tokens.
+For example, in (S~\ref{sent:keyissue}) we extract ``不是...而是'' (not ... but) as a candidate
 even though ``不'' (not) and ``是'' (is) are separated. Comparatively, in (S~\ref{sent:improve}),
-``如'' (if) is not extracted because it does not satisfy a token boundary.
+the correct connective ``如'' (if) is not extracted because it does not satisfy a token boundary.
 
 \begin{sent}{sent:keyissue}{}
     当前 / 经济 / 的 / 关键 / \underline{不} / \underline{是} / 争取 / 更 /
