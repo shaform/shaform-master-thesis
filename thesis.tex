@@ -6,6 +6,7 @@
 \usepackage{url}
 \usepackage{graphicx}
 \usepackage{array}
+\usepackage{hhline}
 
 \usepackage{multirow} 
 \usepackage{rotating}
@@ -133,6 +134,18 @@
 \floatname{algorithm}{Algorithm}
 \renewcommand{\algorithmicrequire}{\textbf{Input:}}
 \renewcommand{\algorithmicensure}{\textbf{Output:}}
+
+% sentence
+\newcounter{sentcounter}
+\renewcommand{\thesentcounter}{\arabic{sentcounter}}
+
+\newenvironment{sent}[2]{%
+\refstepcounter{sentcounter}%
+\label{#1}%
+(S~\thesentcounter)%
+}%
+{}%
+
 
 \begin{document}
 

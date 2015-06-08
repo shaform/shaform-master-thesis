@@ -6,3 +6,50 @@
 %
 \chapter{Methods}
 \label{c:method}
+
+\section{Connective Candidate Extraction}
+
+To identify the correct discourse connectives, we need to
+extract connective candidates and distinguish between discourse
+and non-discourse usages among these candidates.
+
+Firstly, we attempt the detection of connective component candidates.
+The simplest method is to just use string matching with the connective
+component lexicon we obtained to extract all possible instances. This yields
+24,539 candidates, while only 2,131 of them are correct instances. An improvement
+could be made by making the observation that many of the components only have
+discourse meaning when they are paired with other components. So instead of matching
+with the connective component lexicon, we use connective lexicon and only extract
+a component candidate when it forms a single connective or pairs with
+other candidates to form a paired connective. This leaves us with 12,526 candidates.
+
+To further reduce the number of candidates, Stanford Chinese
+segmenter~\citep{chang2008optimizing} is employed to segment paragraphs into tokens. We use
+the token boundary as clues for eliminating spurious candidates. In particular,
+we only extract a component when it can be composed by complete tokens. For example,
+in (S~\ref{sent:keyissue}) we extract ``不是...而是'' (not ... but) as a candidate
+even though ``不'' (not) and ``是'' (is) are separated. Comparatively, in (S~\ref{sent:improve}),
+``如'' (if) is not extracted because it does not satisfy a token boundary.
+
+\begin{sent}{sent:keyissue}{}
+    当前 / 经济 / 的 / 关键 / \underline{不} / \underline{是} / 争取 / 更 /
+    高 / 的 / 增长 / 速度 / ， / \underline{而是} / 提高 / 效益 / 。
+    (The key issue for current economy is not to pursue faster growth, but to
+    increase productivity.)
+\end{sent}
+
+\begin{sent}{sent:improve}{}
+    \underline{如}无 / 改进 / ， / 很 / 难 / 在 / 海外 / 市场 / 参与 / 竞争 /
+    。 (It will be difficult to compete in foreign markets if there is no
+    improvement.)
+\end{sent}
+
+Using this procedure, only 7,649 component candidates are extracted, with 2,068 of 2,131 annotated
+components recovered. These candidates could form 7,976 connective candidates, recovering
+1,755 of 1,813 annotated connectives. Thus, 0.9704 and 0.9680 become upper bounds of recall
+for the subsequent stages. Table~\ref{t:cand-extract} shows the comparison between different
+extraction methods. The technique we use reduce spurious candidates substantially while
+maintaining high recall.
+
+%t:cand-extract
+\input{tables/cand-extract}
