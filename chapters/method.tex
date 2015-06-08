@@ -55,3 +55,89 @@ maintaining high recall.
 
 %t:cand-extract
 \input{tables/cand-extract}
+
+\section{Discourse Usage Disambiguation}
+
+We start by investigating the identification of connective components that have discourse functions.
+We use \textit{Scikit-Learn} library~\citep{scikit-learn} to carry out binary classification between discourse
+and non-discourse usages for all candidates. Various classifiers such as \textit{Logistic Regression}
+and \textit{Support Vector Machine (SVM)} have been experimented, and the results are
+reported in Chapeter~\ref{c:exp}. The SVM included by Scikit-Learn is a \textit{Python} wrapper for the popular
+\textit{LibSVM} library~\citep{CC01a}.
+
+\subsection{Features}
+
+The feature set we used for classification is as follows.
+When we extract features related to the parse tree, we use utilities provided by the
+\textit{Natural Language Toolkit}~\citep{BirdKleinLoper09}.
+
+\subsubsection{P\&N}
+
+The feature set is a subset of the features from
+\cite{pitler2009using}. It includes four binary features:
+(1) the highest category that dominates exactly the component
+itself in the parse tree, which is called self-category, (2) the parent of the self-category,
+(3) the left-sibling of the self-category, and (4) the right-sibling of the self-category.
+Special null features are set when no such nodes exist. For example,
+in Figure~\ref{i:parse-but}, there is no node that dominates exactly the
+connective component ``却是'' (but), while in Figure~\ref{i:parse-therefore} the
+self-category of ``因此'' (therefore) is ADVP. We have also experimented
+with the full feature set, but the performance does not increase.
+
+%i:parse-but
+%i:parse-therefore
+\input{figures/parse}
+
+\subsubsection{POS}
+
+The feature set contains three types of binary features:
+(1) part-of-speech tags for all tokens that constitute the connective component,
+(2) part-of-speech tag of the token to the left of the component, and
+(3) part-of-speech tag of the token to the right of the component. For example,
+in (S~\ref{sent:sovereignty}) the features for ``意味着'' (meaning) are
+\textbf{POS-left-PU}, \textbf{POS-right-PN}, \textbf{POS-self-VV}, and
+\textbf{POS-self-AS}.
+
+\begin{sent}{sent:sovereignty}{}
+    一百二十七/CD 位/M 委员/NN 一致/AD 通过/VV ，/PU \underline{意味/VV 着/AS} 大家/PN 对/P
+    恢复/VV 行使/VV 香港/NR 主权/NN 后/LC 的/DEG 政治/NN 架构/NN 重建/NN ，/PU
+    有/VE 着/AS 高度/JJ 的/DEG 共识/NN 。/PU
+    (All 127 committee members agreed, meaning that everyone reaches a consensus about
+    the reconstruction of political structure after resuming exercise of sovereignty over Hong Kong.)
+\end{sent}
+
+\subsubsection{NUM}
+
+The feature set contains three numerical features. (1) The number of detected
+connective candidates the component involves. The larger the number of (1) means that
+the component candidate can form more plausible connective candidates by linking with
+other component candidates. (2) The distance from the connective component
+to a separating element on the left. (3) The distance from the connective component to a
+separating element on the right. Distance is measured by adding 1 to the number of tokens
+between the separating element and the nearest token of the component.
+The separating elements include the symbols ``！？：；，。''.
+When no such symbol is found, we use the distance to paragraph boundary.
+For example, in (S 3) the features for “意味着” (meaning) are \textbf{NUM-AMBIGUITY=X},
+\textbf{NUM-left=1}, and \textbf{NUM-right=12}, where X depends on the number of candidate
+connectives detected.
+
+
+\subsubsection{VECTOR}
+
+This feature set is built using word embeddings we created.
+We have tried creating 400-dimensional embeddings by GloVe tool~\citep{pennington2014glove}
+and word2vec tool~\citep{mikolov2013efficient,mikolov2013distributed}.
+
+The vectors are used to construct three features: (1) the averaged vectors
+for the tokens that constitute the connective component, (2) the vector for the
+token to the right and (3) the vector for the token to the left. Zero-valued vector is used
+when the vector does not exist.
+
+In total, it's a 1200-dimensional vector when the embeddings are used independently.
+The dimensionality increases proportionally when we combine different vectors produced by
+different tools.
+
+
+
+\section{Connective Linking Disambiguation}
+\section{Connective Argument Extraction}
