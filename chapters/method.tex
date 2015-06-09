@@ -66,6 +66,7 @@ reported in Chapeter~\ref{c:exp}. The SVM included by Scikit-Learn is a \textit{
 \textit{LibSVM} library~\citep{CC01a}.
 
 \subsection{Features}
+\label{s:comp-features}
 
 The feature set we used for classification is as follows.
 When we extract features related to the parse tree, we use utilities provided by the
@@ -108,15 +109,20 @@ in (S~\ref{sent:sovereignty}) the features for ``意味着'' (meaning) are
 
 \subsubsection{NUM}
 
-The feature set contains three numerical features. (1) The number of detected
-connective candidates the component involves. The larger the number of (1) means that
-the component candidate can form more plausible connective candidates by linking with
-other component candidates. (2) The distance from the connective component
-to a separating element on the left. (3) The distance from the connective component to a
-separating element on the right. Distance is measured by adding 1 to the number of tokens
-between the separating element and the nearest token of the component.
-The separating elements include the symbols ``！？：；，。''.
-When no such symbol is found, we use the distance to paragraph boundary.
+The feature set contains three numerical features.
+
+\begin{enumerate}
+    \item The number of detected connective candidates the component involves. The larger
+        the number means that the component candidate can form more plausible connective
+        candidates by linking with other component candidates.
+    \item The distance from the connective component to a separating element on the left.
+    \item The distance from the connective component to a
+        separating element on the right. Distance is measured by adding 1 to the number of tokens
+        between the separating element and the nearest token of the component.
+        The separating elements include the symbols ``！？：；，。''.
+        When no such symbol is found, we use the distance to paragraph boundary.
+\end{enumerate}
+
 For example, in (S 3) the features for “意味着” (meaning) are \textbf{NUM-AMBIGUITY=X},
 \textbf{NUM-left=1}, and \textbf{NUM-right=12}, where X depends on the number of candidate
 connectives detected.
@@ -130,7 +136,7 @@ and word2vec tool~\citep{mikolov2013efficient,mikolov2013distributed}.
 
 The vectors are used to construct three features: (1) the averaged vectors
 for the tokens that constitute the connective component, (2) the vector for the
-token to the right and (3) the vector for the token to the left. Zero-valued vector is used
+token to the left and (3) the vector for the token to the right. Zero-valued vector is used
 when the vector does not exist.
 
 In total, it's a 1200-dimensional vector when the embeddings are used independently.
@@ -138,6 +144,102 @@ The dimensionality increases proportionally when we combine different vectors pr
 different tools.
 
 
-
 \section{Connective Linking Disambiguation}
+
+Rather than eliminating non-discourse connective components first and
+dealing with linking disambiguation for overlapped connectives later,
+we try to solve them together as linking may provide additional clues for
+detecting discourse usage. We treat each connective candidate as an instance
+and extract similar features for each candidate. Afterwards, a two-stage
+process is carried out to identify correct instances.
+
+Firstly, we use machine learning to eliminate unlikely candidates. This is done by
+training a regression model to predict the scores for each candidate and eliminate
+all instances that have scores under a threshold. When training, each real connective
+is set to 1 and each spurious connective is set to 0. Since there are more spurious
+connectives than real connectives, and we want to preserve most of the real connectives before
+the next stage, we balance the data set by oversampling the correct instances for four times.  
+At test time, the score of each candidate is obtained, and all
+connectives with scores lower than a threshold are eliminated.
+
+Afterwards, there remain some connective candidates that overlap with each other. That is,
+they share the same connective component. So we greedily accept connective candidates
+ordered by their lengths and then their scores, while rejecting overlapped ones. We have observed
+that the more components a connective has, the less likely a spurious instance would be
+detected. Thus we use length as a criterion for ordering.
+
+\subsection{Features}
+
+The feature sets for each connective candidate are similar to those in the previous
+experiment:
+
+\subsubsection{P\&N}
+
+The feature set contains the union of self-category, parent-category, left-sibling,
+and right-sibling as defined in Section~\ref{srcomp-features} for each component.
+For example, in Figure~\ref{i:parse-although}, the features for ``虽'' (although) are
+\textbf{PN-self-ADVP}, \textbf{PN-parent-VP}, \textbf{PN-left-Null}, and \textbf{PN-right-ADVP}, while
+the features for ``但'' (but) are \textbf{PN-self-ADVP}, \textbf{PN-parent-IP}, \textbf{PN-left-Null},
+and \textbf{PN-right-NP}. Therefore, the combined features for ``虽-但'' (although-but) are
+\textbf{PN-self-ADVP}, \textbf{PN-parent-VP}, \textbf{PN-parent-IP}, \textbf{PN-left-Null},
+\textbf{PN-right-ADVP}, and \textbf{PN-right-NP}.
+
+
+%i:parse-although
+\input{figures/parse-although}
+
+
+\subsubsection{POS}
+
+The feature set contains three types of binary features:
+(1) part-of-speech tags for all tokens that constitute the connective components
+of the connective candidate,
+(2) part-of-speech tag of the token to the left of each component, and
+(3) part-of-speech tag of the token to the right of each component. For example,
+in (S~\ref{sent:crisis}), the features for ``虽-但'' (although-but) are
+\textbf{POS-left-NR}, \textbf{POS-right-AD}, \textbf{POS-self-CS},
+\textbf{POS-left-PU}, \textbf{POS-right-JJ}, and \textbf{POS-self-AD}.
+
+\begin{sent}{sent:crisis}{}
+    东亚/NR 诸国/NN 宛如/VV 骨牌/NN 般/VA 连番/AD 倒下/VV 。/PU
+    台湾/NR \underline{虽/CS} 只/AD 遭/VV 风暴/NN 边缘/NN 扫过/VV ，/PU
+    \underline{但/AD} 後续/JJ 冲击/NN 将/AD 一/CD 波波/M 涌到/VV 。/PU
+    (East Asian countries fell like dominoes.
+    Although Taiwan is only swept by the edge of the storm,
+    the follow-up impact would come.
+\end{sent}
+
+\subsubsection{NUM}
+
+The feature set contains the length of the connective as a set
+of binary features. The length is defined as the number of components
+that it contains.
+In additional, there are seven numerical features.
+\begin{enumerate}
+    \item The number of overlapped connective candidates. Any connective
+        candidates that share a token with any of the components for the current
+        candidate is considered as overlapped.
+    \item The number of connective candidates that cross any
+        components of the current connective. A connective crosses a component
+        if the component is between any two components of the connective.
+    \item The distance between the leftmost and the rightmost tokens of the connective.
+        The distance is measured by tokens as before.
+    \item The geometric mean of distances between all neighboring connective components for
+        The current connective candidates.
+    \item The distances from the leftmost connective component to a separating element on the left.
+    \item The distance from the rightmost connective component to a separating element on the right.
+    \item The minimum distance from any separating element to any connective component.
+\end{enumerate}
+
+The separating elements include the symbols ``！？：；，。''.
+When no such symbol is found, we use the distance to paragraph boundary.
+
+\subsubsection{VECTOR}
+
+This feature set is built using word embeddings as before, averaging over all components.
+In particular, it contains three vectors: (1) the averaged vectors
+for the all tokens that constitute the connective components, (2) the averaged vector for the
+token to the left of each component and (3) the averaged vector for the token to the
+right of each component. Zero-valued vector is used when the vector does not exist.
+
 \section{Connective Argument Extraction}
