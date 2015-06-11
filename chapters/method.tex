@@ -138,7 +138,7 @@ The feature set contains three numerical features.
         When no such symbol is found, we use the distance to paragraph boundary.
 \end{enumerate}
 
-For example, in (S 3) the features for “意味着” (meaning) are \textbf{NUM-AMBIGUITY=X},
+For example, in (S 3) the features for “意味着” (meaning) are \textbf{NUM-ambiguity=X},
 \textbf{NUM-left=1}, and \textbf{NUM-right=12}, where X depends on the number of candidate
 connectives detected.
 
@@ -205,7 +205,7 @@ experiment:
 \subsubsection{P\&N}
 
 The feature set contains the union of self-category, parent-category, left-sibling,
-and right-sibling as defined in Section~\ref{srcomp-features} for each component.
+and right-sibling as defined in Section~\ref{s:comp-features} for each component.
 For example, in Figure~\ref{i:parse-although}, the features for ``虽'' (although) are
 \textbf{PN-self-ADVP}, \textbf{PN-parent-VP}, \textbf{PN-left-Null}, and \textbf{PN-right-ADVP}, while
 the features for ``但'' (but) are \textbf{PN-self-ADVP}, \textbf{PN-parent-IP}, \textbf{PN-left-Null},
@@ -278,3 +278,11 @@ right of each component. Zero-valued vector is used when the vector does not exi
 \subsection{Argument Extraction as Sequence Labeling}
 
 \subsection{Features}
+
+\subsubsection{CONTEXT}
+
+This feature set is the combination of the self-category, parent-category, left-sibling,
+and right-sibling of the segment. Since most segment do not have a node that dominates
+exactly its tokens. We relax the definition of self-category to be the highest node that
+dominates all of the tokens in the segment besides other tokens. Since the root node would
+always be the self-category with this definition, we add another extr
