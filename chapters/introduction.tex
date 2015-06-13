@@ -20,7 +20,7 @@ complex discourse relations between textual units.
 
 In this thesis, we focus on several issues regarding Chinese discourse analysis
 including the identification and classification of explicit discourse connectives,
-the identification of correct linkings between these connectives, and the extraction
+the identification of correct linkings between the connective components, and the extraction
 of their arguments. 
 
 %
@@ -38,24 +38,71 @@ Discourse relations represent how different discourse units logically connect
 with each other.  There are different categorization systems of relation types, but
 it's usually defined in a hierarchical manner so there are different number
 of relation types depending on granularity. For example, in
-\textit{Chinese Discourse TreeBank (CDTB)} \citep{li2014building}, the discourse
+\textit{Chinese Discourse TreeBank (CDTB)}~\citep{li2014building}, the discourse
 relation type are defined in a three-level hierarchy. The top-level categories
-include \textit{Causality}, \textit{Transition}, \textit{Coordination}
-and \textit{Explanation}. In PDTBwhere the four top-level . We briefly explain their meanings as follows:
+include \textit{Causality}, \textit{Coordination}, \textit{Transition},
+and \textit{Explanation}.
+While in \textit{Penn Discourse TreeBank (PDTB) 2.0}~\citep{Prasad08thepenn},
+the top-level categories include \textit{Temporal}, \textit{Contingency},
+\textit{Comparison}, and \textit{Expansion}. In this thesis, we use
+CDTB as our corpus, so we will follow their taxonomy. The meanings of these
+relation types are briefly explained as follows:
 
 \begin{description}
-\item[Causality] Some explanations \ldots
-\item[Transition] Some explanations \ldots
-\item[Coordination] A Coordination relation is used when the arguments are
+\item[Causality] Causality is used when a event in an argument cause the event
+    in another argument. It expresses the relationship between the cause
+    and the effect.
+\item[Coordination] Coordination is used when the arguments are
     descriptions on different aspects of the same thing or
     on different things that share common features.
-\item[Explanation] Some explanations \ldots
+\item[Transition] Transition is used when the arguments contrast with each other.
+    It shows the difference between arguments.
+\item[Explanation] Explanation expresses the same concept using different wordings.
+    It is used for arguments that try to explain the same thing in different perspective.
 \end{description}
 
-Some example sentences \ldots
+The following are example sentences for each relation type respectively.
 
-Some explanation about explicit and implicit relations \ldots
+% Causality
+\begin{sent}{sent:causality}{}
+    [上海近年来颁布了七十一件法规性文件，] [确保了开发的有序进行。]
+    (Shanghai recently announced 71 regulatory documents, ensuring the order of development.)
+\end{sent}
 
+% Coordination
+\begin{sent}{sent:coordination}{}
+    [他们认为，到浦东新区投资办事有章法，] [讲规矩，] [利益能得到保障。]
+    (Their view on investing in the Pudong New Area is that things are done methodologically,
+    rules are followed, and their interest can be protected.)
+\end{sent}
+
+% Transition
+\begin{sent}{sent:transition}{}
+    [假新闻\textbf{虽然}为数甚少，] [\textbf{但}影响极坏。]
+    (Although there are very few false news, they have a very bad influence.)
+\end{sent}
+
+% Explanation
+\begin{sent}{sent:explanation}{}
+    [他说,中国的农业生产将与人口同步增长，] [也就是说每年增长大约百分之一。]
+    (He said that China's agricultural production will increase in line with
+    population, that is, increase about one percent per year.)
+\end{sent}
+
+In addition to these relation types, each relation could also be classified as implicit
+or explicit relation. An explicit relation is signalled by a discourse connective. For
+example, in (S~\ref{sent:transition}), there is a connective ``虽然-但'' (although-but),
+so this is a explicit relation. On the other hand, (S~\ref{sent:causality} does not
+have a connective, so the relation is represented implicitly.
+
+In this thesis, we will denote the components of a connective as connective components.
+Each connective can be composed of one or more components. For example, ``虽然-但'' (although-but)
+is composed of two connective components, ``虽然'' (although) and ``但'' (but).
+
+Finally, the discourse units that a relation involves are called arguments. Each relation
+has two or more arguments. For example, the arguments are represented by [] in the previous
+examples. (S~\ref{sent:coordination}) has three arguments, while
+(S~\ref{sent:transition}) has two arguments.
 
 
 %
