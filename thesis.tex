@@ -11,6 +11,8 @@
 %\usepackage{caption}
 \usepackage{tikz}
 \usepackage{tikz-qtree}
+\usepackage{multicol}
+\usepackage{amsmath}
 
 \usepackage{multirow} 
 \usepackage{rotating}
@@ -141,14 +143,16 @@
 
 % sentence
 \newcounter{sentcounter}
-\renewcommand{\thesentcounter}{\arabic{sentcounter}}
+%\renewcommand{\thesentcounter}{\arabic{sentcounter}}
 
-\newenvironment{sent}[2]{%
-\refstepcounter{sentcounter}%
-\label{#1}%
-(S~\thesentcounter)%
-}%
-{}%
+\newenvironment{sent}[2]{
+\noindent
+\setlength{\leftskip}{2em}
+\refstepcounter{sentcounter}
+\label{#1}
+(S~\thesentcounter)
+}{}
+\numberwithin{sentcounter}{chapter}
 
 
 \begin{document}

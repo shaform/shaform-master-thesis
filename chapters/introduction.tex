@@ -11,22 +11,50 @@ Natural language understanding has always been an important goal in Artificial
 Intelligence. There are many applications including natural language user
 interface and large-scale content-analysis. However, the task is also considered
 as very difficult because there are often many ambiguities in a seemingly
-simple sentence. Moreover, real world knowledge is required to fully understand
-the concepts involved in the text.
+simple sentence. Moreover, real world knowledge is sometimes required to fully
+understand the concepts involved in the text. Researchers deal with this problem by dividing it into subtasks such as lexical
+analysis, syntax analysis, semantic analysis, and discourse analysis.
+As large-scale annotated data sets become available, researchers build
+upon each component that was perfected over the years and start to handle the
+complex discourse relations between textual units.
 
-Researchers deal with this problem by dividing it into subtasks such as lexical
-analysis, syntax analysis, semantic analysis, and discourse analysis. Building
-upon each component that was perfected over the years and the large-scale
-annotated data sets, researchers start to handle the complex discourse relations
-between textual units.
+In this thesis, we focus on several issues regarding Chinese discourse analysis
+including the identification and classification of explicit discourse connectives,
+the identification of correct linkings between these connectives, and the extraction
+of their arguments. 
 
 %
 %   Background
 %
 \section{Background}
 
-Talk about discourse research.
+Discourse is used to refer to a coherent sequence of sentences or phrases.
+Discourse analysis is an attempt to extract meaningful information from
+these sentences. Such discourse information includes the exact boundaries
+between the discourse units and the discourse relation types between
+these discourse units.
 
+Discourse relations represent how different discourse units logically connect
+with each other.  There are different categorization systems of relation types, but
+it's usually defined in a hierarchical manner so there are different number
+of relation types depending on granularity. For example, in
+\textit{Chinese Discourse TreeBank (CDTB)} \citep{li2014building}, the discourse
+relation type are defined in a three-level hierarchy. The top-level categories
+include \textit{Causality}, \textit{Transition}, \textit{Coordination}
+and \textit{Explanation}. In PDTBwhere the four top-level . We briefly explain their meanings as follows:
+
+\begin{description}
+\item[Causality] Some explanations \ldots
+\item[Transition] Some explanations \ldots
+\item[Coordination] A Coordination relation is used when the arguments are
+    descriptions on different aspects of the same thing or
+    on different things that share common features.
+\item[Explanation] Some explanations \ldots
+\end{description}
+
+Some example sentences \ldots
+
+Some explanation about explicit and implicit relations \ldots
 
 
 
@@ -45,14 +73,16 @@ There are many challenges unique to Chinese.
 %
 \section{Goal}
 
-In this research, we will 
-
 The goal of this research is to build an end-to-end system to analyze the explicit discourse
-connectives in Chinese texts. This includes (1) the extraction of discourse connective
-components, (2) the disambiguation for linkings between connective components, (3) the classification
-of the relation type for each discourse, and (4) the extraction of arguments for each discourse connective.
-
-Such a system could be incorporated. Eventually build a discourse parser.
+connectives in Chinese texts. The first task is the extraction of explicit discourse
+connectives. This includes the extraction of candidates and the disambiguation between discourse
+and non-discourse usages. We will firstly build a basic model to identify connective components
+in the text, and then integrate linking relationships between the components to improve
+the performance. The second task is the disambiguation for linkings between connective components.
+We identify how the connective components pair with each others to form connectives.
+The third task is the classification of the relation type for each discourse relation. We classify
+each relation represented by a explicit connective.
+The fourth component is the extraction of arguments of each discourse connective.
 
 %
 %   Structure
