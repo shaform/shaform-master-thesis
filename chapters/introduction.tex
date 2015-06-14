@@ -36,13 +36,13 @@ these discourse units.
 
 Discourse relations represent how different discourse units logically connect
 with each other.  There are different categorization systems of relation types, but
-it's usually defined in a hierarchical manner so there are different number
+it's usually defined in a hierarchical manner so that there are different number
 of relation types depending on granularity. For example, in
 \textit{Chinese Discourse TreeBank (CDTB)}~\citep{li2014building}, the discourse
-relation type are defined in a three-level hierarchy. The top-level categories
+relation types are defined in a three-level hierarchy. The top-level categories
 include \textit{Causality}, \textit{Coordination}, \textit{Transition},
-and \textit{Explanation}.
-While in \textit{Penn Discourse TreeBank (PDTB) 2.0}~\citep{Prasad08thepenn},
+and \textit{Explanation},
+while in \textit{Penn Discourse TreeBank (PDTB) 2.0}~\citep{Prasad08thepenn},
 the top-level categories include \textit{Temporal}, \textit{Contingency},
 \textit{Comparison}, and \textit{Expansion}. In this thesis, we use
 CDTB as our corpus, so we will follow their taxonomy. The meanings of these
@@ -58,7 +58,7 @@ relation types are briefly explained as follows:
 \item[Transition] Transition is used when the arguments contrast with each other.
     It shows the difference between arguments.
 \item[Explanation] Explanation expresses the same concept using different wordings.
-    It is used for arguments that try to explain the same thing in different perspective.
+    It is used for arguments that try to explain the same thing in different perspectives.
 \end{description}
 
 The following are example sentences for each relation type respectively.
@@ -79,30 +79,43 @@ The following are example sentences for each relation type respectively.
 % Transition
 \begin{sent}{sent:transition}{}
     [假新闻\textbf{虽然}为数甚少，] [\textbf{但}影响极坏。]
-    (Although there are very few false news, they have a very bad influence.)
+    (Although there are very few false news, it has a very bad influence.)
 \end{sent}
 
 % Explanation
 \begin{sent}{sent:explanation}{}
     [他说,中国的农业生产将与人口同步增长，] [也就是说每年增长大约百分之一。]
     (He said that China's agricultural production will increase in line with
-    population, that is, increase about one percent per year.)
+    population, that is, it will increase about one percent per year.)
 \end{sent}
 
 In addition to these relation types, each relation could also be classified as implicit
 or explicit relation. An explicit relation is signalled by a discourse connective. For
 example, in (S~\ref{sent:transition}), there is a connective ``虽然-但'' (although-but),
-so this is a explicit relation. On the other hand, (S~\ref{sent:causality} does not
+so this is an explicit relation. On the other hand, (S~\ref{sent:causality}) does not
 have a connective, so the relation is represented implicitly.
 
 In this thesis, we will denote the components of a connective as connective components.
 Each connective can be composed of one or more components. For example, ``虽然-但'' (although-but)
 is composed of two connective components, ``虽然'' (although) and ``但'' (but).
 
+As discourse relations can have hierarchy structures in a text, sometimes a connective may be
+present for a sub-structure, but the higher-level relation is still implicit because the connective
+is not used for that relation. For example, (S~\ref{sent:hierarchy}) contains (S~\ref{sent:transition})
+as a sub-structure. While (S~\ref{sent:transition}) is an explicit relation, (S~\ref{sent:hierarchy})
+is still an implicit relation.
+
+\begin{sent}{sent:hierarchy}{}
+    [类似的假新闻和半真半假的新闻，并非《湖北日报》上有，其他报纸，以及电视、广播中也曾有过。]
+    [假新闻虽然为数甚少，但影响极坏。]
+    (Similar false news not only appears on Hubei Daily, but can also be found on
+    other newspapers as well as TV and radio.
+    Although there are very few false news, it has a very bad influence.)
+\end{sent}
+
 Finally, the discourse units that a relation involves are called arguments. Each relation
-has two or more arguments. For example, the arguments are represented by [] in the previous
-examples. (S~\ref{sent:coordination}) has three arguments, while
-(S~\ref{sent:transition}) has two arguments.
+has two or more arguments. For example, (S~\ref{sent:coordination}) has three arguments, while
+(S~\ref{sent:transition}) has two arguments as denoted by [] markers.
 
 
 %
@@ -112,7 +125,13 @@ examples. (S~\ref{sent:coordination}) has three arguments, while
 
 Talk about Chinese. and our goal.
 
-There are many challenges unique to Chinese.
+There are many challenges unique to Chinese language. For example, many of the connectives
+in Chinese are paired connectives that are composed of multiple components.
+
+Because sentences do not have a clear boundaries in Chinese texts. It could easily range
+over extremely long text.
+
+paired connectives a lot here \citep{zhou2012pdtb}
 
 
 %
