@@ -63,6 +63,10 @@ relation types are briefly explained as follows:
 \end{description}
 
 The following are example sentences for each relation type respectively.
+The discourse units that a relation involves are called its arguments.
+Each relation has two or more arguments. For example, (S~\ref{sent:coordination}) has
+three arguments, while (S~\ref{sent:transition}) has two arguments. The arguments are
+denoted by [] markers in these examples.
 
 % Causality
 \begin{sent}{sent:causality}{}
@@ -120,10 +124,6 @@ as a sub-structure. While (S~\ref{sent:transition}) is an explicit relation,
     Although there are very few false news, it has a very bad influence.)
 \end{sent}
 
-Finally, the discourse units that a relation involves are called its arguments.
-Each relation has two or more arguments. For example, (S~\ref{sent:coordination}) has
-three arguments, while (S~\ref{sent:transition}) has two arguments. The arguments are
-denoted by [] markers in these examples.
 
 
 %
@@ -131,22 +131,36 @@ denoted by [] markers in these examples.
 %
 \section{Motivation}
 
-Talk about Chinese. and our goal.
+Research for English discourse relations is progressing continuously. This is partly
+due to the availability of large-scale English discourse corpora including
+\textit{Rhetorical Structure Theory Discourse Treebank (RST-DT)}~\citep{Carlson01building} and
+PDTB~\citep{Prasad08thepenn}. Comparatively, the resource for Chinese discourse research
+has been lacking. Researchers often use self-constructed datasets to carry out their experiments.
+Such datasets are relatively small and are often not publicly available, making it difficult to compare
+the results from different researchers.
 
-There are many challenges unique to Chinese language. For example, many of the connectives
-in Chinese are paired connectives that are composed of multiple components.
+In recent years, several Chinese discourse corpora have become available. For example,
+there are \textit{HIT-CDTB}~\citep{zhang2014chinese}, CDTB~\citep{li2014building}, and
+\textit{Discourse Treebank for Chinese (DTBC)}~\citep{zhou2014the}. Therefore, it becomes feasible
+to utilize these public datasets to comprehensively study the issues in Chinese discourse analysis.
 
-Because sentences do not have a clear boundaries in Chinese texts. It could easily range
-over extremely long text.
-
-paired connectives a lot here \citep{zhou2012pdtb}
-
+There are many unique challenges for Chinese language that are not present in English discourse studies.
+Firstly, there are more discourse connectives in Chinese than in English. Some of these connectives
+can be used in different types of relations, causing sense ambiguity.
+Secondly, a lot of Chinese connectives are parallel connectives that have multiple
+discontinuous components~\citep{zhou2012pdtb}. Finding the correct linkings between these components can
+be useful for discourse analysis.
+Finally, the sentences boundaries for Chinese texts are not clearly defined. Because there is no
+requirement to always terminate a sentence under certain rules, sometimes there could exist very
+long sentences. Thus it's more difficult to detect discourse units and determine which are
+the arguments of a given relation.
 
 %
 %   Goal
 %
 \section{Goal}
 
+In this thesis, we try to investigate these unique challenges for Chinese.
 The goal of this research is to build an end-to-end system to analyze
 the explicit discourse relations in Chinese texts. The first task is
 the extraction of explicit discourse connectives. This includes
@@ -164,4 +178,4 @@ The fourth component is the extraction of the arguments for each discourse conne
 %   Structure
 %
 \section{Structure}
-This thesis is organized as follows.
+This thesis is organized as follows. Blah blah blah.
