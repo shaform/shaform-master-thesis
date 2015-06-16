@@ -9,19 +9,19 @@
 
 Natural language understanding has always been an important goal in Artificial
 Intelligence. There are many applications including natural language user
-interface and large-scale content-analysis. However, the task is also considered
+interface and large-scale content-analysis. However, the task is considered
 as very difficult because there are often many ambiguities in a seemingly
 simple sentence. Moreover, real world knowledge is sometimes required to fully
-understand the concepts involved in the text. Researchers deal with this problem by dividing it into subtasks such as lexical
-analysis, syntax analysis, semantic analysis, and discourse analysis.
-As large-scale annotated data sets become available, researchers build
-upon each component that was perfected over the years and start to handle the
+understand the concepts involved in the text. Researchers deal with this problem
+by dividing it into subtasks such as lexical analysis, syntax analysis, semantic
+analysis, and discourse analysis. As large-scale annotated data sets become
+available, researchers build upon each component and start to handle the
 complex discourse relations between textual units.
 
 In this thesis, we focus on several issues regarding Chinese discourse analysis
 including the identification and classification of explicit discourse connectives,
-the identification of correct linkings between the connective components, and the extraction
-of their arguments. 
+the identification of correct linkings between the connective components,
+and the extraction of their arguments. 
 
 %
 %   Background
@@ -30,7 +30,7 @@ of their arguments.
 
 Discourse is used to refer to a coherent sequence of sentences or phrases.
 Discourse analysis is an attempt to extract meaningful information from
-these sentences. Such discourse information includes the exact boundaries
+the discourse units. Such discourse information includes the exact boundaries
 between the discourse units and the discourse relation types between
 these discourse units.
 
@@ -49,7 +49,7 @@ CDTB as our corpus, so we will follow their taxonomy. The meanings of these
 relation types are briefly explained as follows:
 
 \begin{description}
-\item[Causality] Causality is used when a event in an argument cause the event
+\item[Causality] Causality is used when an event in an argument cause the event
     in another argument. It expresses the relationship between the cause
     and the effect.
 \item[Coordination] Coordination is used when the arguments are
@@ -58,7 +58,8 @@ relation types are briefly explained as follows:
 \item[Transition] Transition is used when the arguments contrast with each other.
     It shows the difference between arguments.
 \item[Explanation] Explanation expresses the same concept using different wordings.
-    It is used for arguments that try to explain the same thing in different perspectives.
+    It is used for arguments that try to explain the same thing in different
+    ways.
 \end{description}
 
 The following are example sentences for each relation type respectively.
@@ -66,13 +67,15 @@ The following are example sentences for each relation type respectively.
 % Causality
 \begin{sent}{sent:causality}{}
     [上海近年来颁布了七十一件法规性文件，] [确保了开发的有序进行。]
-    (Shanghai recently announced 71 regulatory documents, ensuring the order of development.)
+    (Shanghai recently announced 71 regulatory documents, ensuring
+    the order of development.)
 \end{sent}
 
 % Coordination
 \begin{sent}{sent:coordination}{}
     [他们认为，到浦东新区投资办事有章法，] [讲规矩，] [利益能得到保障。]
-    (Their view on investing in the Pudong New Area is that things are done methodologically,
+    (Their view on investing in the Pudong New Area is that
+    things are done methodologically,
     rules are followed, and their interest can be protected.)
 \end{sent}
 
@@ -89,21 +92,25 @@ The following are example sentences for each relation type respectively.
     population, that is, it will increase about one percent per year.)
 \end{sent}
 
-In addition to these relation types, each relation could also be classified as implicit
-or explicit relation. An explicit relation is signalled by a discourse connective. For
-example, in (S~\ref{sent:transition}), there is a connective ``虽然-但'' (although-but),
-so this is an explicit relation. On the other hand, (S~\ref{sent:causality}) does not
-have a connective, so the relation is represented implicitly.
+In addition to these relation types, each relation could also be classified
+as implicit or explicit. An explicit relation is signalled by a discourse connective.
+For example, in (S~\ref{sent:transition}), there is a connective ``虽然-但''
+(although-but), so this is an explicit relation. On the other hand,
+(S~\ref{sent:causality}) does not have a connective, so the relation
+is represented implicitly.
 
+In Chinese, there are many parallel connectives that have more than one components.
 In this thesis, we will denote the components of a connective as connective components.
-Each connective can be composed of one or more components. For example, ``虽然-但'' (although-but)
-is composed of two connective components, ``虽然'' (although) and ``但'' (but).
+Each connective can be composed of one or more components. For example, ``虽然-但''
+(although-but) is composed of two connective components, ``虽然'' (although)
+and ``但'' (but).
 
-As discourse relations can have hierarchy structures in a text, sometimes a connective may be
-present for a sub-structure, but the higher-level relation is still implicit because the connective
-is not used for that relation. For example, (S~\ref{sent:hierarchy}) contains (S~\ref{sent:transition})
-as a sub-structure. While (S~\ref{sent:transition}) is an explicit relation, (S~\ref{sent:hierarchy})
-is still an implicit relation.
+As discourse relations can have hierarchy structures in a text, sometimes
+a connective may be present for a sub-structure, but the higher-level relation
+is still implicit because the connective is not intended for that relation.
+For example, (S~\ref{sent:hierarchy}) contains (S~\ref{sent:transition})
+as a sub-structure. While (S~\ref{sent:transition}) is an explicit relation,
+(S~\ref{sent:hierarchy}) is still an implicit relation.
 
 \begin{sent}{sent:hierarchy}{}
     [类似的假新闻和半真半假的新闻，并非《湖北日报》上有，其他报纸，以及电视、广播中也曾有过。]
@@ -113,9 +120,10 @@ is still an implicit relation.
     Although there are very few false news, it has a very bad influence.)
 \end{sent}
 
-Finally, the discourse units that a relation involves are called arguments. Each relation
-has two or more arguments. For example, (S~\ref{sent:coordination}) has three arguments, while
-(S~\ref{sent:transition}) has two arguments as denoted by [] markers.
+Finally, the discourse units that a relation involves are called its arguments.
+Each relation has two or more arguments. For example, (S~\ref{sent:coordination}) has
+three arguments, while (S~\ref{sent:transition}) has two arguments. The arguments are
+denoted by [] markers in these examples.
 
 
 %
