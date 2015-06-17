@@ -7,17 +7,95 @@
 \chapter{Related Work}
 \label{c:related}
 
+This section is organized as follows.
 
-\section{English Discourse Parsing}
+\section{English Discourse Corpus}
 
-Penn Discourse Treebank (PDTB)~\citep{Prasad08thepenn} is a large
-corpus with discourse relations annotated over the Wall Street Journal
-articles. Many groups have investigated different subtasks of English
+Two popular English large-scale discourse corpora are available for researchers.
+
+In the Rhetorical Structure Theory Discourse Treebank (RST-DT)~\citep{Carlson01building},
+there are 385 \textit{Wall Street Journal (WSJ)} articles selected from
+the Penn Treebank~\citep{marcus1993building}. These articiles were annotated under
+the \textit{Rhetorical Structure Theory (RST)}~\citep{mann-thompson88}.
+Each article was segmented into \textit{elementary discourse units (EDUs)}, and the
+discourse relations between these EDUs were annotated in a tree structure manner.
+Consider the example sentences (S~\ref{sent:rst})  from \cite{Carlson01building}.
+
+\begin{sent}{sent:rst}{}
+[Still, analysts don't expect the buy-back to significantly affect per-share earnings in the short
+term.]\textsuperscript{16} [``The impact won't be that great,'']\textsuperscript{17}
+[said Graeme Lid gerwood of First Boston Corp.]\textsuperscript{18}
+[This is in part because of the effect]\textsuperscript{19}
+[of having to average the number of shares outstanding,]\textsuperscript{21}
+[she said.]\textsuperscript{20} [In addition,]\textsuperscript{22}
+[Mrs. Lidgerwood said,]\textsuperscript{23}
+[Norfolk is likely to draw down its cash initially]\textsuperscript{24}
+[to finance the purchases]\textsuperscript{25}
+[and thus forfeit some interest income.]\textsuperscript{26}
+\end{sent}
+
+The discourse annotations are shown in Figure~\ref{i:rst-tree}. Each relation is represented
+by an internal node, while each EDU is represented by a leaf node. A discourse relation is
+annotated between different groups of EDUs. For example, there is a \textit{elaboration-additional}
+relation between (17-21) and (22-26). The hierarchy annotations enable the analysis of
+the complex discourse structure.
+
+% i:rst-tree
+\input{figures/rst-tree}
+
+Comparatively, the Penn Discourse Treebank 2.0 (PDTB2)~\citep{Prasad08thepenn}
+is a much larger corpus. The annotations were done on 2159 articles from
+the WSJ corpus of the Penn Treebank~\citep{marcus1993building}. They adopted a lexically-grounded
+approach, annotating explicit relations signalled by connectives without constructing higher-level
+structures as done in RST-DT. Therefore, the arguments do not span over long ranges. In fact,
+more than 90\% of the arguments appear in the same sentence or the exact immediately
+preceding sentence as pointed out by \cite{kong2014a}. In addition, they annotated implicit relations
+for successive pairs of sentences.
+
+
+\section{English Discourse Research}
+
+Many groups have investigated different subtasks of English
 discourse parsing on this corpus. \cite{pitler2009using} trained a maximum
 entropy classifier with various syntactic features to identify explicit discourse
-connectives in PDTB and achieved the F1 of 94.19\%. Additionally, they used
+connectives in PDTB2 and achieved the F1 of 94.19\%. Additionally, they used
 a Naive Bayes classifier to classify the relation type of each connective and
-archived the accuracy of 94.15\%. Such high performance is already
-comparable to human annotator agreement.
+archived the accuracy of 94.15\%. Such high performance is already comparable to human annotator agreement.
 
-\section{Chinese Discourse Parsing}
+
+
+\section{Chinese Discourse Corpus}
+
+Early days research
+
+HIT-CDTB
+CDTB
+%DCTD
+
+\section{Chinese Discourse Research}
+
+
+
+fully explain several research
+%In the past, researchers investigated English discourse connective identification
+%on Penn Discourse Treebank~\cite{Prasad08thepenn}. Pitler and Nenkova~\shortcite{pitler2009using} 
+%used syntactic features to deal with discourse usage and
+%relation type ambiguities. Various features were
+%experimented to improve the results~\cite{faiz2013identifying,j2013disambig}.
+%Ghosh~\shortcite{ghosh2012end} and Lin et al.~\shortcite{lin2014pdtb}
+%attempted to build an end-to-end discourse parser.
+%
+%T'sou et al.~\shortcite{t1998automatic,t1999applying,t2000enhancement} and Chan
+%et al.~\shortcite{chan2000mining} investigated connective detection in Chinese texts
+%as a part of a tagging system. Hu et al.~\shortcite{hu2009research}
+%developed a fully automatic system to extract connective components.
+%They removed words commonly used in non-discourse contexts from the dictionary
+%and improved accuracy from 0.5866 to 0.8988.
+%Hu et al.~\shortcite{hu2011research} dealt with linking ambiguity.
+%The above work focused on relatively short sentence groups.
+%Zhou~\shortcite{zhou2012cross} and Li, Carpuat et al.~\shortcite{li2014cross} employed
+%cross-lingual information to deal with discourse usage and relation type ambiguity.
+%Their reported F scores for discourse usage identification are 0.7933 and 0.7163, respectively.
+%Li, Carpuat et al.~\shortcite{li2014cross} used 5-way classification to evaluate discourse usage
+%and relation type classification together and obtained overall accuracy of 0.7020.
+
