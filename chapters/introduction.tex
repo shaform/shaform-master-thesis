@@ -38,15 +38,16 @@ Discourse relations represent how different discourse units logically connect
 with each other.  There are different categorization systems of relation types, but
 it's usually defined in a hierarchical manner so that there are different number
 of relation types depending on granularity. For example, in
-\textit{Chinese Discourse TreeBank (CDTB)}~\citep{li2014building}, the discourse
+\textit{Penn Discourse TreeBank (PDTB) 2.0}~\citep{Prasad08thepenn}, the discourse
 relation types are defined in a three-level hierarchy. The top-level categories
-include \textit{Causality}, \textit{Coordination}, \textit{Transition},
-and \textit{Explanation},
-while in \textit{Penn Discourse TreeBank (PDTB) 2.0}~\citep{Prasad08thepenn},
-the top-level categories include \textit{Temporal}, \textit{Contingency},
-\textit{Comparison}, and \textit{Expansion}. In this thesis, we use
-CDTB as our corpus, so we will follow their taxonomy. The meanings of these
-relation types are briefly explained as follows:
+include \textit{Temporal}, \textit{Contingency}, \textit{Comparison},
+and \textit{Expansion}, while in
+\textit{Chinese Discourse TreeBank (CDTB)}~\citep{li2014building}, 
+the top-level categories include \textit{Causality}, \textit{Coordination},
+\textit{Transition}, and \textit{Explanation}.
+
+In this thesis, we use CDTB as our corpus, so we will follow their taxonomy.
+The meanings of these relation types are briefly explained as follows:
 
 \begin{description}
 \item[Causality] Causality is used when an event in an argument cause the event
@@ -62,7 +63,9 @@ relation types are briefly explained as follows:
     ways.
 \end{description}
 
-The following are example sentences for each relation type respectively.
+
+We will take some sentences from CDTB~\citep{li2014building} to illustrate the issues
+in discourse analysis. The following are for each relation type respectively.
 The discourse units that a relation involves are called its arguments.
 Each relation has two or more arguments. For example, (S~\ref{sent:coordination}) has
 three arguments, while (S~\ref{sent:transition}) has two arguments. The arguments are
