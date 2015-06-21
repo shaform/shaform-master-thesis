@@ -7,7 +7,9 @@
 \chapter{Related Work}
 \label{c:related}
 
-This section is organized as follows.
+In this chapter, we firstly introduce some English discourse corpora and the
+related discourse research in English. Afterwards, we continue with the Chinese
+discourse corpora and the related Chinese research works.
 
 \section{English Discourse Corpus}
 
@@ -18,7 +20,8 @@ there are 385 \textit{Wall Street Journal (WSJ)} articles selected from
 the Penn Treebank~\citep{marcus1993building}. These articiles were annotated under
 the \textit{Rhetorical Structure Theory (RST)}~\citep{mann-thompson88}.
 Each article was segmented into \textit{elementary discourse units (EDUs)}, and the
-discourse relations between these EDUs were annotated in a tree structure manner.
+\textit{rhetorical relations} between these EDUs were annotated in a tree structure
+manner.
 Consider the example sentences (S~\ref{sent:rst})  from \cite{Carlson01building}.
 
 \begin{sent}{sent:rst}{}
@@ -36,8 +39,10 @@ term.]\textsuperscript{16} [``The impact won't be that great,'']\textsuperscript
 
 The discourse annotations are shown in Figure~\ref{i:rst-tree}. Each relation is represented
 by an internal node, while each EDU is represented by a leaf node. A discourse relation is
-annotated between different groups of EDUs. For example, there is a \textit{elaboration-additional}
-relation between (17-21) and (22-26). The hierarchy annotations enable the analysis of
+annotated between different spans of EDUs. For example, there is a \textit{elaboration-additional}
+relation between (17-21) and (22-26). Each relation can either be binary or multi-child.
+Each span was also labeled as either \textit{NUCLEUS} or \textit{SATELLITE} relative
+to a relation depending on its salience. The hierarchy annotations enable the analysis of
 the complex discourse structure.
 
 % i:rst-tree
@@ -48,20 +53,50 @@ is a much larger corpus. The annotations were done on 2159 articles from
 the WSJ corpus of the Penn Treebank~\citep{marcus1993building}. They adopted a lexically-grounded
 approach, annotating explicit relations signalled by connectives without constructing higher-level
 structures as done in RST-DT. Therefore, the arguments do not span over long ranges. In fact,
-more than 90\% of the arguments appear in the same sentence or the exact immediately
-preceding sentence as pointed out by \cite{kong2014a}. In addition, they annotated implicit relations
-for successive pairs of sentences.
+more than 90\% of the arguments appear in the same sentence of the connective or the
+exact immediately preceding sentence as pointed out by \cite{kong2014a}.
+In addition, they annotated implicit relations for successive pairs of sentences.
 
 
 \section{English Discourse Research}
 
 Many groups have investigated different subtasks of English
-discourse parsing on this corpus. \cite{pitler2009using} trained a maximum
+discourse parsing on PDTB2. \cite{pitler2009using} trained a maximum
 entropy classifier with various syntactic features to identify explicit discourse
-connectives in PDTB2 and achieved the F1 of 94.19\%. Additionally, they used
+connectives and achieved the F1 of 94.19\%. Additionally, they used
 a Naive Bayes classifier to classify the relation type of each connective and
-archived the accuracy of 94.15\%. Such high performance is already comparable to human annotator agreement.
+achieved the accuracy of 94.15\%. Such high performance was already comparable to human
+annotator agreement. They have found that the degree of relation type ambiguity
+for connectives are low in English. In fact, an accuracy of 93.67\% can be achieved
+by using the strings of connectives as the only features. \cite{wellner2009sequence}
+also experimented with constituency-based and dependency-based features to identify
+explicit connectives with logistic regression classifier. In addition, he proposed
+a sequential ranking model to jointly identify discourse connectives and their arguments.
+He developed a dependency-based discourse parsing system. \cite{faiz2013identifying} combined
+various feature sets to improve the results on connective identification. \cite{j2013disambig} pointed
+out that while a few connectives constitute most of connective instances, most articles contain
+at least one low-frequency connective. Therefore, using macro-average over different connectives
+may be a better metric. They also shown that simple lexical features such as POS tags perform
+well in this experimental setting when golden standard parsing tree is not available.
 
+For argument extraction.
+\cite{lin2014pdtb} build an end-to-end discourse parser for PDTB2.
+
+As RST-DT provides hierarchy discourse structure annotations. There are also many
+attempts to construct these discourse structures automatically. \cite{soricut2003sentence}
+investigated sentence-level discourse parsing. They built discourse segmenter to
+segment each sentence into EDUs using a statistical model with lexical and syntactic features.
+They evaluated the model by the ability to recover EDU boundaries and achieved the F1 of
+83.1\% and 84.7\% with automatically generated parsing tree and golden truth parsing tree respectively.
+They also constructed a discourse parser and shown that near-human level performance can be achieved
+if golden truth syntactic parsing tree and EDU segmentation were given. \cite{sporleder2005} focused
+on non-hierarchical discourse chunking and produced comparable results without the use of
+syntactic parsers. \cite{fisher2007utility} investigated whether the features derived from finite-state
+systems are enough for discourse segmentation and shown that combining features from syntactic tree
+can improve the performance. \cite{joty2012novel} applied an CKY-like parsing algorithm
+to sentence-level discourse parsing. By avoiding a greedy approach, they were able to increase
+their performance. \cite{li2014recursive} utilized deep learning approach for document-level 
+discourse parsing. They recursively learn the representations for discourse units.
 
 
 \section{Chinese Discourse Corpus}
