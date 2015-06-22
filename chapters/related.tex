@@ -7,11 +7,12 @@
 \chapter{Related Work}
 \label{c:related}
 
-In this chapter, we firstly introduce some English discourse corpora and the
-related discourse research in English. Afterwards, we continue with the Chinese
-discourse corpora and the related Chinese research works.
+In this chapter, we discussed some related work for English and Chinese discourse
+analysis. We firstly introduce some English discourse corpora and the
+related discourse research. Afterwards, we continue with the Chinese
+discourse corpora and the related Chinese research.
 
-\section{English Discourse Corpus}
+\section{English Discourse Corpora}
 
 Two popular English large-scale discourse corpora are available for researchers.
 
@@ -70,17 +71,25 @@ annotator agreement. They have found that the degree of relation type ambiguity
 for connectives are low in English. In fact, an accuracy of 93.67\% can be achieved
 by using the strings of connectives as the only features. \cite{wellner2009sequence}
 also experimented with constituency-based and dependency-based features to identify
-explicit connectives with logistic regression classifier. In addition, he proposed
+explicit connectives with logistic regression classifier. In addition, they proposed
 a sequential ranking model to jointly identify discourse connectives and their arguments.
-He developed a dependency-based discourse parsing system. \cite{faiz2013identifying} combined
+They developed a dependency-based discourse parsing system. \cite{faiz2013identifying} combined
 various feature sets to improve the results on connective identification. \cite{j2013disambig} pointed
 out that while a few connectives constitute most of connective instances, most articles contain
 at least one low-frequency connective. Therefore, using macro-average over different connectives
 may be a better metric. They also shown that simple lexical features such as POS tags perform
 well in this experimental setting when golden standard parsing tree is not available.
 
-For argument extraction.
+\cite{dines2005attribution} used a tree subtraction algorithm to extract arguments for
+intra-sentential subordinating conjunctions. \cite{wellner2007auto} considered the task of identifying
+arguments for discourse connectives. They used a log-linear ranking model to extract the heads of arguments.
+\cite{elwell2008discourse} followed the work to identifying heads and  shown that
+interpolating connective specific models with general models can improve performance.
+\cite{ghosh2011shallow,ghosh2012global} formulated the problem as sequence labelling task
+and used conditional random fields to tackle the problem.
+\cite{kong2014a} developed a constituent-based approach to extract arguments.
 \cite{lin2014pdtb} build an end-to-end discourse parser for PDTB2.
+
 
 As RST-DT provides hierarchy discourse structure annotations. There are also many
 attempts to construct these discourse structures automatically. \cite{soricut2003sentence}
@@ -99,38 +108,45 @@ their performance. \cite{li2014recursive} utilized deep learning approach for do
 discourse parsing. They recursively learn the representations for discourse units.
 
 
-\section{Chinese Discourse Corpus}
+\section{Chinese Discourse Corpora}
 
-Early days research
+There have been few Chinese discourse corpora compared to English until recently.
+\cite{xue2005annotating} discussed the issues involved in annotating Chinese texts. They
+poinited out the difficulty to determine argument spans due to the hierarchical nature
+of discourse structure. \cite{huang2011chinese} annotated 81 articles selected from
+the Sinica Treebank 3.1~\footnote{http://turing.iis.sinica.edu.tw/treesearch/}. They followed
+the top-level categories in PDTB for relation types and focused on the annotation
+of inter-sentential discourse relations. \cite{huang2014interpretation} annotated the
+relation type for 7,601 sentences that have only two discourse units. Though their
+corpora are relatively small.
+\cite{zhou2012pdtb,zhou2015the} adopted PDTB-style discourse annotations and constructed
+a Chinese discourse corpus that contains 164 articles selected from the \textit{Chinese
+Treebank (CTB)}~\citep{xue2005penn}. \cite{zhang2014chinese} annotated 525 texts selected
+from OntoNotes Release 4.0~\citep{weischedel_ontonotes_2011}. They have annotated
+intra-sentential, inter-sentential, and passage-level relations, though
+these annotations do not form a hierarchical structure naturally. \cite{zhou2014the}
+refined the annotation scheme of PDTB2 and annotated 890 documents from CTB,
+and focused mainly on intra-sentential discourse relations.
+\cite{li2014building} proprosed a \textit{Connective-driven Dependency Tree (CDT)}
+scheme, which was designed specifically for Chinese rhetorical structue. They
+annotated 500 documents from CTB. Each paragraph was segmented into EDUs similar
+to the RST scheme. A three-level hierarchy of relation types was
+proposed, and the explicit and implicit relations between different spans of EDUs
+were annotated. The relations for each paragraph form a tree structure.
 
-HIT-CDTB
-CDTB
-%DCTD
 
 \section{Chinese Discourse Research}
 
 
-
-fully explain several research
-%In the past, researchers investigated English discourse connective identification
-%on Penn Discourse Treebank~\cite{Prasad08thepenn}. Pitler and Nenkova~\shortcite{pitler2009using} 
-%used syntactic features to deal with discourse usage and
-%relation type ambiguities. Various features were
-%experimented to improve the results~\cite{faiz2013identifying,j2013disambig}.
-%Ghosh~\shortcite{ghosh2012end} and Lin et al.~\shortcite{lin2014pdtb}
-%attempted to build an end-to-end discourse parser.
-%
-%T'sou et al.~\shortcite{t1998automatic,t1999applying,t2000enhancement} and Chan
-%et al.~\shortcite{chan2000mining} investigated connective detection in Chinese texts
-%as a part of a tagging system. Hu et al.~\shortcite{hu2009research}
-%developed a fully automatic system to extract connective components.
-%They removed words commonly used in non-discourse contexts from the dictionary
-%and improved accuracy from 0.5866 to 0.8988.
-%Hu et al.~\shortcite{hu2011research} dealt with linking ambiguity.
-%The above work focused on relatively short sentence groups.
-%Zhou~\shortcite{zhou2012cross} and Li, Carpuat et al.~\shortcite{li2014cross} employed
-%cross-lingual information to deal with discourse usage and relation type ambiguity.
-%Their reported F scores for discourse usage identification are 0.7933 and 0.7163, respectively.
-%Li, Carpuat et al.~\shortcite{li2014cross} used 5-way classification to evaluate discourse usage
-%and relation type classification together and obtained overall accuracy of 0.7020.
-
+\cite{t1999applying,t2000enhancement} and \cite{chan2000mining} investigated
+connective detection in Chinese texts as a part of a tagging system. \cite{hu2009research}
+developed a fully automatic system to extract connective components.
+They removed words commonly used in non-discourse contexts from the dictionary
+and improved accuracy from 0.5866 to 0.8988.
+\cite{hu2011research} dealt with linking ambiguity.
+The above work focused on relatively short sentence groups.
+\cite{zhou2012cross} and \cite{li2014cross} employed
+cross-lingual information to deal with discourse usage and relation type ambiguity.
+Their reported F scores for discourse usage identification are 0.7933 and 0.7163, respectively.
+\cite{li2014cross} used 5-way classification to evaluate discourse usage
+and relation type classification together and obtained overall accuracy of 0.7020.
