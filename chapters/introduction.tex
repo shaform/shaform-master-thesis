@@ -64,9 +64,12 @@ The meanings of these relation types are briefly explained as follows:
 
 
 We will take some sentences from CDTB~\citep{li2014building} to illustrate the issues
-in discourse analysis. The following are for each relation type respectively.
+in discourse analysis. The discourse relation types for the following examples
+(S~\ref{sent:causality}-\ref{sent:explanation}) are
+Causality, Coordination, Transition, and Explanation, respectively.
+Each relation represents the relationship between two or more discourse units.
 The discourse units that a relation involves are called its arguments.
-Each relation has two or more arguments. For example, (S~\ref{sent:coordination}) has
+For example, (S~\ref{sent:coordination}) has
 three arguments, while (S~\ref{sent:transition}) has two arguments. The arguments are
 denoted by [] markers in these examples.
 
@@ -87,7 +90,7 @@ denoted by [] markers in these examples.
 
 % Transition
 \begin{sent}{sent:transition}{}
-    [假新闻\textbf{虽然}为数甚少，] [\textbf{但}影响极坏。]
+    [假新闻\zhbf{虽然}为数甚少，] [\zhbf{但}影响极坏。]
     (Although there are very few false news, it has a very bad influence.)
 \end{sent}
 
@@ -105,18 +108,22 @@ For example, in (S~\ref{sent:transition}), there is a connective ``虽然-但''
 (S~\ref{sent:causality}) does not have a connective, so the relation
 is represented implicitly.
 
-In Chinese, there are many parallel connectives that have more than one components.
+These discourse connectives explicitly signal the presence of a discourse relation,
+and therefore are important clues for discourse analysis.
+In Chinese, there are many parallel connectives that have more than one
+component~\citep{zhou2012pdtb}.
 In this thesis, we will denote the components of a connective as connective components.
 Each connective can be composed of one or more components. For example, ``虽然-但''
 (although-but) is composed of two connective components, ``虽然'' (although)
 and ``但'' (but).
 
-As discourse relations can have hierarchy structures in a text, sometimes
+As discourse relations can form hierarchy structures in a text, sometimes
 a connective may be present for a sub-structure, but the higher-level relation
 is still implicit because the connective is not intended for that relation.
 For example, (S~\ref{sent:hierarchy}) contains (S~\ref{sent:transition})
 as a sub-structure. While (S~\ref{sent:transition}) is an explicit relation,
-(S~\ref{sent:hierarchy}) is still an implicit relation.
+the discourse relation between the two discourse units in (S~\ref{sent:hierarchy})
+is still implicit.
 
 \begin{sent}{sent:hierarchy}{}
     [类似的假新闻和半真半假的新闻，并非《湖北日报》上有，其他报纸，以及电视、广播中也曾有过。]
@@ -133,29 +140,37 @@ as a sub-structure. While (S~\ref{sent:transition}) is an explicit relation,
 %
 \section{Motivation}
 
-Research for English discourse relations is progressing continuously. This is partly
-due to the availability of large-scale English discourse corpora including
-\textit{Rhetorical Structure Theory Discourse Treebank (RST-DT)}~\citep{Carlson01building} and
-PDTB2~\citep{Prasad08thepenn}. Comparatively, the resource for Chinese discourse research
-has been lacking. Researchers often use self-constructed datasets to carry out their experiments.
-Such datasets are relatively small and are often not publicly available, making it difficult to compare
-the results from different researchers.
+Research for English discourse relations has been progressing continuously. This is
+partly due to the availability of large-scale English discourse corpora including
+\textit{Rhetorical Structure Theory Discourse Treebank (RST-DT)}~\citep{Carlson01building}
+and PDTB2~\citep{Prasad08thepenn}. Comparatively, the resource for Chinese discourse
+research has been lacking. Researchers often used self-constructed datasets to carry
+out their experiments. Such datasets are relatively small and are often not publicly
+available, making it difficult to compare the results from different researchers.
 
 In recent years, several Chinese discourse corpora have become available. For example,
 there are \textit{HIT-CDTB}~\citep{zhang2014chinese}, CDTB~\citep{li2014building}, and
-\textit{Discourse Treebank for Chinese (DTBC)}~\citep{zhou2014the}. Therefore, it becomes feasible
-to utilize these public datasets to comprehensively study the issues in Chinese discourse analysis.
+\textit{Discourse Treebank for Chinese (DTBC)}~\citep{zhou2014the}. Therefore, it
+becomes feasible to utilize these public datasets to comprehensively study
+the issues in Chinese discourse analysis.
 
-There are many unique challenges for Chinese language that are not present in English discourse studies.
-Firstly, there are more discourse connectives in Chinese than in English. Some of these connectives
-can be used in different types of relations, causing sense ambiguity.
-Secondly, a lot of Chinese connectives are parallel connectives that have multiple
-discontinuous components~\citep{zhou2012pdtb}. Finding the correct linkings between these components can
-be useful for discourse analysis.
-Finally, the sentences boundaries for Chinese texts are not clearly defined. Because there is no
-requirement to always terminate a sentence under certain rules, sometimes there could exist very
-long sentences. Thus it's more difficult to detect discourse units and determine which are
-the arguments of a given relation.
+There are many unique challenges for Chinese language that are not present in
+English discourse studies. Firstly, there are more discourse connectives
+in Chinese than in English and their parts of speech have more
+varieties~\citep{huang2014interpretation}. Therefore, it's easier to find words
+that have the same surface forms as these connectives, but not actually have
+discourse meaning. Therefore, there is need to disambiguate between
+discourse and non-discourse usages.
+Secondly, many Chinese connectives are parallel connectives that
+have multiple discontinuous components~\citep{zhou2012pdtb}.
+When there are multiple connectives present in a paragraph, their components
+can often link with each other in multiple possible ways.
+Finding the correct linkings between these components
+can be useful for discourse analysis. Finally, the sentence boundaries for
+Chinese texts are not clearly defined. Because there is no
+requirement to always terminate a sentence under certain rules,
+sometimes there could exist very long sentences. Thus it's more difficult
+to detect discourse units and determine which are the arguments of a given relation.
 
 %
 %   Goal
@@ -164,20 +179,30 @@ the arguments of a given relation.
 
 In this thesis, we try to investigate these unique challenges for Chinese.
 The goal of this research is to build an end-to-end system to analyze
-the explicit discourse relations in Chinese texts. The first task is
-the extraction of explicit discourse connectives. This includes
-the extraction of candidates and the disambiguation between discourse
-and non-discourse usages. We will firstly build a basic model to identify
-connective components in the text, and afterwards, we will integrate linking
-relationships between the components to improve the performance.
+the explicit discourse relations in Chinese texts. In particular, we
+deal with four tasks. The first task is the extraction of explicit discourse
+connectives. This includes the extraction of candidates and the disambiguation
+between discourse and non-discourse usages. We will firstly build a basic model
+to identify connective components in the text, and afterwards, we will
+integrate linking relationships between the components to improve the performance.
 The second task is the disambiguation for linkings between connective components.
 We identify how the connective components pair with each others to form connectives.
 The third task is the classification of the relation type for each discourse relation.
-We classify each relation represented by a explicit connective.
-The fourth component is the extraction of the arguments for each discourse connective.
+We will classify each relation represented by a explicit connective by top-level
+relation types and second level relation types.
+The fourth task is the extraction of the arguments for each discourse connective.
+By dealing with these issues, an end-to-end discourse parser for Chinese may
+be built in future studies.
 
 %
 %   Structure
 %
 \section{Structure}
-This thesis is organized as follows. Blah blah blah.
+This thesis is organized as follows. In Chapter \ref{c:related}, we summarize
+the related work for discourse analysis, including the corpora and research for
+English and Chinese. In Chapter \ref{c:corpus}, we discuss the data sets used in
+this research, and provide some statistics and analysis. In Chapter \ref{c:method},
+we give an overview of our system, and discuss the design of various components.
+In Chapter \ref{c:exp}, we perform evaluation on our models and compare with
+other works. Finally, we conclude our work and discuss some future directions in
+Chapter \ref{c:future}.
