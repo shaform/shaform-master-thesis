@@ -6,5 +6,101 @@
 %
 \chapter{Corpus}
 \label{c:corpus}
-\section{Corpus A}
-\section{Corpus B}
+
+In this chapter, we discuss the datasets we use in our study, and
+provide some statistics and analysis.
+
+\section{Chinese Discourse Treebank (CDTB)}
+
+Chinese Discourse TreeBank (CDTB)~\citep{li2014building} is a discourse
+corpus that contains 500 articles from the Chinese Treebank (CTB)~\citep{xue2005penn}.
+Totally, it contains 2,342 paragraphs.
+Inspired by RST and PDTB, they proposed the Connective-driven Dependency Tree (CDT)
+scheme to annotate the documents.
+
+In CDTB, each paragraph is represented as a discourse tree. The leaf nodes are the
+elementary discourse units (EDUs) for the text, while internal nodes are discourse
+relations between discourse units. This is very similar to RST-DT.
+Consider the example sentences (S~\ref{sent:cdtb}) from \cite{li2014building}.
+
+\begin{sent}{sent:cdtb}{}
+[浦东开发开放是一项振兴上海,建设现代化经济、贸易、金融中心的跨世纪
+工程,]\textsuperscript{1}
+[(因此) 大量出现的是以前不曾遇到过的新情况、新问题。]\textsuperscript{2}
+[(对此),浦东\{不是\}简单的采取“干一段时间,等积累了经验以后再制定法规条例”的做法,]\textsuperscript{3}
+[\{而是\}借鉴发达国家和深圳等特区的经验教训,]\textsuperscript{4}
+[<并且>聘请国内外有关专家学者,]\textsuperscript{5}
+[<并且>积极、及时地制定和推出法规性 文件,]\textsuperscript{6}
+[\{使\}这些经济活动一出现就被纳入法制轨道。]\textsuperscript{7}
+
+(
+Pudong's development and opening up is a century-
+spanning undertaking for vigorously promoting Shanghai and
+constructing a modern economic, trade, and financial center.
+Because of this, new situations and new questions that have
+not been encountered before are emerging in great numbers.
+In response to this, Pudong is not simply adopting an approach
+of "work for a short time and then draw up laws and regulations
+only after experience has been accumulated.”
+Instead, Pudong is taking advantage of the lessons from experience of
+developed countries and special regions such as Shenzhen,
+by hiring appropriate domestic and foreign specialists and
+scholars,
+actively and promptly formulating and issuing
+regulatory documents.
+So these economic activities are incorporated into the sphere
+of influence of the legal system as soon as they appear.
+)
+\end{sent}
+
+The discourse structure is shown in Figure~\ref{i:cdtb-tree}. Importantly,
+the set of discourse relation types is organized as a three-level hierarchy,
+where the third level are the discourse connectives themselves. The relation
+types are shown in Figure~\ref{i:three-level}. The top-level categories have
+four relation types, while the second level have 17 types. For an implicit
+relation, the connective that could be inserted is annotated. This is denoted
+by <> in Figure~\ref{i:cdtb-tree}. Totally, there are 282 types of connectives.
+For each connective of an explicit relation,
+they also annotated whether it can be deleted as denoted by () or cannot be
+deleted as denoted by \{\}.
+If an appropriate connective to be inserted cannot be found, an internal
+node may only have a second level relation type as well.
+
+% i:cdtb-tree
+\input{figures/cdtb-tree}
+
+% i:three-level
+\input{figures/three-level}
+
+During our experiments, we found some errors in the annotation and corrected
+them. After the correction, there are 2,131 connective components annotated
+for the explicit relations, and they form 1,813 connectives instances. The length
+distribution of these connectives are shown in Table~\ref{t:connective-length}.
+Most connectives only have one or two connective components.
+
+% t:connective-length
+\input{tables/connective-length}
+
+Many of the connective types can be used for different 1-level and 2-level
+relation types. As shown in Table~\ref{t:connective-type}, while most connective
+types are only used for 1 relation types, the ambiguous connectives have many
+instances.
+
+% t:connective-type
+\input{tables/connective-type}
+
+\section{NTU PN-Gram Corpus}
+
+NTU PN-Gram Corpus~\citep{yu2012development} is a large-scale corpus that was
+constructed by POS-tagging the Chinese texts from the ClueWeb09
+dataset~\citep{callan2009clueweb09}. In NTU PN-Gram, there are totally 173,741,587
+web pages containing 141,179,769,123 tokens. In our study, we use a subset that
+was extracted by \cite{huang2014interpretation}. They extracted sentences that
+have two clauses and one connective. Totally, there are 43,010,050 sentences.
+We eliminated the duplicate sentences and 21,217,147 sentences were left, containing
+326,996,602 tokens.
+
+We use the resulting dataset to train word embeddings for further use.
+We have created 400-dimensional embeddings by GloVe tool~\citep{pennington2014glove}
+and word2vec tool~\citep{mikolov2013efficient,mikolov2013distributed} with CBOW and
+SKIP-GRAM models.
