@@ -180,17 +180,17 @@ to detect discourse units and determine which are the arguments of a given relat
 In this thesis, we try to investigate these unique challenges for Chinese.
 The goal of this research is to build an end-to-end system to analyze
 the explicit discourse relations in Chinese texts. In particular, we
-deal with four tasks. The first task is the extraction of explicit discourse
+deal with three tasks. The first task is the extraction of explicit discourse
 connectives. This includes the extraction of candidates and the disambiguation
-between discourse and non-discourse usages. We will firstly build a basic model
-to identify connective components in the text, and afterwards, we will
-integrate linking relationships between the components to improve the performance.
-The second task is the disambiguation for linkings between connective components.
-We identify how the connective components pair with each others to form connectives.
-The third task is the classification of the relation type for each discourse relation.
+between discourse and non-discourse usages. In addition, linking ambiguities
+between discourse connective components must be resolved to correctly extract
+parallel connectives.  We will firstly build a basic model to identify connective
+components in the text, and afterwards, we will integrate linking relationships
+between the components to improve the performance.
+The second task is the classification of the relation type for each discourse relation.
 We will classify each relation represented by a explicit connective by top-level
 relation types and second level relation types.
-The fourth task is the extraction of the arguments for each discourse connective.
+The third task is the extraction of the arguments for each discourse connective.
 By dealing with these issues, an end-to-end discourse parser for Chinese may
 be built in future studies.
 

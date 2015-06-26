@@ -96,11 +96,19 @@ constructed by POS-tagging the Chinese texts from the ClueWeb09
 dataset~\citep{callan2009clueweb09}. In NTU PN-Gram, there are totally 173,741,587
 web pages containing 141,179,769,123 tokens. In our study, we use a subset that
 was extracted by \cite{huang2014interpretation}. They extracted sentences that
-have two clauses and one connective. Totally, there are 43,010,050 sentences.
-We eliminated the duplicate sentences and 21,217,147 sentences were left, containing
+meet three conditions:
+
+\begin{enumerate}
+\item Each sentence must have exactly two clauses.
+\item Each sentence must have exactly one instance of connective.
+\item Each of the two clauses must not have more than 20 Chinese characters.
+\end{enumerate}
+
+We use an intermediate result that contains 43,010,050 sentences and eliminated
+the duplicate sentences. 21,217,147 sentences were left, containing
 326,996,602 tokens.
 
-We use the resulting dataset to train word embeddings for further use.
+We use the resulting sentences to train word embeddings for further use.
 We have created 400-dimensional embeddings by GloVe tool~\citep{pennington2014glove}
 and word2vec tool~\citep{mikolov2013efficient,mikolov2013distributed} with CBOW and
-SKIP-GRAM models.
+SKIP-GRAM models. These vectors are used as features as discussed in Chapter~\ref{c:method}.
