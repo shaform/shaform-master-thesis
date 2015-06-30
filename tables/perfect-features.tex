@@ -1,0 +1,40 @@
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+
+\bf Features            & \bf Precision & \bf Recall & \bf F1-Score \\ \hline
+    P \& N              &     92.11     &     92.76  &     92.43    \\ \hline
+    POS                 &     88.36     &     91.55  &     89.93    \\ \hline
+    NUM                 & \bf 95.59     & \bf 96.58  & \bf 96.08    \\ \hline
+    SKIPGRAM            &     88.30     &     91.94  &     90.08    \\ \hline
+    All-P \& N          &     94.57     &     96.13  &     95.35    \\ \hline
+    All-POS             &     93.88     &     95.53  &     94.70    \\ \hline
+    All-NUM             &     90.82     &     93.37  &     92.08    \\ \hline
+    All-SKIPGRAM        &     94.86     &     96.19  &     95.52    \\ \hline
+    All                 &     94.47     &     96.13  &     95.29    \\
+
+\hhline{|=|=|=|=|}
+
+    Left-first          &     85.89     &     91.01  &     88.37    \\ \hline
+    Length              &     97.59     &     96.04  &     96.81    \\ \hline
+    Order by length     & \bf 97.71     & \bf 96.15  & \bf 96.92    \\
+
+\hhline{|=|=|=|=|}
+% length then this
+
+    P \& N              &     97.26     &     95.60  &     96.42    \\ \hline
+    POS                 &     97.48     &     95.82  &     96.64    \\ \hline
+    NUM                 & \bf 98.48     & \bf 96.92  & \bf 97.69    \\ \hline
+    SKIPGRAM            &     97.87     &     96.37  &     97.10    \\ \hline
+    All-P \& N          &     97.81     &     96.25  &     97.02    \\ \hline
+    All-POS             &     97.81     &     96.25  &     97.02    \\ \hline
+    All-NUM             &     97.54     &     96.03  &     96.78    \\ \hline
+    All-SKIPGRAM        &     97.92     &     96.36  &     97.13    \\ \hline
+    All                 &     97.81     &     96.25  &     97.02    \\
+
+
+\end{tabular}
+\caption{\label{t:perfect-features} Performance of discourse usage
+disambiguation for connective by different features. }
+\end{table}
