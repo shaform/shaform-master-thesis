@@ -7,46 +7,33 @@
 \chapter{Related Work}
 \label{c:related}
 
-In this chapter, we discussed some related work for English and Chinese discourse
+In this chapter, we discuss some related work for English and Chinese discourse
 analysis. We firstly introduce some English discourse corpora and the
 related discourse research. Afterwards, we continue with the Chinese
 discourse corpora and the related Chinese research.
 
 \section{English Discourse Corpora}
 
-Two popular English large-scale discourse corpora are available for researchers.
+In this section, we introduce two popular English large-scale discourse
+corpora that are available for researchers.
 
 In the Rhetorical Structure Theory Discourse Treebank (RST-DT)~\citep{Carlson01building},
 there are 385 \textit{Wall Street Journal (WSJ)} articles selected from
-the Penn Treebank~\citep{marcus1993building}. These articiles were annotated under
+the Penn Treebank~\citep{marcus1993building}. These articles were annotated under
 the \textit{Rhetorical Structure Theory (RST)}~\citep{mann-thompson88}.
 Each article was segmented into \textit{elementary discourse units (EDUs)}, and the
 \textit{rhetorical relations} between these EDUs were annotated in a tree structure
 manner.
-Consider the example sentences (S~\ref{sent:rst}) from \cite{Carlson01building}.
 
-\begin{sent}{sent:rst}{}
-[Still, analysts don't expect the buy-back to significantly affect per-share earnings in the short
-term.]\textsuperscript{16} [``The impact won't be that great,'']\textsuperscript{17}
-[said Graeme Lid gerwood of First Boston Corp.]\textsuperscript{18}
-[This is in part because of the effect]\textsuperscript{19}
-[of having to average the number of shares outstanding,]\textsuperscript{21}
-[she said.]\textsuperscript{20} [In addition,]\textsuperscript{22}
-[Mrs. Lidgerwood said,]\textsuperscript{23}
-[Norfolk is likely to draw down its cash initially]\textsuperscript{24}
-[to finance the purchases]\textsuperscript{25}
-[and thus forfeit some interest income.]\textsuperscript{26}
-\end{sent}
+Each relation is represented by an internal node, while each EDU is represented
+by a leaf node. A discourse relation is annotated between different spans of EDUs.
+This is represented by the children of an internal node. Each relation can
+either be binary or multi-child. Figure~\ref{i:rst-tree} shows an example sub-tree.
+The relation 1 has two arguments (a-b) and (c-d), and relation 2 has two
+arguments (a) and (b).
+The hierarchy annotations enable the analysis of the complex discourse structure.
 
-The discourse annotations are shown in Figure~\ref{i:rst-tree}. Each relation is represented
-by an internal node, while each EDU is represented by a leaf node. A discourse relation is
-annotated between different spans of EDUs. For example, there is a \textit{elaboration-additional}
-relation between (17-21) and (22-26). Each relation can either be binary or multi-child.
-Each span was also labeled as either \textit{NUCLEUS} or \textit{SATELLITE} relative
-to a relation depending on its salience. The hierarchy annotations enable the analysis of
-the complex discourse structure.
-
-% i:rst-tree
+%i:rst-tree
 \input{figures/rst-tree}
 
 Comparatively, the Penn Discourse Treebank 2.0 (PDTB2)~\citep{Prasad08thepenn}
@@ -77,16 +64,16 @@ They developed a dependency-based discourse parsing system. \cite{faiz2013identi
 various feature sets to improve the results on connective identification. \cite{j2013disambig} pointed
 out that while a few connectives constitute most of connective instances, most articles contain
 at least one low-frequency connective. Therefore, using macro-average over different connectives
-may be a better metric. They also shown that simple lexical features such as POS tags perform
+may be a better metric. They also showed that simple lexical features such as POS tags perform
 well in this experimental setting when golden standard parsing tree is not available.
 
 \cite{dines2005attribution} used a tree subtraction algorithm to extract arguments for
 intra-sentential subordinating conjunctions. \cite{wellner2007auto} considered the task of identifying
 arguments for discourse connectives. They used a log-linear ranking model to extract the heads of arguments.
-\cite{elwell2008discourse} followed the work to identifying heads and  shown that
+\cite{elwell2008discourse} followed the work to identify the heads and showed that
 interpolating connective specific models with general models can improve performance.
 \cite{ghosh2011shallow,ghosh2012global} formulated the problem as sequence labelling task
-and used conditional random fields to tackle the problem.
+and used Conditional Random Fields (CRFs) to tackle the problem.
 \cite{kong2014a} developed a constituent-based approach to extract arguments.
 \cite{lin2014pdtb} build an end-to-end discourse parser for PDTB2.
 
@@ -96,29 +83,37 @@ attempts to construct these discourse structures automatically. \cite{soricut200
 investigated sentence-level discourse parsing. They built discourse segmenter to
 segment each sentence into EDUs using a statistical model with lexical and syntactic features.
 They evaluated the model by the ability to recover EDU boundaries and achieved the F1 of
-83.1\% and 84.7\% with automatically generated parsing tree and golden truth parsing tree respectively.
-They also constructed a discourse parser and shown that near-human level performance can be achieved
+83.1\% with automatically generated parsing tree and 84.7\% with golden truth parsing tree.
+They also constructed a discourse parser and showed that near-human level performance can be achieved
 if golden truth syntactic parsing tree and EDU segmentation were given. \cite{sporleder2005} focused
 on non-hierarchical discourse chunking and produced comparable results without the use of
 syntactic parsers. \cite{fisher2007utility} investigated whether the features derived from finite-state
-systems are enough for discourse segmentation and shown that combining features from syntactic tree
-can improve the performance. \cite{joty2012novel} applied an CKY-like parsing algorithm
+systems are enough for discourse segmentation and showed that combining features from syntactic tree
+can improve the performance. \cite{joty2012novel} applied an CYK-like parsing algorithm
 to sentence-level discourse parsing. By avoiding a greedy approach, they were able to increase
-their performance. \cite{li2014recursive} utilized deep learning approach for document-level 
-discourse parsing. They recursively learn the representations for discourse units.
+their performance.
+
+Though sentence-level discourse parsing is well studied, document-level discourse
+parsing still needs investigation. \cite{hernault2010hilda} attempted
+document-level discourse parsing using Support Vector Machine (SVM) to
+predict the discourse relations and construct the discourse tree in
+a bottom-up fashion. \cite{feng2012text} further improved the results using more
+linguistic features. \cite{joty2013combining} utilized CRFs to tackle this problem.
+\cite{li2014recursive} experimented with a deep learning approach.
+They recursively learn the representations for discourse units
+while building the discourse tree in a bottom-up manner.
 
 
 \section{Chinese Discourse Corpora}
 
 There have been few Chinese discourse corpora compared to English until recently.
 \cite{xue2005annotating} discussed the issues involved in annotating Chinese texts. They
-poinited out the difficulty to determine argument spans due to the hierarchical nature
+pointed out the difficulty to determine argument spans due to the hierarchical nature
 of discourse structure. \cite{huang2011chinese} annotated 81 articles selected from
 the Sinica Treebank 3.1~\footnote{http://turing.iis.sinica.edu.tw/treesearch/}. They followed
 the top-level categories in PDTB for relation types and focused on the annotation
 of inter-sentential discourse relations. \cite{huang2014interpretation} annotated the
-relation type for 7,601 sentences that have only two discourse units. Though their
-corpora are relatively small.
+relation type for 7,601 sentences that have only two discourse units.
 \cite{zhou2012pdtb,zhou2015the} adopted PDTB-style discourse annotations and constructed
 a Chinese discourse corpus that contains 164 articles selected from the \textit{Chinese
 Treebank (CTB)}~\citep{xue2005penn}. \cite{zhang2014chinese} annotated 525 texts selected
@@ -127,26 +122,43 @@ intra-sentential, inter-sentential, and passage-level relations, though
 these annotations do not form a hierarchical structure naturally. \cite{zhou2014the}
 refined the annotation scheme of PDTB2 and annotated 890 documents from CTB,
 and focused mainly on intra-sentential discourse relations.
-\cite{li2014building} proprosed a \textit{Connective-driven Dependency Tree (CDT)}
-scheme, which was designed specifically for Chinese rhetorical structue. They
+
+\cite{li2014building} proposed a \textit{Connective-driven Dependency Tree (CDT)}
+scheme, which was designed specifically for Chinese rhetorical structure. They
 annotated 500 documents from CTB. Each paragraph was segmented into EDUs similar
 to the RST scheme. A three-level hierarchy of relation types was
 proposed, and the explicit and implicit relations between different spans of EDUs
-were annotated. The relations for each paragraph form a tree structure.
-
+were annotated. The relations for each paragraph form a tree structure. In addition,
+they annotated the discourse connectives for each relation. We use this corpus
+for our study as it have both discourse connective annotations and discourse
+structure annotations. We will discuss this corpus further in Section~\ref{c:CDTB}.
 
 \section{Chinese Discourse Research}
 
 
 \cite{t1999applying,t2000enhancement} and \cite{chan2000mining} investigated
 connective detection in Chinese texts as a part of a tagging system. \cite{hu2009research}
-developed a fully automatic system to extract connective components.
-They removed words commonly used in non-discourse contexts from the dictionary
-and improved accuracy from 0.5866 to 0.8988.
-\cite{hu2011research} dealt with linking ambiguity.
-The above work focused on relatively short sentence groups.
+developed a fully automatic system to extract connective components from sentences.
+They used a rule-based method and found that the performance was sensitive to
+the connective lexicon. By removing words commonly used in non-discourse contexts,
+they were able to improve accuracy from 58.66\% to 89.88\%.
 \cite{zhou2012cross} and \cite{li2014cross} employed
-cross-lingual information to deal with discourse usage and relation type ambiguity.
-Their reported F scores for discourse usage identification are 0.7933 and 0.7163, respectively.
-\cite{li2014cross} used 5-way classification to evaluate discourse usage
-and relation type classification together and obtained overall accuracy of 0.7020.
+cross-lingual information to deal with discourse usage ambiguity.
+Their reported F scores are 79.33\% and 71.63\%, respectively.
+\cite{li2014cross} used 5-way classification to classify a connective
+between four relation types and non-discourse usage,
+and obtained overall accuracy of 70.20\%.
+
+\cite{hu2011research} dealt with linking ambiguity. They focused on sentences
+that have multiple clauses and assumed all connective components in the sentence
+are correctly identified. They developed a method to prune the search tree
+to avoid the computation of all solutions while trying to find a connective
+set that includes all connective components. They were able to achieve 98.9\%
+accuracy in the 79 sentences that have linking ambiguities.
+
+\cite{huang2011chinese} investigated relation type disambiguation between
+two sentences. They used four-class classification with SVM, and their reported
+accuracy and macro-average F1 are 88.28\% and 63.69\% respectively.
+\cite{huang2012contingency} dealt with intra-sentential relations identification
+and tackled the relation structure prediction with a 49-way classification
+between different types of relation structures in a sentence.
