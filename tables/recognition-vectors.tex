@@ -1,11 +1,11 @@
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \begin{tabular}{|c|c|c|c|}
 \hline
 
 \bf Features        & \bf Precision & \bf Recall & \bf F1-Score \\ \hline
     GLOVE           &     77.95     &     75.77  &     76.79    \\ \hline
-    SKIP-GRAM       & \bf 78.33     &     76.28  & \bf 77.25    \\ \hline
+    SKIPGRAM        & \bf 78.33     &     76.28  & \bf 77.25    \\ \hline
     CBOW            &     75.08     &     73.97  &     74.48    \\ \hline
     GLOVE+SKIPGRAM  &     77.82     & \bf 76.57  &     77.15    \\ \hline
     GLOVE+CBOW      &     74.63     &     73.79  &     74.14    \\ \hline
@@ -14,5 +14,6 @@
 
 \end{tabular}
 \caption{\label{t:recognition-vectors} Performance of discourse usage
-disambiguation for connective components by different features. }
+disambiguation for connective components using different word embeddings for
+the VECTOR features. }
 \end{table}

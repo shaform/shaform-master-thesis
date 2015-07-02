@@ -1,4 +1,4 @@
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 \tikzstyle{block} = [rectangle, draw, node distance=1.5cm,
     text width=20em, text centered, rounded corners, minimum height=3em]
@@ -11,7 +11,7 @@
     % Place nodes
     \node [cloud] (paragraph) {paragraph};
     \node [block, below of=paragraph] (identify) {A. Identify connective component candidates};
-    \node [block, below=1.6em of identify] (eliminate) {B1. Eliminate non-discourse usages};
+    \node [block, below=1.6em of identify] (eliminate) {B1. Eliminate non-discourse usages on component or connective level};
     \node [block, below of=eliminate] (linking) {B2. Identify correct connectives};
     \node [container, fit=(eliminate) (linking)] (merge) {};
     \node [block, below=1.6em of linking] (types) {C. Disambiguate relation types};

@@ -1,0 +1,26 @@
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+
+\bf Methods             & \bf Precision & \bf Recall & \bf F1-Score \\ \hline
+    Left-first          &     85.89     &     91.01  &     88.37    \\ \hline
+    Order by length     & \bf 97.71     & \bf 96.15  & \bf 96.92    \\
+
+\hhline{|=|=|=|=|}
+% length then this
+    P \& N              &     97.26     &     95.60  &     96.42    \\ \hline
+    POS                 &     97.48     &     95.82  &     96.64    \\ \hline
+    NUM                 & \bf 98.48     & \bf 96.92  & \bf 97.69    \\ \hline
+    SKIPGRAM            &     97.87     &     96.37  &     97.10    \\ \hline
+    All-P \& N          &     97.81     &     96.25  &     97.02    \\ \hline
+    All-POS             &     97.81     &     96.25  &     97.02    \\ \hline
+    All-NUM             &     97.54     &     96.03  &     96.78    \\ \hline
+    All-SKIPGRAM        &     97.92     &     96.36  &     97.13    \\ \hline
+    All                 &     97.81     &     96.25  &     97.02    \\ \hline
+
+
+\end{tabular}
+\caption{\label{t:perfect-length} Performance of discourse usage
+disambiguation for connective by different features. }
+\end{table}

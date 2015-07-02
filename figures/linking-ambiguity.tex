@@ -1,0 +1,15 @@
+\begin{figure}[ht]
+\vspace{1em}
+\centering
+\tikzstyle{every picture}+=[remember picture]
+\tikzstyle{na} = [shape=rectangle,inner sep=2pt]
+\tikz\node[na](word1){\underline{除了}}; ... ，
+\tikz\node[na](word2){\underline{还}}; ... 。 ... 
+\tikz\node[na](word3){\underline{也}}; ... 。
+\begin{tikzpicture}[overlay]
+  \path[-, black,thick](word2) edge [out=90, in=90] (word1);
+  \path[-, gray,thick](word2) edge [out=70, in=110] (word3);
+\end{tikzpicture}
+
+\caption{\label{i:linking-ambiguity} Ambiguous linkings between connective components. }
+\end{figure}
