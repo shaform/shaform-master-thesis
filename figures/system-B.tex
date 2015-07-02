@@ -1,0 +1,44 @@
+\begin{figure}[ht]
+\centering
+\tikzstyle{block} = [rectangle, draw, node distance=1.5cm,
+    text width=10em, text centered, rounded corners, minimum height=3em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse, node distance=1.5cm,
+    minimum height=2em]
+\tikzstyle{container} = [draw, rectangle, dashed, inner sep=0.8em]
+
+\begin{tikzpicture}[node distance = 2cm, auto]
+    % Place nodes
+    \node [cloud] (components) {component candidates};
+
+    \path (components)+(-2.5,-2)
+        node [block] (eliminate1) {B1. Eliminate non-discourse components};
+
+    \node [block, right=3em of eliminate1] (generate2) {B2. Generate all connective candidates};
+
+    \node [block, below of=generate2] (eliminate2) {B2. Eliminate unlikely connective candidates};
+
+    \node [block, below of=eliminate1] (generate1) {B1. Generate all connective candidates};
+
+    \path (generate1)+(2.5,-2) node [block] (linking) {C. Resolve linking ambiguities};
+
+    \node [cloud, below of=linking] (connectives) {connectives};
+
+    % Draw edges
+    \path [line] (eliminate1) -- (generate1);
+    \path [line] (generate1) -- (linking);
+    \path [line] (generate2) -- (eliminate2);
+    \path [line] (eliminate2) -- (linking);
+    \path [line,dashed] (linking) -- (connectives);
+    \path [line,dashed] (components) -- (eliminate1);
+    \path [line,dashed] (components) -- (generate2);
+\end{tikzpicture}
+
+\caption{\label{i:system-B} System overview for alternative methods
+to extract connectives. } In B1, we eliminate non-discourse components first,
+and generate all possible candidates by linking the components. In B2,
+we do not eliminate components, but use all possible connective candidates, and
+disambiguate discourse usages on the connective level. In fact, by eliminating
+unlikely connective candidates, B2 actually solve some of linking ambiguities
+before feeding the remaining candidates to C.
+\end{figure}

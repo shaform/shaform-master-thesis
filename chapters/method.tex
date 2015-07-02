@@ -7,6 +7,30 @@
 \chapter{Methods}
 \label{c:method}
 
+\section{Overview}
+
+In this chapter, we discuss our system design for Chinese discourse analysis.
+Our study mainly focus on the analysis of explicit relations.
+The components for the pipeline system is shown in Figure~\ref{i:system}.
+
+%i:system
+\input{figures/system}
+
+Firstly, we extract connective components candidates from each paragraph.
+Secondly, an classifier is used to disambiguate between discourse and
+non-discourse usages for these component candidates. We then try to identify
+the correct connectives by solving the linking ambiguity between remaining
+component candidates.
+A different approach that eliminates non-discourse usages and disambiguate
+linkings both on the connective level is also experimented. The alternative
+approaches are illustrated in Figure~\ref{i:system-B}.
+Finally, we determine the relation types for each explicit
+connective and extract the arguments for each relation.
+
+%i:system-B
+\input{figures/system-B}
+
+
 \section{Connective Candidate Extraction}
 
 \subsection{Goal}
@@ -28,8 +52,9 @@ component lexicon to extract all possible instances. This yields
 could be made by making the observation that many of the components only have
 discourse meaning when they are paired with other components. So instead of matching
 with the connective component lexicon, we use connective lexicon and only extract
-a component candidate when it forms a single connective or pairs with
-other candidates to form a paired connective. This leaves us with 12,526 candidates.
+a component candidate when it could independently form a single connective or pair
+with other candidates to form a parallel connective.
+This leaves us with 12,526 candidates.
 
 One reason for many incorrect instances is that many characters used for connectives
 appear in other unrelated words. For example, even though ``如'' (if) is a connective,
@@ -37,9 +62,10 @@ this character appears in an unrelated word ``如是说'' (says). To alleviate t
 Stanford Chinese segmenter~\citep{chang2008optimizing} is employed to segment paragraphs
 into tokens. These token boundaries can be used as clues for eliminating spurious candidates.
 In particular, we only extract a component when it can be composed by complete tokens.
-For example, in (S~\ref{sent:keyissue}) we extract ``不是...而是'' (not ... but) as a candidate
-even though ``不'' (not) and ``是'' (is) are separated. Comparatively, in (S~\ref{sent:improve}),
-the correct connective ``如'' (if) is not extracted because it does not satisfy a token boundary.
+For example, in (S~\ref{sent:keyissue}) we extract ``不是'' (not) and ``而是'' (but) as candidates
+even though ``不'' (not) and ``是'' (is) are separated. Comparatively, in (S~\ref{sent:peace}),
+the spurious connective component candidate ``和'' (and) is not extracted because it does
+not satisfy a token boundary.
 
 \begin{sent}{sent:keyissue}{}
     当前 / 经济 / 的 / 关键 / \underline{不} / \underline{是} / 争取 / 更 /
@@ -48,10 +74,9 @@ the correct connective ``如'' (if) is not extracted because it does not satisfy
     increase productivity.)
 \end{sent}
 
-\begin{sent}{sent:improve}{}
-    \underline{如}无 / 改进 / ， / 很 / 难 / 在 / 海外 / 市场 / 参与 / 竞争 /
-    。 (It will be difficult to compete in foreign markets if there is no
-    improvement.)
+\begin{sent}{sent:peace}{}
+    双方 / 表示 / 希望 / 在 / \underline{和}平 / 计划 / 的 / 基础 / 上 / 解决 / 问题 / 。
+    (Both sides expressed the hope to solve the problem on the basis of the peace plan.)
 \end{sent}
 
 Using this procedure, only 7,649 component candidates are extracted, with 2,068 of 2,131 annotated
@@ -65,6 +90,7 @@ maintaining high recall.
 \input{tables/cand-extract}
 
 \section{Discourse Usage Disambiguation}
+\label{c:discourse-disambig}
 
 \subsection{Goal}
 
@@ -72,33 +98,46 @@ We start by investigating the identification of connective components that have 
 as most of the related works only deal with single connectives. Given the positions of all candidate
 components, we would like to eliminate spurious candidates.
 
-\subsection{Classification of Discourse Usage}
+\subsection{Disambiguation on Component Level}
+\label{c:discourse-disambig-component}
 
-We use \textit{Scikit-Learn} library~\citep{scikit-learn} to carry out binary classification between discourse
-and non-discourse usages for all candidates. Various classifiers such as \textit{Logistic Regression}
-and \textit{Support Vector Machine (SVM)} have been experimented, and the results are
-reported in Chapeter~\ref{c:exp}. The SVM included by Scikit-Learn is a \textit{Python} wrapper for the popular
-\textit{LibSVM} library~\citep{CC01a}.
 
-\subsection{Features}
+We use \textit{Scikit-Learn} library~\citep{scikit-learn} to carry out binary
+classification between discourse and non-discourse usages for all candidates.
+Features for each connective component are extracted and various
+classifiers such as \textit{Logistic Regression} and
+\textit{Support Vector Machine (SVM)} have been experimented, and the results
+are reported in Chapter~\ref{c:exp}. The SVM included by Scikit-Learn is
+a \textit{Python} wrapper for the popular \textit{LibSVM} library~\citep{CC01a}.
+After we eliminate spurious components, we could form connective candidates
+by linking the remaining components. Linking ambuirities must be solved to
+identify the correct connective afterwards.
+
+
+\subsection{Features for a Connective Component Candidate}
 \label{s:comp-features}
 
-The feature set we used for classification is as follows.
-When we extract features related to the parse tree, we use utilities provided by the
-\textit{Natural Language Toolkit}~\citep{BirdKleinLoper09}.
+In this section we discuss the features we propose.
+Stanford POS tagger~\citep{toutanova2003feature} and Stanford Chinese
+parser~\citep{levy2003harder} are used to create the POS tags and parsing tree
+for each paragraph. When we extract features related to the parsing tree, we use
+utilities provided by the \textit{Natural Language Toolkit}~\citep{BirdKleinLoper09}
+to manipulate the parsing trees. The features we used for classification
+are as follows.
 
 \subsubsection{P\&N}
 
 The feature set is a subset of the features from
 \cite{pitler2009using}. It includes four binary features:
 (1) the highest category that dominates exactly the component
-itself in the parse tree, which is called self-category, (2) the parent of the self-category,
+itself in the parsing tree, which is called self-category, (2) the parent of the self-category,
 (3) the left-sibling of the self-category, and (4) the right-sibling of the self-category.
 Special null features are set when no such nodes exist. For example,
 in Figure~\ref{i:parse-but}, there is no node that dominates exactly the
 connective component ``却是'' (but), while in Figure~\ref{i:parse-therefore} the
 self-category of ``因此'' (therefore) is ADVP. We have also experimented
-with the full feature set, but the performance does not increase.
+with the full feature set from \cite{pitler2009using}, but the performance
+does not increase.
 
 %i:parse-but
 %i:parse-therefore
@@ -116,7 +155,7 @@ in (S~\ref{sent:sovereignty}) the features for ``意味着'' (meaning) are
 
 \begin{sent}{sent:sovereignty}{}
     一百二十七/CD 位/M 委员/NN 一致/AD 通过/VV ，/PU \underline{意味/VV 着/AS} 大家/PN 对/P
-    恢复/VV 行使/VV 香港/NR 主权/NN 后/LC 的/DEG 政治/NN 架构/NN 重建/NN ，/PU
+    恢复/VV 行使/VV 香港/NR 主权/NN \underline{后/LC} 的/DEG 政治/NN 架构/NN 重建/NN ，/PU
     有/VE 着/AS 高度/JJ 的/DEG 共识/NN 。/PU
     (All 127 committee members agreed, meaning that everyone reaches a consensus about
     the reconstruction of political structure after resuming exercise of sovereignty over Hong Kong.)
@@ -132,15 +171,18 @@ The feature set contains three numerical features.
         candidates by linking with other component candidates.
     \item The distance from the connective component to a separating element on the left.
     \item The distance from the connective component to a
-        separating element on the right. Distance is measured by adding 1 to the number of tokens
-        between the separating element and the nearest token of the component.
-        The separating elements include the symbols ``！？：；，。''.
-        When no such symbol is found, we use the distance to paragraph boundary.
+        separating element on the right.
 \end{enumerate}
 
-For example, in (S 3) the features for “意味着” (meaning) are \textbf{NUM-ambiguity=X},
-\textbf{NUM-left=1}, and \textbf{NUM-right=12}, where X depends on the number of candidate
-connectives detected.
+Distance is measured by adding 1 to the number of tokens
+between the separating element and the nearest token of the component.
+The separating elements include the symbols ``！？：；，。''.
+When no such symbol is found, we use the distance to paragraph boundary.
+
+For example, in (S~\ref{sent:sovereignty}) the features for “意味着” (meaning) are \textbf{NUM-ambiguity=1},
+\textbf{NUM-left=1}, and \textbf{NUM-right=12}. As there is only one connective candidate that has the
+component “意味着” (meaning), the linking ambiguity for the component is 1.
+We normalize the numerical features by scaling each to zero mean and unit variance.
 
 
 \subsubsection{VECTOR}
@@ -154,53 +196,40 @@ for the tokens that constitute the connective component, (2) the vector for the
 token to the left and (3) the vector for the token to the right. Zero-valued vector is used
 when the vector does not exist.
 
-In total, it's a 1200-dimensional vector when the embeddings are used independently.
-The dimensionality increases proportionally when we combine different vectors produced by
+In total, it's a 1200-dimensional vector when the 400-dimensional embeddings are used.
+The dimensionality increases proportionally if we combine different vectors produced by
 different tools.
 
-
-\section{Connective Linking Disambiguation}
-
-\subsection{Goal}
-
-Given all connective component candidates, we could construct all possible
-connective candidates formed by these component. However, many of these
-candidates are incorrect. In particular, a component may involves in
-many different connective candidates by linking with different components,
-but only one of them could be correct. Moreover, many component candidates
-do not actually have discourse usage, meaning that none of the connectives
-it forms is correct. We would like to extract the correct connective from
-the paragraph.
+\subsection{Disambiguation on Connective Level}
+\label{c:discourse-disambig-connective}
 
 
-\subsection{A Two-Stage Approach}
+Rather than disambiguate each component candidate, we could also treat each connective
+candidate as an instance and tackle discourse usage disambiguation on the connective
+level. All possible connective candidates are  generated by linking components with
+each other. Features for each connective candidate are extracted and binary
+classification can be carried out to identify discourse usages.
+Since there are more spurious connectives than real connectives, we balance the
+data set by oversampling the correct instances for three times. To evaluate on
+component level, we take the union of the components for all connective as the result.
 
-Rather than eliminating non-discourse connective components first and
-dealing with linking disambiguation for overlapped connectives later,
-we try to solve them together as linking may provide additional clues for
-detecting discourse usage. We treat each connective candidate as an instance
-and extract similar features for each candidate. Afterwards, a two-stage
-process is carried out to identify correct instances.
+Suppose we can do the classification perfectly, we would have already
+solved the linking ambiguities as only the correct connectives remain.
+However, there may still exist some spurious candidates, some of which are
+caused by incorrect component candidates, others caused by
+incorrect linkings.
+In particular, some overlapped connective candidates that share the same
+connective component candidate remain. By resolving the linking
+ambiguities, we will have more capacity to identify the correct connectives. This
+work is described in Section~\ref{c:linking-disambig}.
 
-Firstly, we use machine learning to eliminate unlikely candidates. This is done by
-training a regression model to predict the scores for each candidate and eliminate
-all instances that have scores under a threshold. When training, each real connective
-is set to 1 and each spurious connective is set to 0. Since there are more spurious
-connectives than real connectives, and we want to preserve most of the real connectives before
-the next stage, we balance the data set by oversampling the correct instances for four times.  
-At test time, the score of each candidate is obtained, and all
-connectives with scores lower than a threshold are eliminated.
-
-Afterwards, there remain some connective candidates that overlap with each other. That is,
-they share the same connective component. So we greedily accept connective candidates
-ordered by their lengths and then their scores, while rejecting overlapped ones. We have observed
-that the more components a connective has, the less likely a spurious instance would be
-detected. Thus we use length as a criterion for ordering.
-
-\subsection{Features}
+\subsection{Features for a Connective Candidate}
+\label{c:connective-features}
 
 The feature sets for each connective candidate are similar to those in the previous
-experiment:
+experiment. As a connective candidate is composed of one or more component candidates,
+we extend some of the features to utilize linking relationships between the
+components.
 
 \subsubsection{P\&N}
 
@@ -262,6 +291,7 @@ In additional, there are seven numerical features.
 
 The separating elements include the symbols ``！？：；，。''.
 When no such symbol is found, we use the distance to paragraph boundary.
+We normalize the numerical features by scaling each to zero mean and unit variance.
 
 \subsubsection{VECTOR}
 
@@ -270,6 +300,78 @@ In particular, it contains three vectors: (1) the averaged vectors
 for the all tokens that constitute the connective components, (2) the averaged vector for the
 token to the left of each component and (3) the averaged vector for the token to the
 right of each component. Zero-valued vector is used when the vector does not exist.
+
+\section{Connective Linking Disambiguation}
+\label{c:linking-disambig}
+
+\subsection{Goal}
+
+Given all connective component candidates, we could construct all possible
+connective candidates formed by these component. Many of these
+candidates are incorrect. In particular, a component may involves in
+many different connective candidates by linking with different components,
+but only one of them could be correct. Moreover, some remaining component
+candidates may not actually have discourse usage, meaning that none of
+the connectives it forms is correct. We would like to extract the
+correct connectives from the paragraph despite the imperfect discourse usage
+disambiguation.
+
+\subsection{A Pipeline Approach with Discourse Usage Disambiguation on Component Level}
+\label{c:pipeline1}
+
+After we have eliminated the non-discourse connective components as described
+in Section~\ref{c:discourse-disambig-component}, we could
+deal with liking ambiguities by determining how to correctly pair these
+components together. We extract all possible connective candidates by
+linking these components. We treat each candidate as an instance to
+extract related features as described in Section~\ref{c:connective-features}.
+Afterwards, logistic regression is used to obtained the likelihood for an
+candidate to be a correct connective.
+
+The likelihood is used as scores, and connective candidates are greedily accepted
+ordered by their lengths (the number of components they have) and their scores.
+Ties are broken by the positions of the connectives. Candidates that have
+leftmost positions are accepted first.
+
+We reject a connective candidate when it share the same connective component
+with the already accepted connectives. The reason to use length as an ordering
+criteria is due to the observation that long connectives appear rarely
+and when they do appear, it's often the case that it's a real connective.
+
+After this procedure, additional connective components may have been eliminated if
+they are unable to form a link with other candidates and is not a single connective.
+Therefore, we also evaluate whether this procedure could improve the performance
+for discourse usage identification in component level.
+
+
+\subsection{A Pipeline Approach with Discourse Usage Disambiguation on Connective Level}
+\label{c:pipeline2}
+
+Rather than eliminating non-discourse connective components first and
+dealing with linking disambiguation for overlapped connectives later,
+we could also try to solve them both on connective level as linking may
+provide additional clues for detecting discourse usage. 
+
+In Section~\ref{c:discourse-disambig-component}, we generate all possible
+connective candidates and eliminate ones that are unlikely to be correct.
+In the process, we eliminate some non-discourse candidates and some incorrect
+linkings.
+
+Afterwards, there remain some connective candidates that overlap with each other.
+That is, they share the same connective component. So we greedily accept connective
+candidates ordered by their lengths and then their scores, while rejecting
+overlapped ones as described in Section~\ref{c:pipeline1}.
+
+Likewise, we also evaluate on component level to see if this increase
+the performance for discourse usage detection.
+
+\section{Relation Type Disambiguation}
+
+After the connectives are extracted, the relation type the connective represent
+must be determined. We use the features in Section~\ref{c:connective-features}
+and additionally we use the identity of the connective as a feature as
+it provides strong clues for it's relation type.
+
 
 \section{Connective Argument Extraction}
 

@@ -11,13 +11,13 @@
     % Place nodes
     \node [cloud] (paragraph) {paragraph};
     \node [block, below of=paragraph] (identify) {A. Identify connective component candidates};
-    \node [block, below=1.6em of identify] (eliminate) {B1. Eliminate non-discourse usages on component or connective level};
-    \node [block, below of=eliminate] (linking) {B2. Identify correct connectives};
-    \node [container, fit=(eliminate) (linking)] (merge) {};
-    \node [block, below=1.6em of linking] (types) {C. Disambiguate relation types};
-    \node [block, below of=types ] (arguments) {D. Extract relation arguments};
+    \node [block, below of=identify] (eliminate) {B. Eliminate non-discourse usages for component candidates or connective candidates};
+    \node [block, below of=eliminate] (linking) {C. Resolve linking ambiguities};
+    \node [block, below of=linking] (types) {D. Disambiguate relation types};
+    \node [block, below of=types ] (arguments) {E. Extract relation arguments};
     % Draw edges
     \path [line] (identify) -- (eliminate);
+    %\path [line] (identify) -- +(5.0,0.0) -- +(5.0,-3) -- (linking);
     \path [line] (eliminate) -- (linking);
     \path [line] (linking) -- (types);
     \path [line] (types) -- (arguments);
