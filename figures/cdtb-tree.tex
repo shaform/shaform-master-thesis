@@ -1,21 +1,26 @@
 \begin{figure}[ht]
 \centering
+\tikzset{every tree node/.style={align=center},
+    level distance=40pt,
+    sibling distance=6pt}
 \begin{tikzpicture}
-\Tree[.{对此 (for this)}
-       [.{因此 (therefore)}
-         [ (1) ]
-         [ (2) ]
+\Tree[.{concessive \\ 尽管 \ldots 但 (although \ldots but)}
+       [.{continue \\ (以后) (later)}
+         [.{coordination \\ 还 (still)}
+           [ (a) ]
+           [ (b) ]
+         ]
+         [ (c) ]
        ]
-       [.{不是 \ldots 而是 (is not \ldots but)}
-         [ (3) ]
-         [.{使 (cause)}
-           [.{并且 (and)}
-             [ (4) ]
-             [ (5) ]
-             [ (6) ]
-           ]
-           [ (7) ]
-         ]]]
+       [.{explanation}
+         [ (d) ]
+         [.{coordination}
+           [ (e) ]
+           [ (f) ]
+           [ (g) ]
+         ]
+       ]
+     ]
 
 \end{tikzpicture}
 

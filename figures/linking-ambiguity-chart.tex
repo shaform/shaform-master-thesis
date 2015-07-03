@@ -1,0 +1,88 @@
+\begin{figure}[ht]
+\centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=15cm,
+            height=10cm,
+            enlargelimits=0.15,
+            legend style={at={(0.5,-0.15)},
+              anchor=north,legend columns=-1},
+            xtick={1,21,...,245},
+            xlabel={\#connective candidates involves},
+            ylabel={\#instances (log)},
+            ymode=log,
+            ]
+        \addplot+[
+                nodes near coords,
+                every node near coord/.append style={xshift=-20, yshift=-10},
+                nodes near coords align={horizontal},
+                point meta=x,
+                ] coordinates {
+        (1,1659)
+        (2,411)
+        (3,48)
+        (4,10)
+        (5,3)
+        };
+        \addplot coordinates {
+        (1,9841)
+        (2,1528)
+        (3,478)
+        (4,202)
+        (5,70)
+        (6,101)
+        (7,16)
+        (8,41)
+        (9,19)
+        (10,14)
+        (11,10)
+        (12,39)
+        (13,4)
+        (14,6)
+        (15,9)
+        (16,12)
+        (17,1)
+        (18,9)
+        (20,11)
+        (21,9)
+        (22,4)
+        (23,1)
+        (24,12)
+        (25,6)
+        (27,3)
+        (28,8)
+        (30,3)
+        (32,11)
+        (35,2)
+        (36,6)
+        (39,2)
+        (40,10)
+        (42,1)
+        (45,2)
+        (49,1)
+        (52,4)
+        (62,1)
+        (64,7)
+        (65,1)
+        (69,1)
+        (84,1)
+        (91,1)
+        (96,1)
+        (104,1)
+        (105,5)
+        (112,1)
+        (132,1)
+        (152,1)
+        (156,1)
+        (157,1)
+        (192,1)
+        (228,1)
+        (234,2)
+        (235,1)
+        (240,1)
+        };
+        \legend{only real,all candidates}
+        \end{axis}
+    \end{tikzpicture}
+\caption{\label{i:linking-ambig-chart} Number of connective candidates a component candidate involes. }
+\end{figure}

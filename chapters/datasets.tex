@@ -11,8 +11,10 @@ In this chapter, we discuss the datasets we use in our study, and
 provide some statistics and analysis.
 
 \section{Chinese Discourse Treebank (CDTB)}
+\label{c:CDTB}
+\subsection{Introduction}
 
-Chinese Discourse TreeBank (CDTB)~\citep{li2014building} is a discourse
+Chinese Discourse Treebank (CDTB)~\citep{li2014building} is a discourse
 corpus that contains 500 articles from the Chinese Treebank (CTB)~\citep{xue2005penn}.
 Totally, it contains 2,342 paragraphs.
 Inspired by RST and PDTB, they proposed the Connective-driven Dependency Tree (CDT)
@@ -21,73 +23,151 @@ scheme to annotate the documents.
 In CDTB, each paragraph is represented as a discourse tree. The leaf nodes are the
 elementary discourse units (EDUs) for the text, while internal nodes are discourse
 relations between discourse units. This is very similar to RST-DT.
-Consider the example sentences (S~\ref{sent:cdtb}) from \cite{li2014building}.
 
-\begin{sent}{sent:cdtb}{}
-[浦东开发开放是一项振兴上海,建设现代化经济、贸易、金融中心的跨世纪
-工程,]\textsuperscript{1}
-[(因此) 大量出现的是以前不曾遇到过的新情况、新问题。]\textsuperscript{2}
-[(对此),浦东\{不是\}简单的采取“干一段时间,等积累了经验以后再制定法规条例”的做法,]\textsuperscript{3}
-[\{而是\}借鉴发达国家和深圳等特区的经验教训,]\textsuperscript{4}
-[<并且>聘请国内外有关专家学者,]\textsuperscript{5}
-[<并且>积极、及时地制定和推出法规性 文件,]\textsuperscript{6}
-[\{使\}这些经济活动一出现就被纳入法制轨道。]\textsuperscript{7}
-
-(
-Pudong's development and opening up is a century-
-spanning undertaking for vigorously promoting Shanghai and
-constructing a modern economic, trade, and financial center.
-Because of this, new situations and new questions that have
-not been encountered before are emerging in great numbers.
-In response to this, Pudong is not simply adopting an approach
-of "work for a short time and then draw up laws and regulations
-only after experience has been accumulated.”
-Instead, Pudong is taking advantage of the lessons from experience of
-developed countries and special regions such as Shenzhen,
-by hiring appropriate domestic and foreign specialists and
-scholars,
-actively and promptly formulating and issuing
-regulatory documents.
-So these economic activities are incorporated into the sphere
-of influence of the legal system as soon as they appear.
-)
-\end{sent}
-
-The discourse structure is shown in Figure~\ref{i:cdtb-tree}. Importantly,
-the set of discourse relation types is organized as a three-level hierarchy,
-where the third level are the discourse connectives themselves. The relation
-types are shown in Figure~\ref{i:three-level}. The top-level categories have
-four relation types, while the second level have 17 types. For an implicit
-relation, the connective that could be inserted is annotated. This is denoted
-by <> in Figure~\ref{i:cdtb-tree}. Totally, there are 282 types of connectives.
-For each connective of an explicit relation,
-they also annotated whether it can be deleted as denoted by () or cannot be
-deleted as denoted by \{\}.
-If an appropriate connective to be inserted cannot be found, an internal
-node may only have a second level relation type as well.
-
-% i:cdtb-tree
-\input{figures/cdtb-tree}
+The set of discourse relation types is organized as a three-level hierarchy as
+shown in Figure~\ref{i:three-level}.
+The top-level categories have four relation types including causality, coordination,
+transition, and explanation. The second level
+have 17 types. The third level are the discourse connectives themselves.
+As some connectives may be used for different relation types, there may
+be multiple third-level connectives that have the same surface form under
+different second-level relation types. For example, the connective
+``并'' (and) appear in the following second-level relation types:
+progressive, continue, explanation, coordination.
 
 % i:three-level
 \input{figures/three-level}
 
-During our experiments, we found some errors in the annotation and corrected
+For an explicit relation, once its second-level type is determined, the
+third-level type is just its explicit connective. For an implicit relation,
+a connective that could be inserted is annotated as its third-level type.
+Sometimes there is no appropriate connective to be inserted. In that case,
+the relation is only annotated with a second-level relation type.
+
+Consider the example sentences (S~\ref{sent:cdtb}) from CDTB. Its discourse
+structure are shown in Figure~\ref{i:cdtb-tree}. The continue relation between
+discourse units (a-b) and c is implicit, but ``以后'' (later) can be inserted
+as a connective as denoted by ``<以后>'' in (S~\ref{sent:cdtb}).
+On the other hand, the explanation relation between (d) and (e-g)
+does not have an inserted connective.
+
+
+\begin{sent}{sent:cdtb}{}
+    [\underline{尽管}浦东新区制定的法规性文件有些比较``粗''，]\textsuperscript{a}
+    [有些\underline{还}只是暂行规定，]\textsuperscript{b}
+    [有待<以后>在实践中逐步完善，]\textsuperscript{c}
+    [\underline{但}这种法制紧跟经济和社会活动的做法，]\textsuperscript{d}
+    [受到了国内外投资者的好评，]\textsuperscript{e}
+    [他们认为，到浦东新区投资办事有章法，]\textsuperscript{f}
+    [讲规矩，]\textsuperscript{g}
+    [利益能得到保障。]\textsuperscript{h}
+
+    (Although some regulatory documents for the Pudong New Area are "rough",
+    and some regulations are still temporary and
+    need to be refined gradually,
+    the practice for regulations to closely follow economic and social activities
+    are praised by domestic and foreign investors.
+    Their view on investing in the Pudong New Area is that
+    things are done methodologically,
+    rules are followed,
+    and their interest can be protected.)
+\end{sent}
+
+% i:cdtb-tree
+\input{figures/cdtb-tree}
+
+Since we only consider explicit relations in our studies, we will ignore
+third-level relation types from now on to avoid confusion.
+For an explicit relations, the second-level relation type and its explicit
+connective can already uniquely determine its relation type.
+When we refer to connective types in the following section, we mean the
+surface forms of connectives (i.e. instances of the same connective type
+may have different relation types).
+
+\subsection{Analysis}
+
+During our experiments, we found some errors in the annotation including
+duplicate annotations and erroneous positions so we corrected
 them. After the correction, there are 2,131 connective components annotated
-for the explicit relations, and they form 1,813 connectives instances. The length
+for the explicit relations, and they form 1,813 connective instances. The length
 distribution of these connectives are shown in Table~\ref{t:connective-length}.
-Most connectives only have one or two connective components.
+The distribution of the connectives are imbalance. Most connectives only have
+one or two connective components. Also, while some connectives have many instances,
+many connectives appear rarely. The frequencies for the connectives are shown
+in Figure~\ref{i:freq}. There are totally 274 types of connectives, but
+147 of them only appear once.
 
 % t:connective-length
 \input{tables/connective-length}
 
-Many of the connective types can be used for different 1-level and 2-level
-relation types. As shown in Table~\ref{t:connective-type}, while most connective
-types are only used for 1 relation types, the ambiguous connectives have many
-instances.
+% i:freq
+\input{figures/freq}
+
+
+We list the top 25 types of connectives in Figure~\ref{i:connective-types}.
+Most of these connectives have only one component.
+
+% i:connective-types
+\input{figures/connective-types}
+
+While there are totally 274 types of connectives, there are only 227 types
+of connective components found in the explicit relation annotations. This
+is because many components can either be a single connective or link
+with other components to form a parallel connective. We collect these
+connectives and connective components to construct a connective lexicon
+that has 274 entries, and a component lexicon that has 227 entries.
+
+
+Although many connectives appear rarely, there exist many spurious connective
+candidates that do not actually have discourse meaning. This can be seen in
+Figure~\ref{i:freq-detected} in log-scale. We show the number of connective candidates
+detected if we use string matching with the connective lexicon to extract
+all connective candidates from the corpus. This problem is partly caused by the linking
+ambiguities but the large number of spurious component candidates is a worse problem.
+These spurious component candidates introduce a lot of connective candidates that
+do not actually have discourse meanings. In fact, if we could identify the correct
+connective components, the total number of connective candidates they form
+is only 2,249, and 1,813 of them are correct, which is about 80\% of these candidates.
+
+% i:freq-detected
+\input{figures/freq-detected}
+
+The problem caused by spurious component candidates is best illustrated in
+Figure~\ref{i:linking-ambig-chart}. When correct components are identified.
+The connective candidates formed by these components are limited.
+Most of the components involve in only one connective, meaning that the correct linking
+is known. The greatest linking ambiguity is only 5. However, when there are
+spurious components, there exist a component candidate that involves in as many
+as 240 connective candidates.
+
+% i:linking-ambig-chart
+\input{figures/linking-ambiguity-chart}
+
+For relation type ambiguity, we list the number of relation types a
+connective appear in the corpus for explicit relations in Table~\ref{t:connective-type}.
+While most connective types are only used for 1 relation types,
+the ambiguous connectives have many instances.
 
 % t:connective-type
 \input{tables/connective-type}
+
+Table~\ref{t:argument-num} shows the number of arguments for the 1,813 explicit
+relations. Most relations only have two arguments, but there are relations
+that have as long as 7 arguments. In addition to the case of single connectives,
+the number of arguments does not always
+match with the number of connective components in each relation. For example,
+in (S~\ref{sent:medal}), the connective 除-外-还 (in addition to \ldots also)
+has three components, but it only have two arguments.
+
+% t:argument-num
+\input{tables/argument-num}
+
+
+\begin{sent}{sent:medal}{}
+    [\underline{除}戈杰安夺得金牌\underline{外}，]
+    [米洛索维奇\underline{还}摘取铜牌。]
+    (In addition to Gogean's gold medal, Milosovici also won the bronze medal.)
+\end{sent}
 
 \section{NTU PN-Gram Corpus}
 
