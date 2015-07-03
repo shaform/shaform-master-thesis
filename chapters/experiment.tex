@@ -6,3 +6,146 @@
 %
 \chapter{Experiments}
 \label{c:exp}
+
+\section{Discourse Usage Disambiguation}
+\label{c:discourse-usage-exp}
+
+In this section, we describe our investigation
+on discourse usage disambiguation. We evaluate our models using
+10-fold cross-validation. The 2,342 paragraphs are divided  into 10 folds
+while keeping the distribution of the number of explicit relations
+in each paragraph roughly equal. Most of the related works only
+deal with connective components, so we will also use the 2,131 annotated
+components to evaluate our models.
+The precision, recall, and F1 score for the positive instances are computed
+for each fold, and the average is reported.
+
+
+We firstly experiment with different types of word embeddings for
+the VECTOR features. We use Logistic Regression as our classifier
+and use VECTOR as the only features. The results are
+shown in Table~\ref{t:recognition-vectors} below. 
+
+\input{tables/recognition-vectors}
+
+In particular, GLOVE is a 400-dimensional vector trained using the
+toolkit provided by \cite{pennington2014glove} while SKIPGRAM and
+CBOW are trained using word2vec~\citep{mikolov2013efficient} with
+continuous skip-gram model and continuous bag-of-words model,
+respectively, as discussed in Chapter~\ref{c:datasets}. SKIPGRAM
+yields the best results on both precision and F1-score. We have
+tried concatenating different embeddings but the performance does not
+improve. Therefore, we will only use SKIPGRAM for the remaining experiments.
+
+We also use the same 10-fold to evaluate different features we proposed.
+The results are shown in Table~\ref{t:recognition-features}. SIKIPGRAM
+is the most powerful feature. Combining all features gives the best
+results.
+
+\input{tables/recognition-features}
+
+We use Scikit-Learn library~\citep{scikit-learn} to experiment with
+several different learning models with default parameters using all the features.
+Table~\ref{t:recognition-models} shows the results. The F1 score for Logistic
+Regression is the highest.
+
+
+\input{tables/recognition-models}
+
+We summarize our results in Table~\ref{t:recognition-methods} and
+compare with various related work. The first model is the method we described above
+using all features with Logistic Regression. For pipeline-by-component,
+we take the connective components extracted from the previous model, and try to
+identify the correct linkings between the components as described in Section~\ref{c:pipeline1}.
+The component candidates that fail to form a connective are eliminated.
+Some spurious candidates are removed in this process. However, it also removes some
+correct components, so the resulting F1 score does not improve. Comparatively,
+pipeline-by-connective yields a slightly better result. As described in
+Section~\ref{c:pipeline2}, we use each connective candidate as an instance and
+disambiguate discourse and non-discourse usages on the connective level.
+The improvement suggest that linking information may help discourse usage disambiguation.
+Though further investigation is needed to confirm the idea.
+
+We also compare our results with the models from \cite{li2015automatic} as they use the
+same dataset as us. The best results for Maximum Entropy and Decision Tree classifiers with
+automatic parsing tree features are selected. We use the 12,526 connective components candidates
+extracted by string matching with connective lexicon as our basis to compute the accuracy in order
+to compare with their work. Our models perform significantly better by a large margin.
+
+We also list the results from \cite{zhou2012cross} and \cite{li2014cross} on different
+datasets. Though it's not directly comparable with our work, the performance is similar.
+
+\input{tables/recognition-methods}
+
+\section{Discourse Linking Disambiguation}
+
+In this section, we discuss our investigation on linking ambiguities between connective components. Evaluation is done with the 1,813 connective instances. The same 10-fold
+for paragraphs is used for the experiments.
+
+We first examine the pipeline-by-component approach and assume all connective
+components are correctly identified so we can evaluate linking disambiguation
+independently. We use logistic regression
+to get the probability for each connective candidate to be correct and greedily
+accept non-overlapping candidates. We break ties by the positions of their components.
+Left-most candidates are accepted first. Experiments are done to investigate whether
+similar features are also useful for linking disambiguation and 
+Table~\ref{t:perfect-features} shows the results. We found that
+the only features that perform well are the NUM features. Further investigation
+reveals that using the length as the only feature actually performs better.
+In fact, if we simply order each candidate by their lengths and the positions,
+accepting candidates that have most components and left-most positions, we could
+reach the best results.
+
+
+\input{tables/perfect-features}
+
+Therefore, we incorporate these methods and rank each candidate using the following
+criteria respectively:
+
+\begin{enumerate}
+    \item the length, the more components the higher the score
+    \item the score obtained by logistic regression
+    \item the positions of components, left is better
+\end{enumerate}
+
+Table~\ref{t:perfect-length} shows the results. We compare different features
+with a baseline that only use positions for ranking (Left-first) and another
+baseline using both lengths and positions (Order by length). NUM features gives
+a slightly better result.
+
+\input{tables/perfect-length}
+
+We also carry out the same experiments when the component candidates are automatically
+extracted as discussed in Section~\ref{c:discourse-usage-exp}. However, the results
+are different. As shown in Table~\ref{t:pipeline-features}, when using scores
+predicted by logistic regression, All-SKIPGRAME gives the best results. Also,
+the its performance is better than the Order by length baseline.
+
+\input{tables/pipeline-features}
+
+Comparatively, when we use length and scores together, using all features gives
+best results as shown in Table~\ref{t:pipeline-length}.
+
+\input{tables/pipeline-length}
+
+This seems to suggest that these features may perform better when there are
+spurious component candidates because they can be used to eliminate some of
+these candidates.  Thus, we try a different model as shown in
+Table~\ref{t:classify-features} and obtain better results.
+
+\input{tables/classify-features}
+
+We also try to adjust the threshold to eliminate the candidates and found
+that our model obtain similar F1 scores across different thresholds as
+shown in Figure~\ref{i:classify-threshold}.
+
+\input{figures/classify-threshold}
+
+\section{Discourse Relation Disambiguation}
+
+10-fold firstly.
+
+We also investigate end-to-end.
+
+
+\section{Explicit Discourse Relation Argument Extraction}
