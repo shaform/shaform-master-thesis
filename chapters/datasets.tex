@@ -46,7 +46,7 @@ the relation is only annotated with a second-level relation type.
 
 Consider the example sentences (S~\ref{sent:cdtb}) from CDTB. Its discourse
 structure are shown in Figure~\ref{i:cdtb-tree}. The continue relation between
-discourse units (a-b) and c is implicit, but ``以后'' (later) can be inserted
+discourse units (a-b) and (c) is implicit, but ``以后'' (later) can be inserted
 as a connective as denoted by ``<以后>'' in (S~\ref{sent:cdtb}).
 On the other hand, the explanation relation between (d) and (e-g)
 does not have an inserted connective.
@@ -171,7 +171,7 @@ has three components, but it only have two arguments.
     [\underline{同时}可消除中外资企业在结汇方面的差别待遇，]
     [完善外汇市场运作和人民币汇率形成机制，]
     [扩大金融机构外汇存贷款业务。]
-    (Allow Chinese companies to retain a certain quota of foreign exchange earnings
+    (Allowing Chinese companies to retain a certain quota of foreign exchange earnings
      may encourage enterprises to enhance economic accounting.
      This reduces production and operation costs, and the expenses for foreign
      exchanges.  At the same time, it eliminates the different treatments between
@@ -216,9 +216,7 @@ to train our word embeddings. These sentences were extracted with three conditio
 
 We use an intermediate result that contains 43,010,050 sentences and eliminated
 the duplicate sentences. The result are 21,217,147 sentences, containing
-326,996,602 tokens.
-
-These sentences are used to train word embeddings.
+326,996,602 tokens. These sentences are used to train word embeddings.
 We have created 400-dimensional embeddings by GloVe tool~\citep{pennington2014glove}
 and word2vec tool~\citep{mikolov2013efficient,mikolov2013distributed} with CBOW and
 SKIP-GRAM models. These vectors are used as features as discussed in Chapter~\ref{c:method}.
