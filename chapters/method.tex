@@ -54,7 +54,7 @@ discourse meaning when they are paired with other components. So instead of matc
 with the connective component lexicon, we use connective lexicon and only extract
 a component candidate when it could independently form a single connective or pair
 with other candidates to form a parallel connective.
-This leaves us with 12,526 candidates.
+This leaves us with 12,498 candidates.
 
 One reason for many incorrect instances is that many characters used for connectives
 appear in other unrelated words. For example, even though ``如'' (if) is a connective,
@@ -95,8 +95,8 @@ maintaining high recall.
 \subsection{Goal}
 
 We start by investigating the identification of connective components that have discourse functions
-as most of the related works only deal with single connectives. Given the positions of all candidate
-components, we would like to eliminate spurious candidates.
+as most of the related works also deal with connective components only.
+Given the positions of all candidate components, we would like to eliminate spurious candidates.
 
 \subsection{Disambiguation on Component Level}
 \label{c:discourse-disambig-component}
@@ -213,8 +213,9 @@ Since there are more spurious connectives than real connectives, we balance the
 data set by oversampling the correct instances for three times. To evaluate on
 component level, we take the union of the components for all connective as the result.
 
-Suppose we can do the classification perfectly, we would have already
-solved the linking ambiguities as only the correct connectives remain.
+By eliminating unlikely connective candidates, some linking ambiguities 
+are also remove. In fact, if we can classify perfectly, we would have already
+solved the linking ambiguities completely as only the correct connectives remain.
 However, there may still exist some spurious candidates, some of which are
 caused by incorrect component candidates, others caused by
 incorrect linkings.
@@ -264,7 +265,7 @@ in (S~\ref{sent:crisis}), the features for ``虽-但'' (although-but) are
     \underline{但/AD} 後续/JJ 冲击/NN 将/AD 一/CD 波波/M 涌到/VV 。/PU
     (East Asian countries fell like dominoes.
     Although Taiwan is only swept by the edge of the storm,
-    the follow-up impact would come.
+    the follow-up impact would come.)
 \end{sent}
 
 \subsubsection{NUM}
@@ -283,7 +284,7 @@ In additional, there are seven numerical features.
     \item The distance between the leftmost and the rightmost tokens of the connective.
         The distance is measured by tokens as before.
     \item The geometric mean of distances between all neighboring connective components for
-        The current connective candidates.
+        the current connective candidates.
     \item The distances from the leftmost connective component to a separating element on the left.
     \item The distance from the rightmost connective component to a separating element on the right.
     \item The minimum distance from any separating element to any connective component.
@@ -306,17 +307,49 @@ right of each component. Zero-valued vector is used when the vector does not exi
 
 \subsection{Goal}
 
-Given all connective component candidates, we could construct all possible
-connective candidates formed by these component. Many of these
-candidates are incorrect. In particular, a component may involves in
-many different connective candidates by linking with different components,
+Depending on the method we choose for discourse usage disambiguation, we
+either have a set of connective component candidates or a set of connective
+candidates. Given all components candidates, we could construct all possible
+connective candidates formed by these components by linking them together.
+Many of these candidates are incorrect. In particular, a component may involves in
+multiple different connective candidates by linking with different components,
 but only one of them could be correct. Moreover, some remaining component
 candidates may not actually have discourse usage, meaning that none of
 the connectives it forms is correct. We would like to extract the
 correct connectives from the paragraph despite the imperfect discourse usage
 disambiguation.
 
-\subsection{A Pipeline Approach with Discourse Usage Disambiguation on Component Level}
+\subsection{A Greedy Algorithm}
+
+We propose a greedy algorithm.
+
+\begin{algorithm}
+    \caption{Linking Resolution Algorithm}
+    \label{a:linking-resolve}
+    \begin{algorithmic}[1]
+        \Require
+            $C$: A set of connective candidates
+        \Ensure
+            $A$: A set of accepted connectives
+        \State $A \gets \{\}$
+        \Comment{Initialize $A$}
+        \While{$C$ is not empty }
+            \State Compute linking ambiguities for all connective components exist in $C$
+            \If{there exists a connective component $ cc_i $ that has linking ambiguity $=$ 1}
+                \State let $ c_i $ be the unique connective candidate the component involves
+            \Else
+                \State Rank all connective candidates in $ C $
+                \State let $ c_i $ be the connective candidate that have highest priority
+            \EndIf
+                \State $C \gets C - \{c_i\}$
+                \State $A \gets A \cup \{c_i\}$
+            \State Remove all connective candidates $ c_j \in C $ that overlap with any $ c_k \in A $
+        \EndWhile
+        \State \Return A
+    \end{algorithmic}
+\end{algorithm}
+
+\subsubsection{A Pipeline Approach with Discourse Usage Disambiguation on Component Level}
 \label{c:pipeline1}
 
 After we have eliminated the non-discourse connective components as described
@@ -344,7 +377,7 @@ Therefore, we also evaluate whether this procedure could improve the performance
 for discourse usage identification in component level.
 
 
-\subsection{A Pipeline Approach with Discourse Usage Disambiguation on Connective Level}
+\subsubsection{A Pipeline Approach with Discourse Usage Disambiguation on Connective Level}
 \label{c:pipeline2}
 
 Rather than eliminating non-discourse connective components first and
