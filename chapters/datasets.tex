@@ -24,7 +24,7 @@ In CDTB, each paragraph is represented as a discourse tree. The leaf nodes are t
 elementary discourse units (EDUs) for the text, while internal nodes are discourse
 relations between discourse units. This is very similar to RST-DT.
 
-The set of discourse relation types is organized as a three-level hierarchy as
+The set of discourse relation types is organized in a three-level hierarchy as
 shown in Figure~\ref{i:three-level}.
 The top-level categories have four relation types including causality, coordination,
 transition, and explanation. The second level
@@ -80,21 +80,21 @@ Since we only consider explicit relations in our studies, we will ignore
 third-level relation types from now on to avoid confusion.
 For an explicit relations, the second-level relation type and its explicit
 connective can already uniquely determine its relation type.
-When we refer to connective types in the following section, we mean the
-surface forms of connectives (i.e. instances of the same connective type
+When we refer to connective classes in the following section, we mean the
+surface forms of connectives (i.e. instances of the same connective class
 may have different relation types).
 
 \subsection{Analysis}
 
-During our experiments, we found some errors in the annotation including
-duplicate annotations and erroneous positions so we corrected
-them. After the correction, there are 2,131 connective components annotated
-for the explicit relations, and they form 1,813 connective instances. The length
-distribution of these connectives are shown in Table~\ref{t:connective-length}.
-The distribution of the connectives are imbalance. Most connectives only have
+During our experiments, we found some errors in the corpus including
+duplicate annotations and erroneous positions, so we corrected
+them. After the correction, there are 2,131 connective component instances
+annotated for the explicit relations, and they form 1,813 connective instances.
+The length distribution for the connectives are shown in Table~\ref{t:connective-length}.
+The distribution is imbalance. Most connectives only have
 one or two connective components. Also, while some connectives have many instances,
 many connectives appear rarely. The frequencies for the connectives are shown
-in Figure~\ref{i:freq}. There are totally 274 types of connectives, but
+in Figure~\ref{i:freq}. There are totally 274 classes of connectives, but
 147 of them only appear once.
 
 % t:connective-length
@@ -104,23 +104,23 @@ in Figure~\ref{i:freq}. There are totally 274 types of connectives, but
 \input{figures/freq}
 
 
-We list the top 25 types of connectives in Figure~\ref{i:connective-types}.
+We list the top 25 classes of connectives in Figure~\ref{i:connective-types}.
 Most of these connectives have only one component.
 
 % i:connective-types
 \input{figures/connective-types}
 
-While there are totally 274 types of connectives, there are only 227 types
+While there are totally 274 classes of connectives, there are only 227 classes
 of connective components found in the explicit relation annotations. This
 is because many components can either be a single connective or link
 with other components to form a parallel connective. We collect these
 connectives and connective components to construct a connective lexicon
-that has 274 entries, and a component lexicon that has 227 entries.
+that has 274 entries and a component lexicon that has 227 entries.
 
 
 Although many connectives appear rarely, there exist many spurious connective
 candidates that do not actually have discourse meaning. This can be seen in
-Figure~\ref{i:freq-detected} in log-scale. We show the number of connective candidates
+Figure~\ref{i:freq-detected}. We show the number of connective candidates
 detected if we use string matching with the connective lexicon to extract
 all connective candidates from the corpus. This problem is partly caused by the linking
 ambiguities but the large number of spurious component candidates is a worse problem.
@@ -144,8 +144,8 @@ as 240 connective candidates.
 \input{figures/linking-ambiguity-chart}
 
 For relation type ambiguity, we list the number of relation types a
-connective appear in the corpus for explicit relations in Table~\ref{t:connective-type}.
-While most connective types are only used for 1 relation types,
+connective used for explicit relations in the corpus in Table~\ref{t:connective-type}.
+While most connective classes are only used for 1 relation type,
 the ambiguous connectives have many instances.
 
 % t:connective-type
@@ -153,15 +153,33 @@ the ambiguous connectives have many instances.
 
 Table~\ref{t:argument-num} shows the number of arguments for the 1,813 explicit
 relations. Most relations only have two arguments, but there are relations
-that have as long as 7 arguments. In addition to the case of single connectives,
-the number of arguments does not always
-match with the number of connective components in each relation. For example,
-in (S~\ref{sent:medal}), the connective 除-外-还 (in addition to \ldots also)
+that have as many as 7 arguments. The number of arguments does not always
+match with the number of connective components in each relation. The same
+connective can also have different number of arguments when used in
+different relations. Single connectives can have as many as 6 arguments
+as shown in (S~\ref{sent:same-time}), and in (S~\ref{sent:medal}),
+the connective 除-外-还 (in addition to \ldots also)
 has three components, but it only have two arguments.
 
 % t:argument-num
 \input{tables/argument-num}
 
+\begin{sent}{sent:same-time}{}
+    [允许中资企业保留一定限额外汇收入，可以促使企业加强经济核算，]
+    [降低生产经营成本，]
+    [减少企业买卖外汇的支出，]
+    [\underline{同时}可消除中外资企业在结汇方面的差别待遇，]
+    [完善外汇市场运作和人民币汇率形成机制，]
+    [扩大金融机构外汇存贷款业务。]
+    (Allow Chinese companies to retain a certain quota of foreign exchange earnings
+     may encourage enterprises to enhance economic accounting.
+     This reduces production and operation costs, and the expenses for foreign
+     exchanges.  At the same time, it eliminates the different treatments between
+     Chinese and foreign-funded enterprises in terms of foreign exchange settlement,
+     improving the operation of the foreign exchange market and the RMB
+     exchange rate formation mechanism, expanding the foreign currency deposits and
+     loans of financial institutions.)
+\end{sent}
 
 \begin{sent}{sent:medal}{}
     [\underline{除}戈杰安夺得金牌\underline{外}，]
@@ -174,9 +192,21 @@ has three components, but it only have two arguments.
 NTU PN-Gram Corpus~\citep{yu2012development} is a large-scale corpus that was
 constructed by POS-tagging the Chinese texts from the ClueWeb09
 dataset~\citep{callan2009clueweb09}. In NTU PN-Gram, there are totally 173,741,587
-web pages containing 141,179,769,123 tokens. In our study, we use a subset that
-was extracted by \cite{huang2014interpretation}. They extracted sentences that
-meet three conditions:
+web pages containing 141,179,769,123 tokens.
+
+Recently, efficient methods to estimate word embeddings have been developed.
+These methods learn the distributed representations for each word that encode
+syntactic and semantic patterns for each word in a fixed-dimensional vector.
+These vectors exhibit interesting properties. For example,
+\cite{mikolov2013linguistic} pointed out that there exist linear regularities
+between these vectors:
+
+$$ vector('king') - vector('man') + vector('woman') \approx vector('queen') $$
+
+Therefore, we investigate whether these vectors are useful for solving
+discourse issues. Due to the limitation of computation powers, we use
+a subset of NTU PN-Gram that was extracted by \cite{huang2014interpretation}
+to train our word embeddings. These sentences were extracted with three conditions:
 
 \begin{enumerate}
 \item Each sentence must have exactly two clauses.
@@ -185,10 +215,10 @@ meet three conditions:
 \end{enumerate}
 
 We use an intermediate result that contains 43,010,050 sentences and eliminated
-the duplicate sentences. 21,217,147 sentences were left, containing
+the duplicate sentences. The result are 21,217,147 sentences, containing
 326,996,602 tokens.
 
-We use the resulting sentences to train word embeddings for further use.
+These sentences are used to train word embeddings.
 We have created 400-dimensional embeddings by GloVe tool~\citep{pennington2014glove}
 and word2vec tool~\citep{mikolov2013efficient,mikolov2013distributed} with CBOW and
 SKIP-GRAM models. These vectors are used as features as discussed in Chapter~\ref{c:method}.
