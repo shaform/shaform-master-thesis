@@ -11,17 +11,17 @@
 
 In this chapter, we discuss our system design for Chinese discourse analysis.
 Our study mainly focus on the analysis of explicit relations.
-The components for the pipeline system is shown in Figure~\ref{i:system}.
+The components for the pipeline system are shown in Figure~\ref{i:system}.
 
 %i:system
 \input{figures/system}
 
-Firstly, we extract connective components candidates from each paragraph.
+Firstly, we extract connective component candidates from each paragraph.
 Secondly, an classifier is used to disambiguate between discourse and
 non-discourse usages for these component candidates. We then try to identify
 the correct connectives by solving the linking ambiguity between remaining
 component candidates.
-A different approach that eliminates non-discourse usages and disambiguate
+A different approach that eliminates non-discourse usages and disambiguates
 linkings both on the connective level is also experimented. The alternative
 approaches are illustrated in Figure~\ref{i:system-B}.
 Finally, we determine the relation types for each explicit
@@ -461,15 +461,50 @@ the performance for discourse usage detection.
 
 \section{Relation Type Disambiguation}
 
-After the connectives are extracted, the relation type the connective represent
-must be determined. We use the features in Section~\ref{c:connective-features}
-and additionally we use the identity of the connective as a feature as
-it provides strong clues for it's relation type.
-
+After the connectives are extracted, the relation type each connective represent
+must be determined. Different classifiers are used to experiment whether the features in
+Section~\ref{c:connective-features} are useful for relation type disambiguation.
+Additionally, we also use the string of the connective as a feature as it provides strong
+clues for the connective's relation type.
 
 \section{Connective Argument Extraction}
 
 \subsection{Goal}
+
+After the connective and its relation type is identified, we would like to extract
+its arguments. Consider Figure~\ref{i:cdtb-tree2}, it shows the discourse tree
+for (S~\ref{sent:rare-earth}). There exist two explicit relations signalled by
+connectives ``其中'' (among them) and ``并'' (and). We would like to know the
+arguments for ``其中'' (among them) are (b) and (c) while arguments for ``并'' (and) are
+(d), (e), (f), (g) and (h).
+
+%i:cdtb-tree2
+\input{figures/cdtb-tree2}
+
+\begin{sent}{sent:rare-earth}{}
+    [科技攻关带动了包头稀土工业生产的迅速发展。]\textsuperscript{a}
+    [现已建成包钢稀土一、二、三厂等稀土生产厂家，]\textsuperscript{b}
+    [\underline{其中}有世界最大的稀土精矿、稀土合金生产厂。]\textsuperscript{c}
+    [目前包头可以生产八十多种稀土产品，]\textsuperscript{d}
+    [这些产品以其独特的优良性能畅销全国，]\textsuperscript{e}
+    [\underline{并}出口十几个国家和地区，]\textsuperscript{f}
+    [年产值和利税达二十多亿元和三亿多元，]\textsuperscript{g}
+    [出口值达五千多万美元。]\textsuperscript{h}
+    (Science and technology research led to the rapid development of industrial production
+    for rare earth minerals in Baotou. Baotou Steel Rare Earth has now completed three
+    plants for rare earth production. Among them are the world's largest rare earth
+    concentrate and rare earth alloy production plant. Baotou can now produce more than
+    eighty kinds of rare earth products. With its excellent properties, these products
+    are sold nationwide and exported to more than 10 countries and regions.
+    The annual output value and profit tax is more
+    than two billion yuan and three hundred million yuan, respectively.
+    The export value is more than fifty million US dollars.)
+\end{sent}
+
+This could be formulated as a sequence labelling problem. In particular,
+
+%i:rare-args
+\input{figures/rare-args}
 
 \subsection{Argument Extraction as Sequence Labeling}
 
