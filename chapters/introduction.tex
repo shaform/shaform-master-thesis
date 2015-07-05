@@ -7,35 +7,33 @@
 \chapter{Introduction}
 \label{c:intro}
 
-Natural language understanding has always been an important goal in Artificial
-Intelligence. There are many applications including natural language user
-interface and large-scale content-analysis. However, the task is considered
-as very difficult because there are often many ambiguities in a seemingly
-simple sentence. Moreover, real world knowledge is sometimes required to fully
-understand the concepts involved in the text. Researchers deal with this problem
-by dividing it into subtasks such as lexical analysis, syntax analysis, semantic
-analysis, and discourse analysis. As large-scale annotated datasets become
-available, researchers build upon each component and start to handle the
-complex discourse relations between textual units.
+Natural language understanding is an ultimate goal in Artificial
+Intelligence. There are many potential applications such as natural language
+interface and large-scale content-analysis. However, NLP tasks are
+challenging because there exist various kinds of ambiguities at different processing levels
+including lexical analysis, syntactic analysis, semantic analysis, and discourse analysis.
+Real world knowledge may be required to fully understand the concepts involved in the text.
+As large-scale annotated datasets become available, researchers build upon each
+component and start to handle the complex discourse relations between textual units.
 
 In this thesis, we focus on several issues regarding Chinese discourse analysis
 including the identification explicit discourse connectives,
 the identification of correct linkings between the connective components,
 the classification of relation types for connectives,
-and the extraction of their arguments. 
+and the extraction of their arguments.
 
 %
 %   Background
 %
 \section{Background}
 
-Discourse is used to refer to a coherent sequence of sentences or phrases.
-Discourse analysis is an attempt to extract meaningful information from
-the discourse units. Such discourse information includes the exact boundaries
-between the discourse units and the discourse relation types between
-these discourse units.
+Discourse refers to a coherent sequence of sentences or phrases.
+Discourse analysis attempts to extract meaningful information from
+discourse units. Such discourse information includes exact boundaries
+between discourse units and the discourse relation types between
+discourse units.
 
-Discourse relations represent how different discourse units logically connect
+Discourse relations represent how discourse units logically connect
 with each other. There are different categorization systems of relation types.
 For example, in
 \textit{Penn Discourse Treebank 2.0 (PDTB2)}~\citep{Prasad08thepenn}, the discourse
@@ -102,7 +100,7 @@ denoted by [] markers in these examples.
     population, that is, it will increase about one percent per year.)
 \end{sent}
 
-In addition to these relation types, each relation could also be classified
+In addition to the relation types, each relation could also be classified
 as implicit or explicit. An explicit relation is signalled by a discourse connective.
 For example, in (S~\ref{sent:transition}), there is a connective ``虽然-但''
 (although-but), so this is an explicit relation. On the other hand,
@@ -113,7 +111,7 @@ These discourse connectives explicitly signal the presence of a discourse relati
 and therefore are important clues for discourse analysis.
 In Chinese, there are many parallel connectives that have more than one
 component~\citep{zhou2012pdtb}.
-In this thesis, we will denote the components of a connective as connective components.
+In this thesis, we call the components of a connective as its connective components.
 Each connective can be composed of one or more components. For example, ``虽然-但''
 (although-but) is composed of two connective components: ``虽然'' (although)
 and ``但'' (but).
@@ -141,11 +139,11 @@ is still implicit.
 %
 \section{Motivation}
 
-Research for English discourse relations has been progressing continuously. This is
+Researches for English discourse relations has been progressing continuously. This is
 partly due to the availability of large-scale English discourse corpora including
 \textit{Rhetorical Structure Theory Discourse Treebank (RST-DT)}~\citep{Carlson01building}
-and PDTB2~\citep{Prasad08thepenn}. Comparatively, the resource for Chinese discourse
-research has been lacking. Researchers often used self-constructed datasets to carry
+and PDTB2~\citep{Prasad08thepenn}. Comparatively, the available resources for Chinese discourse
+researches lacked. Researchers often used self-constructed datasets to carry
 out their experiments. Such datasets are relatively small and are often not publicly
 available, making it difficult to compare the results from different researchers.
 
@@ -184,9 +182,9 @@ not coexist.  In other words, only candidates (1) and (5) are correct.
 \begin{sent}{sent:invest}{}
 \underline{除了}投资环境优越，\underline{还}在于这些企业所具有的产品优势。
 (...) 对上海的产业优化 \underline{也}有很大的带动作用。
-(``\underline{In addition to} 
+(``\underline{In addition to}
 superior investment environment, it's \underline{also} due to the product
-advantages possessed by the enterprise. (...) It \underline{also} has 
+advantages possessed by the enterprise. (...) It \underline{also} has
 great effect in promoting the optimization of industries in Shanghai.'')
 \end{sent}
 
@@ -198,7 +196,7 @@ great effect in promoting the optimization of industries in Shanghai.'')
 %
 \section{Goal}
 
-In this thesis, we try to investigate these unique challenges for Chinese.
+In this thesis, we aim at investigating these unique challenges for Chinese.
 The goal of this research is to build an end-to-end system to analyze
 the explicit discourse relations in Chinese texts. In particular, we
 deal with four tasks. The first task is the extraction of explicit discourse
@@ -207,10 +205,10 @@ between discourse and non-discourse usages. We will investigate the disambiguati
 both on the connective component level and connective level.
 To correctly identify parallel connectives, linking ambiguities between
 the component candidates must be resolved. Therefore, our second task
-focus on resolving the linking ambiguities.
+focuses on resolving the linking ambiguities.
 The third task is the classification of the relation type for each discourse
 relation.
-We will classify each relation represented by a explicit connective by top-level
+We will classify each relation represented by an explicit connective by top-level
 relation types and second level relation types.
 The fourth task is the extraction of the arguments for each discourse connective.
 Built upon these components, an end-to-end discourse parser for Chinese may
@@ -221,7 +219,7 @@ be built in future studies.
 %
 \section{Structure}
 This thesis is organized as follows. In Chapter \ref{c:related}, we summarize
-the related work for discourse analysis, including the corpora and research for
+the related work for discourse analysis, including the corpora and researches for
 English and Chinese. In Chapter \ref{c:datasets}, we discuss the data sets used in
 this research, and provide some statistics and analysis. In Chapter \ref{c:method},
 we give an overview of our system, and discuss the design of various components.
