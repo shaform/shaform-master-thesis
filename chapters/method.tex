@@ -321,7 +321,25 @@ disambiguation.
 
 \subsection{A Greedy Algorithm}
 
-We propose a greedy algorithm.
+We propose a greedy algorithm to resolve linking ambiguities among a set of
+connective candidates as outlined in Algorithm~\ref{a:linking-resolve}.
+The algorithm filters the candidate set $C$ and produce a result set $A$ that
+contains only non-overlapped connective candidates. On line~\ref{a:lnk:compute}
+and \ref{a:lnk:check}, the algorithm computes the number of connective candidates
+each component candidate involves in the remaining $C$, and checks if there exists
+a component that does not have multiple possible linkings. When such candidate
+is not found, we rank all connective candidate under some criteria
+and select the one with highest priority.
+
+As we should see in our experiments, accepting components that have no ambiguity
+is especially helpful when the only task is to resolve linking ambiguities among
+component candidates that are known to be correct.
+In fact, under this condition, we can guarantee the connective candidate
+$c_i$ found on line~\ref{a:lnk:select} is correct as long as $A$ does not have
+any spurious connective candidate. Moreover, one could also develop an non-greedy
+algorithm that guarantees to produces a result set that contain all component
+candidates as done by \cite{hu2011research}. However, we think that not knowing
+which component candidate is correct is a more realistic experiment setting.
 
 \begin{algorithm}
     \caption{Linking Resolution Algorithm}
@@ -334,20 +352,70 @@ We propose a greedy algorithm.
         \State $A \gets \{\}$
         \Comment{Initialize $A$}
         \While{$C$ is not empty }
-            \State Compute linking ambiguities for all connective components exist in $C$
-            \If{there exists a connective component $ cc_i $ that has linking ambiguity $=$ 1}
-                \State let $ c_i $ be the unique connective candidate the component involves
+            \State Compute linking ambiguities for all connective components exist in $C$ \label{a:lnk:compute}
+            \If{there exists a connective component $ cc_i $ that has linking ambiguity $=$ 1} \label{a:lnk:check}
+                \State let $ c_i $ be the unique connective candidate the component involves \label{a:lnk:select}
             \Else
                 \State Rank all connective candidates in $ C $
                 \State let $ c_i $ be the connective candidate that have highest priority
             \EndIf
                 \State $C \gets C - \{c_i\}$
                 \State $A \gets A \cup \{c_i\}$
-            \State Remove all connective candidates $ c_j \in C $ that overlap with any $ c_k \in A $
+            \State Remove all connective candidates $ c_j \in C $ that overlap with $ c_i $
         \EndWhile
         \State \Return A
     \end{algorithmic}
 \end{algorithm}
+
+When we use Algorithm~\ref{a:linking-resolve} in a pipeline system,
+there exist many component candidates in $C$ that do not have discourse meaning,
+and accepting any component that has linking ambiguity $=$ 1 could easily
+introduce many spurious connective candidates. Therefore, we would just rank all
+candidates and use their priority to greedily accept candidates. The simplified
+algorithm is outlined in Algorithm~\ref{a:linking-rank}.
+
+\begin{algorithm}
+    \caption{Linking Resolution Algorithm by Ranking Only}
+    \label{a:linking-rank}
+    \begin{algorithmic}[1]
+        \Require
+            $C$: A set of connective candidates
+        \Ensure
+            $A$: A set of accepted connectives
+        \State $A \gets \{\}$
+        \Comment{Initialize $A$}
+        \State Rank all connective candidates in $ C $
+        \While{$C$ is not empty }
+            \State let $ c_i $ be the connective candidate that have highest priority
+            \State $C \gets C - \{c_i\}$
+            \State $A \gets A \cup \{c_i\}$
+            \State Remove all connective candidates $ c_j \in C $ that overlap with $ c_i $
+        \EndWhile
+        \State \Return A
+    \end{algorithmic}
+\end{algorithm}
+
+We will use different ranking criteria to evaluate our models. The experiments are
+explained in Section~\ref{c:linking-exp}.
+
+\begin{description}
+\item[Score] We use the features described in Section~\ref{c:connective-features} to
+    train a logistic regression classifier to predict whether a connective candidate
+    has discourse meaning and use the probability obtained as its score.
+
+\item[Length] We use the number of components each connective candidate has as its
+    score. This is used as we have observed that when a component candidate can
+    pair with other components, it's less likely for it to be a single connective by
+    itself.
+
+\item[Position] The positions of the components a connective candidate has is used
+    as a tie-breaker for the ranking algorithm. In particular, we accept the left-most
+    candidate first.
+\end{description}
+
+We explain two alternative pipeline approaches that correspond to two different
+discourse usage disambiguation as described in Section~\ref{c:discourse-disambig-component}
+and \ref{c:discourse-disambig-connective}.
 
 \subsubsection{A Pipeline Approach with Discourse Usage Disambiguation on Component Level}
 \label{c:pipeline1}
@@ -355,26 +423,18 @@ We propose a greedy algorithm.
 After we have eliminated the non-discourse connective components as described
 in Section~\ref{c:discourse-disambig-component}, we could
 deal with liking ambiguities by determining how to correctly pair these
-components together. We extract all possible connective candidates by
-linking these components. We treat each candidate as an instance to
+components together. We generate all possible connective candidates by
+linking these components. These candidates form a candidate set $ C $ and the set is
+fed to the linking resolving algorithm to obtain the final result $ A $.
+To obtain the scores, we treat each candidate as an instance to
 extract related features as described in Section~\ref{c:connective-features}.
 Afterwards, logistic regression is used to obtained the likelihood for an
 candidate to be a correct connective.
 
-The likelihood is used as scores, and connective candidates are greedily accepted
-ordered by their lengths (the number of components they have) and their scores.
-Ties are broken by the positions of the connectives. Candidates that have
-leftmost positions are accepted first.
-
-We reject a connective candidate when it share the same connective component
-with the already accepted connectives. The reason to use length as an ordering
-criteria is due to the observation that long connectives appear rarely
-and when they do appear, it's often the case that it's a real connective.
-
 After this procedure, additional connective components may have been eliminated if
 they are unable to form a link with other candidates and is not a single connective.
 Therefore, we also evaluate whether this procedure could improve the performance
-for discourse usage identification in component level.
+for discourse usage identification on component level.
 
 
 \subsubsection{A Pipeline Approach with Discourse Usage Disambiguation on Connective Level}
@@ -391,9 +451,10 @@ In the process, we eliminate some non-discourse candidates and some incorrect
 linkings.
 
 Afterwards, there remain some connective candidates that overlap with each other.
-That is, they share the same connective component. So we greedily accept connective
-candidates ordered by their lengths and then their scores, while rejecting
-overlapped ones as described in Section~\ref{c:pipeline1}.
+That is, they share the same connective component. So we feed these candidates
+to the linking resolving algorithm to obtain the final result. Since each candidate
+already has a predicted score when disambiguating the discourse usage, the score
+is used directly.
 
 Likewise, we also evaluate on component level to see if this increase
 the performance for discourse usage detection.
