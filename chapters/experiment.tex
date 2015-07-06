@@ -8,7 +8,7 @@
 \label{c:exp}
 
 \section{Discourse Usage Disambiguation}
-\label{c:discourse-usage-exp}
+\label{s:discourse-usage-exp}
 
 In this section, we describe our investigation
 on discourse usage disambiguation. We evaluate our models using
@@ -56,12 +56,12 @@ We summarize our results in Table~\ref{t:recognition-methods} and
 compare with various related work. The first model is the method we described above
 using all features with Logistic Regression. For pipeline-by-component,
 we take the connective components extracted from the previous model, and try to
-identify the correct linkings between the components as described in Section~\ref{c:pipeline1}.
+identify the correct linkings between the components as described in Section~\ref{s:pipeline1}.
 The component candidates that fail to form a connective are eliminated.
 Some spurious candidates are removed in this process. However, it also removes some
 correct components, so the resulting F1 score does not improve. Comparatively,
 pipeline-by-connective yields a slightly better result. As described in
-Section~\ref{c:pipeline2}, we use each connective candidate as an instance and
+Section~\ref{s:pipeline2}, we use each connective candidate as an instance and
 disambiguate discourse and non-discourse usages on the connective level.
 The improvement suggest that linking information may help discourse usage disambiguation.
 Though further investigation is needed to confirm the idea.
@@ -78,7 +78,7 @@ datasets. Though it's not directly comparable with our work, the performance is 
 \input{tables/recognition-methods}
 
 \section{Discourse Linking Disambiguation}
-\label{c:linking-exp}
+\label{s:linking-exp}
 
 In this section, we discuss our investigation on linking ambiguities between connective components. Evaluation is done with the 1,813 connective instances. The same 10-fold
 for paragraphs is used for the experiments.
@@ -117,7 +117,7 @@ a slightly better result.
 \input{tables/perfect-length}
 
 We also carry out the same experiments when the component candidates are automatically
-extracted as discussed in Section~\ref{c:discourse-usage-exp}. However, the results
+extracted as discussed in Section~\ref{s:discourse-usage-exp}. However, the results
 are different. As shown in Table~\ref{t:pipeline-features}, when using scores
 predicted by logistic regression, All-SKIPGRAME gives the best results. Also,
 the its performance is better than the Order by length baseline.
