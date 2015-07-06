@@ -472,8 +472,8 @@ clues for the connective's relation type.
 \subsection{Goal}
 
 After the connective and its relation type is identified, we would like to extract
-its arguments. Consider Figure~\ref{i:cdtb-tree2}, it shows the discourse tree
-for (S~\ref{sent:rare-earth}). There exist two explicit relations signalled by
+its arguments. For example, in Figure~\ref{i:cdtb-tree2}, the discourse tree
+for (S~\ref{sent:rare-earth}) is shown. There exist two explicit relations signalled by
 connectives ``其中'' (among them) and ``并'' (and). We would like to know the
 arguments for ``其中'' (among them) are (b) and (c) while arguments for ``并'' (and) are
 (d), (e), (f), (g) and (h).
@@ -501,12 +501,43 @@ arguments for ``其中'' (among them) are (b) and (c) while arguments for ``并'
     The export value is more than fifty million US dollars.)
 \end{sent}
 
-This could be formulated as a sequence labelling problem. In particular,
+\subsubsection{Argument Extraction as a Sequence Labelling Problem}
+
+We could formulate argument extraction as a sequence labelling problem.
+Figure~\ref{i:rare-args} shows the arguments and the corresponding labels
+for the four relations in Figure~\ref{i:cdtb-tree2}. Though we will
+focus on explicit relations, the implicit relations are also shown
+for completeness.
+As we know the arguments will span over a continuous interval,
+we use four labels for the EDUs: \textit{before}, \textit{start},
+\textit{inside}, \textit{after}. Each argument is represented by
+a \textit{start} followed by zero or more \textit{inside}s.
 
 %i:rare-args
 \input{figures/rare-args}
 
-\subsection{Argument Extraction as Sequence Labeling}
+To obtain the correct labels, one must first segment the paragraph
+into EDUs and then classify each EDU for a particular label.
+However, as our goal is to extract the arguments, only the
+argument boundaries must be determined as shown in
+Figure~\ref{i:rare-bounds}. For a relation that has $N$ arguments,
+there are $N+1$ boundaries. As long as we can identify these boundaries,
+we could extract the arguments.
+
+
+%i:rare-bounds
+\input{figures/rare-boundaries}
+
+Therefore, it's not required to obtain the EDUs as long as
+we can divide the paragraph into segments that include all these boundaries.
+In fact, even if we simply use the tokens as the segments, we could still satisfy
+this requirement. One could improve the segmentation by making the observation
+that the EDU boundaries in CDTB only occur with certain symbols that separate
+phrases and sentences. The symbols include ”, …, ─, 、, 。, 」, ！, ，, ：, ； and ？.
+We would segment the paragraph by these symbols, and solve the sequence labelling
+problem on these segments.
+
+\subsection{Determination of Argument Boundaries}
 
 \subsection{Features}
 
