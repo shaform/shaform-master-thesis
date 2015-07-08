@@ -2,6 +2,7 @@
 \centering
     \begin{tikzpicture}
         \begin{axis}[
+                height=8cm,
                 width=15cm,
                 xlabel=Threshold,
                 legend style={at={(0.5,0.25)},
@@ -54,5 +55,6 @@
             \legend{precision,recall,F1}
         \end{axis}
     \end{tikzpicture}
-\caption{\label{i:classify-threshold} Top 25 Types. }
+\caption{\label{i:classify-threshold} Performance for the pipeline system
+with different thresholds for discourse disambiguation. }
 \end{figure}

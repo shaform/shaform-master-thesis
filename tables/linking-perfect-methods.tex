@@ -1,0 +1,28 @@
+\begin{table}[ht]
+\centering
+\begin{tabular}{|l|c|c|c|}
+\hline
+                            & \multicolumn{3}{c|}{Connective Instances}  \\ \hline
+\bf Method                  & \bf Precision & \bf Recall & \bf F1-Score  \\ \hline
+    baseline+               &     87.65     &     93.28  &     90.38     \\ \hline
+    len+                    &     97.60     &     96.04  &     96.81     \\ \hline
+    score+                  &     97.59     & \bf 97.91  & \bf 97.75     \\ \hline
+    len-score+              & \bf 98.04     &     96.47  &     97.25     \\
+
+
+\hhline{|=|=|=|=|}
+
+    baseline                &     85.28     &     90.84  &     87.97     \\ \hline
+    len                     &     97.60     &     96.04  &     96.81     \\ \hline
+    score                   &     97.53     &     97.85  &     97.69     \\ \hline
+    len-score               & \bf 98.04     &     96.47  &     97.25     \\ \hline
+
+\end{tabular}
+\begin{flushleft}
+\small
+\textbf{+}: greadily accept connectives with linking ambiguity $=$ 1
+\end{flushleft}
+\caption{\label{t:linking-perfect-methods} Performance of linking
+disambiguation with known connective components for different methods. }
+\end{table}
+

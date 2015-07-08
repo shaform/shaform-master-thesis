@@ -1,0 +1,43 @@
+\begin{table}[ht]
+\centering
+\begin{tabular}{|l|c|c|c|c|c|c|}
+\hline
+                            & \multicolumn{3}{|c|}{Connective Instances} & \multicolumn{3}{|c|}{Component Instances} \\ \hline
+\bf Method                  & \bf Precision & \bf Recall & \bf F1-Score  & \bf Precision & \bf Recall & \bf F1-Score \\ \hline
+    @baseline+              &     74.23     &     66.05  &     69.88     &     83.62     &     66.66  &     74.12    \\ \hline
+    @len+                   &     80.75     &     66.23  &     72.75     & \bf 84.77     &     65.91  &     74.12    \\ \hline
+    @score+                 &     77.47     &     67.42  &     72.07     &     83.59     &     68.13  &     75.02    \\ \hline
+    @len-score+             & \bf 81.23     &     66.67  &     73.22     &     84.72     &     66.44  &     74.43    \\
+
+\hhline{|=|=|=|=|=|=|=|}
+
+    @baseline               &     68.25     &     69.70  &     68.96     &     81.03     &     73.64  &     77.13    \\ \hline
+    @len                    &     74.53     &     71.09  &     72.75     &     81.29     &     75.20  &     78.10    \\ \hline
+    @score                  &     73.79     &     72.40  &     73.07     &     81.75     &     75.24  &     78.33    \\ \hline
+    @len-score              &     75.66     &     72.08  &     73.81     &     81.84     &     75.66  &     78.60    \\
+
+\hhline{|=|=|=|=|=|=|=|}
+
+   \#baseline+              &     69.25     &     73.06  &     71.09     &     77.42     &     75.04  &     76.19    \\ \hline
+   \#len+                   &     74.21     &     74.11  &     74.15     &     78.26     &     76.90  &     77.55    \\ \hline
+   \#score+                 &     71.75     &     75.20  &     73.41     &     77.60     &     78.89  &     78.21    \\ \hline
+   \#len-score+             &     74.57     &     74.72  &     74.63     &     78.38     &     78.11  &     78.23    \\
+
+\hhline{|=|=|=|=|=|=|=|}
+
+   \#baseline               &     68.09     &     73.45  &     70.65     &     76.84     &     77.19  &     76.99    \\ \hline
+   \#len                    &     72.84     &     76.25  &     74.49     &     76.82     &     79.98  &     78.35    \\ \hline
+   \#score                  &     71.71     &     75.86  &     73.71     &     77.59     &     79.35  &     78.44    \\ \hline
+   \#len-score              &     73.30     & \bf 76.75  & \bf 74.97     &     77.27     & \bf 80.45  & \bf 78.81    \\ \hline
+
+\end{tabular}
+\begin{flushleft}
+\small
+\textbf{@}: disambiguation on component level \\
+\textbf{\#}: disambiguation on connective level \\
+\textbf{+}: greadily accept connectives with linking ambiguity $=$ 1
+\end{flushleft}
+\caption{\label{t:linking-methods} Performance of linking
+disambiguation for differnt methods. }
+\end{table}
+

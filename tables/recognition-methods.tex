@@ -1,12 +1,13 @@
 \begin{table}[ht]
 \centering
-\begin{tabular}{|c|c|c|c|c|}
+\begin{tabular}{|l|c|c|c|c|}
 \hline
 
-\bf Features                  & \bf Precision & \bf Recall & \bf F1-Score & \bf Accuracy \\ \hline
-    logistic regression       &     79.92     &     77.44  &     78.64    &     92.84    \\ \hline
-    pipeline-by-component     & \bf 81.84     &     75.66  &     78.60    & \bf 92.96    \\ \hline % length+logistic
-    pipeline-by-connective    &     77.27     & \bf 80.45  & \bf 78.81    &     92.61    \\
+\bf Method                    & \bf Precision & \bf Recall & \bf F1-Score & \bf Accuracy \\ \hline
+    @ w/o linking resolution  &     79.92     &     77.44  &     78.64    &     92.79    \\ \hline
+    \# w/o linking resolution &     76.23     &     81.35  &     78.68    &     92.46    \\ \hline
+    @len-score                & \bf 81.84     &     75.66  &     78.60    & \bf 92.96    \\ \hline
+    \#len-score               &     77.27     &     80.45  &     78.81    &     92.61    \\
 
 \hhline{|=|=|=|=|=|}
 
@@ -16,7 +17,7 @@
 \hhline{|=|=|=|=|=|}
 
     Zhou et al.               &               &            &     79.33    &     70.43    \\ \hline
-    Li, M \& N                &     78.57     &     81.48  &     80.00    &     82.04    \\ \hline
+    Li, M \& N                &     78.57     & \bf 81.48  & \bf 80.00    &     82.04    \\ \hline
 
 \end{tabular}
 \caption{\label{t:recognition-methods} Performance of discourse usage
