@@ -14,8 +14,8 @@ And copy some part of [台大碩博士論文LaTeX範本](https://code.google.com
     * sudo apt-get install texlive texlive-xetex texlive-latex-recommended texlive-latex-extra texlive-bibtex-extra texlive-science texlive-humanities pdftk
 * 安裝字形（標楷體、Times New Roman）
     * sudo mkdir -p /usr/share/fonts/truetype/win/ 
-    * sudo cp [WINDOWS]/Windows/Fonts/kaiu.ttf /usr/share/truetype/win/
-    * sudo cp [WINDOWS]/Windows/Fonts/times\*.ttf /usr/share/truetype/win/
+    * sudo cp [WINDOWS]/Windows/Fonts/kaiu.ttf /usr/share/fonts/truetype/win/
+    * sudo cp [WINDOWS]/Windows/Fonts/times\*.ttf /usr/share/fonts/truetype/win/
     * fc-cache
     * fc-list //for check
 * 編譯
