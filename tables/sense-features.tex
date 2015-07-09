@@ -1,20 +1,23 @@
 \begin{table}[ht]
 \centering
-\begin{tabular}{|c|c|c|c|}
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|}
 \hline
-
-\bf Features            & \bf Precision & \bf Recall & \bf F1-Score \\ \hline
-    P \& N              &     72.42     &     70.52  &     71.45    \\ \hline
-    POS                 &     70.47     &     70.47  &     70.46    \\ \hline
-    NUM                 &     73.08     &     71.80  &     72.41    \\ \hline
-    SKIPGRAM            &     69.35     &     69.58  &     69.46    \\ \hline
-    All-P \& N          &     73.55     &     72.45  &     72.99    \\ \hline
-    All-POS             &     73.33     &     72.24  &     72.77    \\ \hline
-    All-NUM             &     72.04     &     71.13  &     71.56    \\ \hline
-    All-SKIPGRAM        & \bf 74.00     & \bf 72.67  & \bf 73.31    \\ \hline
-    All                 &     73.79     &     72.40  &     73.07    \\ \hline
+                  & \multicolumn{4}{c|}{4 Relation Types}      & \multicolumn{4}{c|}{17 Relation Types}                                    \\ \hline
+\bf Features      & \bf P         & \bf R      & \bf F         & \bf A         & \bf P         & \bf R      & \bf F        & \bf A         \\ \hline
+    P \& N        &     94.94     &     91.85  &     93.08     &     79.98     &     71.32     &     61.72  &     64.42    &     86.53     \\ \hline
+    POS           &     85.66     &     70.47  &     75.10     &     82.79     &     34.51     &     31.12  &     31.76    &     68.58     \\ \hline
+    NUM           &     13.42     &     24.97  &     17.46     &     53.67     &      8.24     &      7.27  &      4.99    &     41.27     \\ \hline
+    SKIPGRAM      &     95.23     &     94.43  &     94.73     &     95.36     &     77.36     &     72.36  & \bf 73.40    &     89.02     \\ \hline
+    CONNECITVE    &     94.94     &     91.85  &     93.08     &     94.16     &     71.32     &     61.72  &     64.42    &     86.53     \\ \hline
+    All-P \& N    &     95.33     &     94.39  &     94.77     &     95.59     &     74.07     &     67.60  &     69.20    &     88.73     \\ \hline
+    All-POS       &     95.51     &     94.12  &     94.70     &     95.36     &     71.04     &     66.31  &     67.42    &     88.13     \\ \hline
+    All-NUM       & \bf 95.84     &     94.52  &     95.07     &     95.80     & \bf 75.69     & \bf 72.38  &     73.16    & \bf 89.23     \\ \hline
+    All-SKIPGRAM  &     94.69     &     92.76  &     93.58     &     94.88     &     68.63     &     62.58  &     64.00    &     86.54     \\ \hline
+    All-CONNECITVE&     95.44     &     94.47  &     94.86     &     95.64     &     71.77     &     66.15  &     67.50    &     88.30     \\ \hline
+    All           &     95.77     & \bf 94.78  & \bf 95.18     & \bf 95.97     &     71.49     &     66.96  &     68.01    &     88.52     \\ \hline
 
 \end{tabular}
-\caption{\label{t:sense-features} Performance of discourse usage
-disambiguation for connective components by different features. }
+\caption{\label{t:sense-features} Performance of relation type
+disambiguation for connectives by different features. }
 \end{table}
+

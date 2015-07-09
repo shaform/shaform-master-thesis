@@ -18,7 +18,7 @@ as suggested by \cite{demvsar2006statistical} at confidence level 0.05.
 In this section, we describe our investigation
 on discourse usage disambiguation. We evaluate our models using
 10-fold cross-validation. The 2,342 paragraphs are divided  into 10 splits
-while keeping the distribution of the number of explicit relations
+while keeping the distribution for the number of explicit relations
 in each paragraph roughly equal. Most of the related works only
 deal with connective components, so we will also use the 2,131 annotated
 components to evaluate our models.
@@ -51,12 +51,12 @@ for the remaining experiments.
 
 We also use the same 10-fold to evaluate different features we proposed.
 The results are shown in Table~\ref{t:recognition-features}. SIKIPGRAM
-is the most powerful feature set. Combining all features yield the best results.
+is the most powerful feature set. Combining all features yields the best results.
 
 \input{tables/recognition-features}
 
 We use Scikit-Learn library~\citep{scikit-learn} to experiment with
-several different learning models with default parameters using all features.
+several learning models with default parameters using all features.
 Table~\ref{t:recognition-models} shows the results. The F1 score for Logistic
 Regression is the highest.
 
@@ -67,11 +67,11 @@ Regression is the highest.
 
 We continue to  evaluate disambiguation on connective level as specified in
 Section~\ref{s:discourse-disambig-connective}. For evaluation on component instances,
-we take the union of all connective component the resulting connective candidates
+we take the union of all connective components the resulting connective candidates
 have as the final result for evaluation.
 
 Table~\ref{t:recognition-connective-features} shows the results with different features.
-As there remain many overlapped candidates, the precision for connectives instances
+As there remain many overlapped candidates, the precision for connective instances
 are relatively low compared to the precision for component instances. The best performance
 for component instances is slightly higher than that of disambiguation on component level in
 Table~\ref{t:recognition-features},
@@ -106,7 +106,7 @@ of the two. Ties are broken by the positions of the connective candidates.
 Baseline models that only rank the candidates by their positions are also reported.
 
 We found that the ambiguity among the components is low. The simple
-baseline model already achieve an F1 of 87.97\%. The greedy
+baseline model already achieves an F1 of 87.97\%. The greedy
 Algorithm~\ref{a:linking-resolve} could improve the baseline
 model significantly, but once ranking is employed, it doesn't contribute much.
 The difference for F1 between \textit{score+} and \textit{len+} is statistically
@@ -140,7 +140,7 @@ Section~\ref{s:discourse-disambig-component} are compared.
 Although it is not statistically significant, for both connective
 instances and components instances, the best results for disambiguation on connective
 level are higher to that for disambiguation on component level.
-In additional, it has the advantage of simpler computation since the same Logistic
+In addition, it is also relatively computation-efficient as the same Logistic
 Regression predictions are used for both discourse usage disambiguation and ranking.
 Therefore, we choose the \textit{\#len-score} model for the next stage of our
 pipeline system.
@@ -160,7 +160,7 @@ shown in Figure~\ref{i:classify-threshold}.
 
 Finally, We summarize our results for discourse disambiguation for
 connective component instances in Table~\ref{t:recognition-methods}. We also
-compare with various related work. The two models are discourse disambiguation
+compare with various related work. The first two models are discourse disambiguation
 on component level and on connective level without linking resolution. The following
 models eliminates additional candidates by resolving linking ambiguity.
 Some spurious candidates are removed in this process. However, it also removes some
@@ -182,9 +182,45 @@ and we have better accuracy.
 
 \section{Discourse Relation Disambiguation}
 
-10-fold firstly.
+In this section, we discuss the evaluation on discourse relation disambiguation.
+
+\subsection{Discourse Relation Disambiguation for Known Connectives}
+
+We will first evaluate our models using 10-fold cross-validation with the 1,813
+explicit connectives. We divide them into 10 splits
+while keeping the distribution for the relation types roughly equal for
+each fold. We use Logistic Regression to classify the relation types.
+Two sets of experiments for the disambiguation on the four top-level
+categories and the 17 second-level categories are examined. The macro-averaged
+precision, recall, and F1 for different relation types and the accuracy for
+all instances are computed. Since many of the 17 categories occur less than
+10 times in the corpus, we ignore a relation type when computing macro-averaged
+scores if it does not appear in the testing fold. The averaged results over
+the 10 folds are shown in Table~\ref{t:sense-features}.
+
+We examined whether the same features
+for connective candidates specified in Section~\ref{s:connective-features} are
+also useful for relation type disambiguation. In addition, we use the string
+of the connective itself as a feature. While the NUM features have some
+discriminative power for discourse usage disambiguation on connective level,
+it does not help for relation disambiguation. SKIPGRAM is still the most powerful
+feature set.
+
+%t:sense-features
+\input{tables/sense-features}
+
+In Table~\ref{t:sense-types}, we show the performance for different relation types
+using All-NUM as features. For the second-level relation types, we only list
+those type that have more than 10 instances. We could notice that the
+number of instances affects the performance of the learning model. The
+lesser the instances, the worse the performance.
+
+%t:sense-types
+\input{tables/sense-types}
+
+%t:sense-types-pipeline
+\input{tables/sense-types-pipeline}
 
 We also investigate end-to-end.
-
 
 \section{Explicit Discourse Relation Argument Extraction}
