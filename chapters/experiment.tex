@@ -22,7 +22,7 @@ while keeping the distribution for the number of explicit relations
 in each paragraph roughly equal. Most of the related works only
 deal with connective components, so we will also use the 2,131 annotated
 components to evaluate our models.
-The precision, recall, and F1 score for the positive instances are computed
+The precision, recall, and F1 scores for the positive instances are computed
 for each fold, and the averaged results are reported.
 
 In Section~\ref{s:linking-exp}, we will also investigate whether solving linking
@@ -45,7 +45,7 @@ GLOVE is trained with the Glove toolkit~\citep{pennington2014glove}
 while SKIPGRAM and CBOW are trained using word2vec~\citep{mikolov2013efficient} with
 continuous skip-gram and continuous bag-of-words models,
 respectively. SKIPGRAM yields the best results.
-We have tried concatenating different embeddings
+We have tried concatenating different embeddings,
 but the performance does not improve. Therefore, we will only use SKIPGRAM
 for the remaining experiments.
 
@@ -67,8 +67,8 @@ Regression is the highest.
 
 We continue to  evaluate disambiguation on connective level as specified in
 Section~\ref{s:discourse-disambig-connective}. For evaluation on component instances,
-we take the union of all connective components the resulting connective candidates
-have as the final result for evaluation.
+we take the resulting connective candidates, and contruct 
+the union of all connective components among these candidates.
 
 Table~\ref{t:recognition-connective-features} shows the results with different features.
 As there remain many overlapped candidates, the precision for connective instances
@@ -91,13 +91,13 @@ component level.
 \label{s:linking-exp}
 
 In this section, we discuss our investigation on linking ambiguities between connective
-components. Evaluation is done by calculating the precision, recall, and F1 for the
+components. Evaluation is done by calculating the precision, recall, and F1 scores for the
 1,813 connective instances.
 The same 10-fold for paragraphs is used for the experiments.
 
 \subsection{Discourse Linking Disambiguation for Known Connective Components}
 
-We start by evaluating linking resolution individually by assuming all correct
+We start by evaluating linking disambiguation individually by assuming all correct
 connective components are already known. The results are reported in
 Table~\ref{t:linking-perfect-methods}.
 We evaluate different ranking criteria such as scores predicted by
@@ -109,7 +109,7 @@ We found that the ambiguity among the components is low. The simple
 baseline model already achieves an F1 of 87.97\%. The greedy
 Algorithm~\ref{a:linking-resolve} could improve the baseline
 model significantly, but once ranking is employed, it doesn't contribute much.
-The difference for F1 between \textit{score+} and \textit{len+} is statistically
+The difference for F1 scores between \textit{score+} and \textit{len+} is statistically
 significant, but the difference between \textit{score+} and \textit{len-score+}
 is insignificant.
 
@@ -118,14 +118,14 @@ is insignificant.
 
 
 \cite{hu2011research} evaluated their algorithm on 79 sentences that have
-linking ambiguities, and they correctly resolved all linking ambiguities for 78
+linking ambiguity, and they correctly resolved all linking ambiguity for 78
 sentences. In our corpus, there are 52 paragraphs that have linking ambiguity
 and are composed of only 1 sentence. We evaluate our non-learning \text{len+} model
 directly on these 52 sentences and are able to correctly resolve all linking
-ambiguities in 51 sentences. Our relatively simple greedy algorithm is
+ambiguity in 51 sentences. Our relatively simple greedy algorithm is
 able to achieve similar results when the components are known.
 
-\subsection{Discourse Linking Disambiguation within Pipeline System}
+\subsection{Discourse Linking Disambiguation within the Pipeline System}
 
 For practical applications, it's difficult to know which component is correct in
 advance. Therefore, we also evaluate linking disambiguation within the pipeline
@@ -158,45 +158,45 @@ shown in Figure~\ref{i:classify-threshold}.
 %i:classify-threshold
 \input{figures/classify-threshold}
 
-Finally, We summarize our results for discourse disambiguation for
+Finally, we summarize our results for discourse disambiguation for
 connective component instances in Table~\ref{t:recognition-methods}. We also
 compare with various related work. The first two models are discourse disambiguation
-on component level and on connective level without linking resolution. The following
-models eliminates additional candidates by resolving linking ambiguity.
+on component level and on connective level without linking disambiguation. The following
+models eliminate additional candidates by resolving linking ambiguity.
 Some spurious candidates are removed in this process. However, it also removes some
 correct components, so the resulting F1 score does not improve much.
 
 %t:recognition-methods
 \input{tables/recognition-methods}
 
-We also compare our results with the models from \cite{li2015automatic} as they use the
+Results from \cite{li2015automatic} are listed as they use the
 same dataset as us. The best results for Maximum Entropy and Decision Tree classifiers with
 automatic parsing tree features are selected. We use the 12,526 connective components candidates
 extracted by string matching with connective lexicon as our basis to compute the accuracy in order
 to compare with their work. Our models perform significantly better by a large margin.
 
 We also list the results from \cite{zhou2012cross} and \cite{li2014cross} on different
-datasets. Though it's not directly comparable with our work, the performance for F1 is similar,
+datasets. Though it's not directly comparable with our work, the performance for F1 scores is similar,
 and we have better accuracy.
 
 
 \section{Discourse Relation Disambiguation}
-
-In this section, we discuss the evaluation on discourse relation disambiguation.
 
 \subsection{Discourse Relation Disambiguation for Known Connectives}
 
 We will first evaluate our models using 10-fold cross-validation with the 1,813
 explicit connectives. We divide them into 10 splits
 while keeping the distribution for the relation types roughly equal for
-each fold. We use Logistic Regression to classify the relation types.
-Two sets of experiments for the disambiguation on the four top-level
-categories and the 17 second-level categories are examined. The macro-averaged
-precision, recall, and F1 for different relation types and the accuracy for
-all instances are computed. Since many of the 17 categories occur less than
-10 times in the corpus, we ignore a relation type when computing macro-averaged
-scores if it does not appear in the testing fold. The averaged results over
-the 10 folds are shown in Table~\ref{t:sense-features}.
+each fold, and use Logistic Regression to classify the relation types.
+Two sets of experiments for the four top-level
+categories and the second-level categories are examined. The second-level categories
+have 17 types, but there are three types (inference, background, evaluation)
+that have less than 10 instances. Therefore, we eliminate these instances and only evaluate
+our models on the remaining 14 types. The resulting dataset contains 1,803 explicit
+connectives. The macro-averaged
+precision, recall, and F1 scores for different relation types and the accuracy for
+all instances are computed. Finally, the averaged results over
+the 10 folds are reported in Table~\ref{t:sense-features}.
 
 We examined whether the same features
 for connective candidates specified in Section~\ref{s:connective-features} are
@@ -210,7 +210,7 @@ feature set.
 \input{tables/sense-features}
 
 In Table~\ref{t:sense-types}, we show the performance for different relation types
-using All-NUM as features. For the second-level relation types, we only list
+using \textit{All-NUM} as features. For the second-level relation types, we only list
 those type that have more than 10 instances. We could notice that the
 number of instances affects the performance of the learning model. The
 lesser the instances, the worse the performance.
@@ -218,9 +218,26 @@ lesser the instances, the worse the performance.
 %t:sense-types
 \input{tables/sense-types}
 
+We also evaluate on component instances to compare with \cite{li2015automatic}.
+We are able to achive higher performance on relation type classification.
+
+%t:sense-word-types
+\input{tables/sense-word-types}
+
+\subsection{Discourse Relation Disambiguation within the Pipeline System}
+
+We also evaluate discourse relation disambiguation within the pipeline system.
+For each connective candidate extracted, we predict its relation type using
+Logistic Regression with \textit{All-NUM} as features.
+The same 10-fold for paragraphs is used, and the precsion, recall, and F1 scores
+for positive instances are computed. The results are listed in
+Table~\ref{t:sense-types-pipeline} below. The micro-averaged F1 72.75\% can be seen
+as the ability for our model to propose connective candidates along with the correct
+relation type. Compared with the original F1 score 74.97\% disregarding relation types,
+the performance only decreases a little, showing the effectiveness of our
+model for relation type disambiguation.
+
 %t:sense-types-pipeline
 \input{tables/sense-types-pipeline}
-
-We also investigate end-to-end.
 
 \section{Explicit Discourse Relation Argument Extraction}
