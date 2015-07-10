@@ -17,9 +17,9 @@ The stages for the pipeline system are shown in Figure~\ref{i:system}.
 \input{figures/system}
 
 Firstly, we extract connective component candidates from each paragraph.
-Secondly, an classifier is used to disambiguate between discourse and
+Secondly, a classifier is used to disambiguate between discourse and
 non-discourse usages for these component candidates. We then try to identify
-the correct connectives by solving the linking ambiguity between remaining
+the correct connectives by resolving the linking ambiguity between the remaining
 component candidates.
 A different approach that eliminates non-discourse usages and disambiguates
 linkings both on the connective level is also experimented. The alternative
@@ -61,7 +61,7 @@ appear in other unrelated words. For example, even though ``如'' (if) is a conn
 this character appears in an unrelated word ``如是说'' (says). To alleviate this problem,
 Stanford Chinese segmenter~\citep{chang2008optimizing} is employed to segment paragraphs
 into tokens. The boundaries of these tokens can be used as clues for eliminating spurious candidates.
-In particular, we only extract a component when it can be composed by complete tokens.
+In particular, we only extract a component when it can be composed of complete tokens.
 For example, in (S~\ref{sent:keyissue}) we extract ``不是'' (not) and ``而是'' (but) as candidates
 even though ``不'' (not) and ``是'' (is) are separated. Comparatively, in (S~\ref{sent:peace}),
 the spurious connective component candidate ``和'' (and) is not extracted because it does
@@ -83,7 +83,7 @@ Using this procedure, only 7,649 component candidates are extracted, with 2,068 
 components recovered. These candidates could form 7,976 connective candidates, recovering
 1,755 of 1,813 annotated connectives. Thus, 0.9704 and 0.9680 become upper bounds of recall
 for the subsequent stages. Table~\ref{t:cand-extract} shows the comparison between different
-extraction methods. The technique we use reduce the number of spurious candidates substantially while
+extraction methods. The technique we use reduces the number of spurious candidates substantially while
 maintaining high recall.
 
 %t:cand-extract
@@ -111,7 +111,7 @@ classifiers such as \textit{Logistic Regression} and
 a \textit{Python} wrapper for the popular \textit{LibSVM} library~\citep{CC01a}.}
 have been experimented. The results are reported in Chapter~\ref{c:exp}. 
 After we eliminate spurious components, we could form connective candidates
-by linking the remaining components. Linking ambuirities must be solved to
+by linking the remaining components. Linking ambuirities must be resolved to
 identify the correct connective afterwards.
 
 
@@ -327,22 +327,22 @@ disambiguation.
 
 We propose a greedy algorithm to resolve linking ambiguities among a set of
 connective candidates as outlined in Algorithm~\ref{a:linking-resolve}.
-The algorithm filters the candidate set $C$ and produce a result set $A$ that
+The algorithm filters the candidate set $C$ and produces a result set $A$ that
 contains only non-overlapped connective candidates. On line~\ref{a:lnk:compute}
 and \ref{a:lnk:check}, the algorithm computes the number of connective candidates
 each component candidate involves in the remaining $C$, and checks if there exists
-a component that does not have multiple possible linkings. When such candidate
-is not found, we rank all connective candidate under some criteria
-and select the one with highest priority.
+a component that does not have multiple possible linkings. When such a candidate
+is not found, we rank all connective candidates under some criteria
+and select the one with the highest priority.
 
-As we should see in our experiments, accepting components that have no ambiguity
+As we will see in our experiments, accepting components that have no ambiguity
 is especially helpful when the only task is to resolve linking ambiguities among
 component candidates that are known to be correct.
 In fact, under this condition, we can guarantee the connective candidate
 $c_i$ found on line~\ref{a:lnk:select} is correct as long as $A$ does not yet have
-any spurious connective candidate. Moreover, one could also develop an non-greedy
-algorithm that guarantees to produce a result set that contain all component
-candidates as done by \cite{hu2011research}. However, we think that not knowing
+any spurious connective candidates. Moreover, one could also develop a non-greedy
+algorithm that guarantees to produce a result set that contains all component
+candidates as done by \cite{hu2011research}. However, we consider that not knowing
 which component candidate is correct is a more realistic experiment setting so
 we will not go into that direction.
 
@@ -409,7 +409,7 @@ explained in Section~\ref{s:linking-exp}.
     has discourse meaning and use the probability obtained as its score.
 
 \item[Length] We use the number of components each connective candidate has as its
-    score. This is used as we have observed that when a component candidate can
+    score. This is based on our observation: when a component candidate can
     pair with other components, it's less likely for it to be a single connective by
     itself.
 
@@ -432,8 +432,8 @@ components together. We generate all possible connective candidates by
 linking these components. These candidates form a candidate set $ C $ and the set is
 fed to the linking resolving algorithm to obtain the final result $ A $.
 To obtain the scores, we treat each candidate as an instance to
-extract related features as described in Section~\ref{s:connective-features}.
-Afterwards, logistic regression is used to obtained the likelihood for an
+extract the related features as described in Section~\ref{s:connective-features}.
+Afterwards, logistic regression is used to obtain the likelihood for a
 candidate to be a correct connective.
 
 After this procedure, additional connective components may have been eliminated if
@@ -461,7 +461,7 @@ to the linking resolving algorithm to obtain the final result. Since each candid
 already has a predicted score when disambiguating the discourse usage, the score
 is used directly.
 
-Likewise, we also evaluate on component level to see if this increase
+Likewise, we also evaluate on component level to see if this increases
 the performance for discourse usage detection.
 
 \section{Relation Type Disambiguation}
