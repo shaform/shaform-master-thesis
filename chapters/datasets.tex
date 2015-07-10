@@ -221,3 +221,19 @@ We have created 400-dimensional embeddings by GloVe tool~\citep{pennington2014gl
 and word2vec tool~\citep{mikolov2013efficient,mikolov2013distributed} with
 continuous skip-gram model and continuous bag-of-words model.
 These vectors are used as features as discussed in Chapter~\ref{c:method}.
+
+
+\section{Linking Directions of Connective Components}
+
+Discourse connectives serve as linking elements that connect discourse units.
+There are three kinds of linking directions~\citep{li1989mandarin}:
+(1) forward-linking elements that are linked with the next discourse unit,
+(2) backward-linking elements that are linked with the previous discourse unit,
+and (3) couple-linking elements that exist in two discourse units~\citep{chen1994contextual}.
+Such linking directions could be useful for identifying the positions of arguments
+for a given connective.
+
+We selected 301 connective components annotated with their possible
+linking directions from the 808 discourse connectives collected by
+\cite{huang2014interpretation}. The linking directions are used as features
+for our argument extraction.
