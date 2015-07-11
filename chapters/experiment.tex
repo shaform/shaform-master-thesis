@@ -27,7 +27,7 @@ for each fold, and the averaged results are reported.
 
 In Section~\ref{s:linking-exp}, we will also investigate whether solving linking
 ambiguities could improve the discourse usage disambiguation. The results
-are summarized, and comparison with with other works is presented.
+are summarized, and comparison with other works is presented.
 
 
 \subsection{Disambiguation on Component Level}
@@ -41,11 +41,9 @@ shown in Table~\ref{t:recognition-vectors} below.
 
 \input{tables/recognition-vectors}
 
-GLOVE is trained with the Glove toolkit~\citep{pennington2014glove}
-while SKIPGRAM and CBOW are trained using word2vec~\citep{mikolov2013efficient} with
-continuous skip-gram and continuous bag-of-words models,
-respectively. SKIPGRAM yields the best results.
-We have tried concatenating different embeddings,
+GLOVE is trained with the Glove toolkit while SKIPGRAM and CBOW are trained
+using word2vec as describe in Section~\ref{s:pn-corpus}. SKIPGRAM yields
+the best results. We have tried concatenating different embeddings,
 but the performance does not improve. Therefore, we will only use SKIPGRAM
 for the remaining experiments.
 
@@ -307,7 +305,7 @@ Only 139 error cases are caused entirely by the argument boundaries within the
 interval. The difficulty to determine the argument interval originates from
 the large variety for the ranges of explicit relations. For the relations that
 are represented by higher nodes in the discourse tree,
-the ranges are so wide that it could contain almost the entire paragraph.
+the range is so wide that it could contain almost the entire paragraph.
 On the other hand, some relations only span over one part of a sentence.
 
 %i:argument-error-type
