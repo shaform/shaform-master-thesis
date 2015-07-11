@@ -567,7 +567,7 @@ that dominates all of the tokens in the segment. It may additionally
 dominates some tokens from other segments. We define the self-category
 to be the highest node that dominates exactly the same tokens as this node.
 Afterwards, we find the categories of the parent, the left-sibling, and
-the right-sibling of this node. The concatenation of the categories is
+the right-sibling of the self-category. The concatenation of the categories is
 used as a binary feature as done by \cite{kong2014a}. We also found that
 using the categories separately does not seem to improve the performance.
 
@@ -581,10 +581,14 @@ The feature for the segment [二、 ] (two,) would be
 
 \subsubsection{PATH}
 
-The feature set is similar to the CON-NT-Path features from \cite{kong2014a}.
+The feature set is similar to the \textbf{CON-NT-Path} features
+from \cite{kong2014a}.
 We use the path from the self-category of each connective component for the
-current connective to the self-category of the segment as the feature. For
-example, in Figure~\ref{i:parse-segment2} we show another sub- parsing tree.
+current connective to the self-category of the segment as the feature. The
+definition of self-category follows that of \textbf{CONTEXT}. Therefore,
+the self-category for the connective component may dominates additional tokens
+besides the component as well.
+In Figure~\ref{i:parse-segment2} we show another sub- parsing tree.
 The feature for the segment [现已建成包钢稀土一、] when labelling arguments
 for the connective ``其中'' (among them) would be
 \textbf{PATH-NP$\uparrow$IP$\uparrow$IP$\downarrow$IP}.
@@ -611,11 +615,11 @@ the current segment from the next).
 \subsubsection{COMPONENT}
 
 The feature set contains the information about each connective component for
-the current connective.
+the current connective. It includes the following features:
 
 \begin{enumerate}
 \item COMPONENT-EXISTS: This feature is set if the current segment has
-a connective component. It includes the following features:
+a connective component.
 
 \item COMPONENT-IS-: Additionally, we use the string for the component as a feature
 if it exists in the segment. For example, if there is a connective component
@@ -643,7 +647,7 @@ the connective components for other explicit relations is not counted.
 \subsubsection{LINK}
 
 The feature set contains the linking directions a connective component
-could be used if it exist in the given segment. The lexicon collected
+could be used if it exists in the given segment. The lexicon collected
 from \cite{huang2014interpretation} is used for the linking directions.
 For example, if the segment contains a connective component that is
 annotated with all three linking directions, the features would be
