@@ -24,6 +24,8 @@
 %\usepackage{algorithmic}
 \usepackage{algpseudocode}
 
+\usepackage{subcaption}
+
 % Format the refs
 \usepackage[sort,comma]{natbib}
 
@@ -50,9 +52,18 @@
 \usepackage{etoolbox}
 \newrobustcmd{\disambiguate}[3]{#2~#3}
 
+\usepackage{mathtools}
 \newcommand\undermat[2]{%
 \makebox[0pt][l]{$\smash{\underbrace{\phantom{%
 \begin{matrix}#2\end{matrix}}}_{\text{$#1$}}}$}#2}
+
+\newcommand\underscope[2]{%
+\makebox[0pt][l]{$\smash{\underbracket{\phantom{%
+\begin{matrix}#2\end{matrix}}}_{\text{$#1$}}}$}#2}
+
+\newcommand\overscope[2]{%
+\makebox[0pt][l]{$\smash{\overbracket{\phantom{%
+\begin{matrix}#2\end{matrix}}}^{\text{$#1$}}}$}#2}
 
 % Using the tex-text mapping for ligatures etc.
 \defaultfontfeatures{Mapping=tex-text}

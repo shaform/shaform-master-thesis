@@ -1,0 +1,33 @@
+\begin{figure}[ht]
+    \centering
+    \vspace{2em}
+    \begin{tikzpicture}
+        \begin{axis}[
+            enlarge y limits=0.5,
+            enlarge x limits=0.1,
+            height=4.5cm,
+            width=10cm,
+            symbolic y coords={
+            exact,one-sided error,two-sided error
+            },
+            xmin=0,
+            xmax=800,
+            xbar=1pt,
+            xlabel=Error cases,
+            nodes near coords,
+            nodes near coords align={horizontal},
+            every node near coord/.append style={
+                anchor=west}
+            ,
+            ytick=data
+          ]
+            \addplot[xbar,fill=blue] coordinates {
+            (139,exact)
+            (771,one-sided error)
+            (164,two-sided error)
+            };
+        \end{axis}
+    \end{tikzpicture}
+    \caption{\label{i:argument-error-position} Error cases for argument extraction
+        by the first and last boundaries. }
+\end{figure}

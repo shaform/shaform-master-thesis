@@ -67,7 +67,7 @@ Regression is the highest.
 
 We continue to  evaluate disambiguation on connective level as specified in
 Section~\ref{s:discourse-disambig-connective}. For evaluation on component instances,
-we take the resulting connective candidates, and contruct 
+we take the resulting connective candidates, and construct 
 the union of all connective components among these candidates.
 
 Table~\ref{t:recognition-connective-features} shows the results with different features.
@@ -219,7 +219,7 @@ lesser the instances, the worse the performance.
 \input{tables/sense-types}
 
 We also evaluate on component instances to compare with \cite{li2015automatic}.
-We are able to achive higher performance on relation type classification.
+We are able to achieve higher performance on relation type classification.
 
 %t:sense-word-types
 \input{tables/sense-word-types}
@@ -229,7 +229,7 @@ We are able to achive higher performance on relation type classification.
 We also evaluate discourse relation disambiguation within the pipeline system.
 For each connective candidate extracted, we predict its relation type using
 Logistic Regression with \textit{All-NUM} as features.
-The same 10-fold for paragraphs is used, and the precsion, recall, and F1 scores
+The same 10-fold for paragraphs is used, and the precision, recall, and F1 scores
 for positive instances are computed. The results are listed in
 Table~\ref{t:sense-types-pipeline} below. The micro-averaged F1 72.75\% can be seen
 as the ability for our model to propose connective candidates along with the correct
@@ -241,3 +241,105 @@ model for relation type disambiguation.
 \input{tables/sense-types-pipeline}
 
 \section{Explicit Discourse Relation Argument Extraction}
+
+\subsection{Argument Extraction for Known Connectives}
+
+In this section, we discuss our evaluation on argument extraction when the
+connectives are already known. Since we have found that the relation type
+is not helpful as a feature, only the positions for the connectives are required.
+
+We will use the same 10-fold for paragraphs for evaluation.
+The precision, recall, and F1 scores for the argument boundaries are
+computed for each fold. Additionally, we also compute the accuracy among the 
+connectives. Each connective is treated as an instance, and we only count it
+as correct if all argument boundaries for the given connective are correctly identified.
+The averaged results over all folds are reported. Table~\ref{t:argument-features} shows
+the performance using different feature sets.
+
+The accuracy for the connectives is lesser than 50\%, showing a lot of space for
+improvement. On the other hand, the F1 score for connective boundaries is higher.
+What this means is that for each connective, we are able to recover most of its
+boundaries, but it's difficult to recover all of them correctly.
+
+%t:argument-features
+\input{tables/argument-features}
+
+We compare our model with a simple baseline model. The model places a argument
+boundary at the beginning of each segment that contains a connective component for
+the current connective. In addition, it places a argument boundary at the
+end of the segment that contains the last connective component. If the connective
+has only one component, only two boundaries are placed, so we place an additional
+boundary after the last boundary or before the first boundary if
+the last boundary is already the end of the paragraph. The results are shown
+in Table~\ref{t:argument-baseline}. Our model outperforms the baseline model
+significantly.
+
+%t:argument-baseline
+\input{tables/argument-baseline}
+
+\subsection{Error Analysis}
+
+We continue to inspect the errors produced by our model.
+Figure~\ref{i:argument-error-len} shows the distribution of the number
+of arguments and the number of connective components for each explicit relation
+and the respective error rates measured by connective accuracy.
+Our model can mostly only handle the relations
+that only have two arguments. For more arguments, the error rates are almost
+close to 1. We also examine whether it's important for
+the number of arguments and the number of component to match as shown in
+Figure~\ref{i:argument-error-len-c}, but no significant difference is observed.
+
+%i:argument-error-len
+\input{figures/argument-error-by-len}
+
+The arguments for a explicit relation span over a continuous argument interval that
+starts from the first argument boundary and ends at the last argument boundary.
+There exist four types of relationships between the real interval and the predicted
+interval as shown in Figure~\ref{i:args-relationship}.
+
+%i:args-relationship
+\input{figures/args-relationship}
+
+We examine distribution of the error cases on these types of relationships and the
+results are shown in Figure~\ref{i:argument-error-type}. We found in most cases,
+the interval predicted is either too wide or too narrow.
+Only 139 error cases are caused entirely by the argument boundaries within the
+interval. The difficulty to determine the argument interval originates from
+the large variety for the ranges of explicit relations. For the relations that
+are represented by higher nodes in the discourse tree,
+the ranges are so wide that it could contain almost the entire paragraph.
+On the other hand, some relations only span over one part of a sentence.
+
+%i:argument-error-type
+\input{figures/argument-error-by-type}
+
+Intriguingly, there are only 63 \textit{intersect} cases. Further investigation
+reveals that in most cases, at least one side of the interval is correctly
+identified. This is shown in Figure~\ref{i:argument-error-position}. Out of
+the 1074 error cases, there are only 164 cases that the both sides of the
+interval are incorrect. The reason behind this is probably due to the fact that
+the existence of a connective often gives strong hint on at least one side of
+the interval. On the contrary, there is often no explicit indication on the boundary
+of the other side of the interval.
+
+%i:argument-error-position
+\input{figures/argument-error-by-position}
+
+\subsection{Argument Extraction within the Pipeline System}
+
+Once argument extraction is integrated into the pipeline system, our end-to-end
+pipeline would be able to extract explicit relations for raw text. In particular,
+it proposes a set of explicit relation candidates, where each relation contains
+three entities: (1) the positions of the connective, (2) the relation type, and
+(3) the arguments. We use the same 10-fold for paragraphs to evaluate our model
+using each relation
+as an instance. The precision, recall, and F1 scores are computed for each fold,
+and the averaged results are reported. Each explicit relation candidate is
+counted as true positive only when the three entities are all correctly
+identified; otherwise, it is counted as false positive. We list the results
+below in Table~\ref{t:final-results}. We could see that due to the difficulty
+of argument extraction, the performance has decreased significantly compared
+to the previous stage.
+
+%t:final-results
+\input{tables/final-results}

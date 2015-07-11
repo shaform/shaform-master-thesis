@@ -1,0 +1,28 @@
+\begin{table}[ht]
+\centering
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+
+\bf Features        & \bf Precision & \bf Recall & \bf F1-Score & \bf Connective Accuracy \\ \hline
+    CONTEXT         &     52.25     &     30.30  &     38.35    &      1.89               \\ \hline
+    PATH            &     76.60     &     56.50  &     65.00    &     14.71               \\ \hline
+    POS             &     55.76     &     38.51  &     45.52    &      7.34               \\ \hline
+    SUBJ            & \bf 88.00     &      7.88  &     14.40    &      0.00               \\ \hline
+    ENDCHAR         &     46.06     &     29.74  &     36.14    &      0.00               \\ \hline
+    LINK            &     76.90     &     40.01  &     52.61    &      1.83               \\ \hline
+    CONNECTIVE      &     47.12     &     30.58  &     37.09    &      0.55               \\ \hline
+    COMPONENT       &     68.82     &     66.98  &     67.88    &     21.68               \\ \hline
+    All-CONTEXT     &     79.13     &     75.75  &     77.40    &     38.38               \\ \hline
+    All-PATH        &     78.37     &     74.46  &     76.36    &     35.58               \\ \hline
+    All-POS         &     76.72     &     74.35  &     75.51    &     35.55               \\ \hline
+    All-SUBJ        &     80.14     &     76.62  &     78.34    &     40.08               \\ \hline
+    All-ENDCHAR     &     80.14     &     76.58  &     78.32    &     40.41               \\ \hline
+    All-LINK        &     80.05     &     76.71  &     78.34    &     40.30               \\ \hline
+    All-CONNECTIVE  &     79.60     &     75.80  &     77.65    &     37.83               \\ \hline
+    All-COMPONENT   &     74.99     &     60.78  &     67.12    &     21.73               \\ \hline
+    All             &     80.24     & \bf 76.80  & \bf 78.48    & \bf 40.74               \\ \hline
+
+\end{tabular}
+\caption{\label{t:argument-features} Performance of argument boundary detection
+using different features. }
+\end{table}
