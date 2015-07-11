@@ -1,0 +1,24 @@
+\begin{figure}[ht]
+\centering
+\tikzset{every tree node/.style={align=center},
+    sibling distance=-1pt}
+\begin{tikzpicture}
+\Tree[.\node(ip2){IP};
+         [.\node(ip3){IP}; \edge[roof]; {[现已建成包钢稀土一、]\ldots} ]
+         [.PU ， ]
+         [.\node(ip1){IP}; [.\node(np1){NP}; [.NN {\underline{其中}} ] ]
+             [.VP [.VE 有 ]
+             [.NP [.CP [.IP [.NP [.NN 世界 ] ]
+                         [.VP [.ADVP [.AD 最 ] ]
+                             [.VP [.VA 大 ] ] ] ]
+                     [.DEC 的 ] ]
+                  [.NP \edge[roof]; {\ldots} ] ] ] ] ]
+
+\draw [->,color=blue] (np1) [bend left] to (ip1);
+\draw [->,color=blue] (ip1) [bend right] to (ip2);
+\draw [->,color=blue] (ip2) [in=-180,out=180] to (ip3);
+
+\end{tikzpicture}
+\caption{\label{i:parse-segment2} A sub- parsing tree for the segments
+with connective 其中. }
+\end{figure}
