@@ -7,7 +7,7 @@
 \chapter{Datasets}
 \label{c:datasets}
 
-In this chapter, we discuss the datasets we use in our study, and
+In this chapter, we discuss the datasets used in this study, and
 provide some statistics and analysis.
 
 \section{Chinese Discourse Treebank (CDTB)}
@@ -15,7 +15,7 @@ provide some statistics and analysis.
 \subsection{Introduction}
 
 Chinese Discourse Treebank (CDTB)~\citep{li2014building} is a discourse
-corpus that contains 500 articles from the Chinese Treebank (CTB)~\citep{xue2005penn}.
+corpus that contains 500 articles selected from the Chinese Treebank (CTB)~\citep{xue2005penn}.
 Totally, it contains 2,342 paragraphs.
 Inspired by RST and PDTB, they proposed the Connective-driven Dependency Tree (CDT)
 scheme to annotate the documents.
@@ -33,7 +33,7 @@ As some connectives may be used for different relation types, there may
 be multiple third-level connectives that have the same surface form under
 different second-level relation types. For example, the connective
 ``并'' (and) appear in the following second-level relation types:
-progressive, continue, explanation, coordination.
+progressive, continue, explanation, and coordination.
 
 % i:three-level
 \input{figures/three-level}
@@ -41,11 +41,11 @@ progressive, continue, explanation, coordination.
 For an explicit relation, once its second-level type is determined, the
 third-level type is just its explicit connective. For an implicit relation,
 a connective that could be inserted is annotated as its third-level type.
-Sometimes there is no appropriate connective to be inserted. In that case,
+Sometimes there is no appropriate connective to be inserted. In such a case,
 the relation is only annotated with a second-level relation type.
 
-Consider the example sentences (S~\ref{sent:cdtb}) from CDTB. Its discourse
-structure are shown in Figure~\ref{i:cdtb-tree}. The continue relation between
+Consider the example sentences (S~\ref{sent:cdtb}) selected from CDTB. Its discourse
+structure is shown in Figure~\ref{i:cdtb-tree}. The continue relation between
 discourse units (a-b) and (c) is implicit, but ``以后'' (later) can be inserted
 as a connective as denoted by ``<以后>'' in (S~\ref{sent:cdtb}).
 On the other hand, the explanation relation between (d) and (e-g)
@@ -76,12 +76,12 @@ does not have an inserted connective.
 % i:cdtb-tree
 \input{figures/cdtb-tree}
 
-Since we only consider explicit relations in our studies, we will ignore
+Since we only consider explicit relations in this study, we will ignore
 third-level relation types from now on to avoid confusion.
 For an explicit relation, the second-level relation type and its explicit
 connective can already uniquely determine its relation type.
 When we refer to connective classes in the following section, we mean the
-surface forms of connectives (i.e. instances of the same connective class
+surface forms of connectives (i.e., instances of the same connective class
 may have different relation types).
 
 \subsection{Analysis}
@@ -95,7 +95,7 @@ The distribution is imbalance. Most connectives only have
 one or two connective components. Also, while some connectives have many instances,
 many connectives appear rarely. The frequencies for the connectives are shown
 in Figure~\ref{i:freq}. There are totally 274 classes of connectives, but
-147 of them only appear once.
+147 of them appear only once.
 
 % t:connective-length
 \input{tables/connective-length}
@@ -191,7 +191,7 @@ has three components, but it only have two arguments.
 \label{s:pn-corpus}
 
 NTU PN-Gram Corpus~\citep{yu2012development} is a large-scale corpus that was
-constructed by POS-tagging the Chinese texts from the ClueWeb09
+constructed by POS-tagging the Chinese texts selected from the ClueWeb09
 dataset~\citep{callan2009clueweb09}. In NTU PN-Gram, there are totally 173,741,587
 web pages containing 141,179,769,123 tokens.
 
@@ -207,7 +207,7 @@ $$ vector('king') - vector('man') + vector('woman') \approx vector('queen') $$
 Therefore, we investigate whether these vectors are useful for solving
 discourse issues. Due to the limitation of computation powers, we use
 a subset of NTU PN-Gram that was extracted by \cite{huang2014interpretation}
-to train our word embeddings. These sentences were extracted with three conditions:
+to train our word embeddings. These sentences were extracted on the basis of the following three conditions:
 
 \begin{enumerate}
 \item Each sentence must have exactly two clauses.

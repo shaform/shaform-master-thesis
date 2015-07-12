@@ -37,7 +37,7 @@ Section~\ref{s:discourse-disambig-component}.
 Different types of word embeddings for
 the VECTOR features are experimented. We use Logistic Regression
 as our classifier with VECTOR as the only features. The results are
-shown in Table~\ref{t:recognition-vectors} below. 
+shown in Table~\ref{t:recognition-vectors}. 
 
 \input{tables/recognition-vectors}
 
@@ -254,17 +254,17 @@ as correct if all argument boundaries for the given connective are correctly ide
 The averaged results over all folds are reported. Table~\ref{t:argument-features} shows
 the performance using different feature sets.
 
-The accuracy for the connectives is lesser than 50\%, showing a lot of space for
+The accuracy for the connectives is less than 50\%, showing a lot of spaces for
 improvement. On the other hand, the F1 score for connective boundaries is higher.
-What this means is that for each connective, we are able to recover most of its
+It means that for each connective, we are able to recover most of its
 boundaries, but it's difficult to recover all of them correctly.
 
 %t:argument-features
 \input{tables/argument-features}
 
-We compare our model with a simple baseline model. The model places a argument
+We compare our model with a simple baseline model. The model places an argument
 boundary at the beginning of each segment that contains a connective component for
-the current connective. In addition, it places a argument boundary at the
+the current connective. In addition, it places an argument boundary at the
 end of the segment that contains the last connective component. If the connective
 has only one component, only two boundaries are placed, so we place an additional
 boundary after the last boundary or before the first boundary if
@@ -290,7 +290,7 @@ Figure~\ref{i:argument-error-len-c}, but no significant difference is observed.
 %i:argument-error-len
 \input{figures/argument-error-by-len}
 
-The arguments for a explicit relation span over a continuous argument interval that
+The arguments for an explicit relation span over a continuous argument interval that
 starts from the first argument boundary and ends at the last argument boundary.
 There exist four types of relationships between the real interval and the predicted
 interval as shown in Figure~\ref{i:args-relationship}.
@@ -335,7 +335,7 @@ as an instance. The precision, recall, and F1 scores are computed for each fold,
 and the averaged results are reported. Each explicit relation candidate is
 counted as true positive only when the three entities are all correctly
 identified; otherwise, it is counted as false positive. We list the results
-below in Table~\ref{t:final-results}. We could see that due to the difficulty
+in Table~\ref{t:final-results}. We could see that due to the difficulty
 of argument extraction, the performance has decreased significantly compared
 to the previous stage.
 
