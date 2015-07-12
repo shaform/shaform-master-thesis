@@ -14,7 +14,7 @@ regarding Chinese discourse analysis. Our
 research focuses on the explicit relations that
 are signalled by discourse connectives.
 We tackle the tasks including discourse
-usage disambiguation for connectives,
+usage disambiguation of connectives,
 linking disambiguation among connective components,
 relation type disambiguation, and argument
 extraction for explicit relations. A pipeline
@@ -27,9 +27,9 @@ We have found that word embeddings are useful in this
 task. The same scores predicted by Logistic Regression
 are also used to rank the candidates, and 
 a greedy algorithm is developed to resolve linking
-ambiguities. We find that most of the difficulty
-is caused by spurious component candidates that form
-many spurious connective candidates. Our model achieves
+ambiguities. We find that one of the challenging issues
+is that many spurious connective candidates are formed by 
+spurious component candidates. Our model achieves
 an F1 of 78.81\% for extracting connective components,
 and an F1 of 74.97\% for extracting connectives. Similar
 features are used to classify the relation type for each
@@ -41,10 +41,10 @@ Additionally, we investigate argument extraction for
 explicit relations. Each paragraph is divided into segments
 and the task is formulated as a sequence labelling problem
 over the segments.
-We are able to achieve an F1 of 78.48\% for identifying
+We achieve an F1 of 78.48\% for identifying
 argument boundaries, which outperforms the baseline system
 significantly. However, correctly identifying all arguments
-for a explicit relation remains a difficult goal. Our
+for an explicit discourse relation remains a difficult goal. Our
 system only achieves an accuracy of 40.74\%. We show
 the challenging issues include the determination of
 the interval the arguments span. Due to the hierarchical
@@ -52,10 +52,10 @@ nature of the discourse structure, the ranges for
 different relations can vary greatly.
 
 The system components are integrated into a pipeline
-system that extracts explicit relations from the raw text.
+system that extracts explicit discourse relations from the raw text.
 Each relation is composed of the connective, the relation type,
 and the arguments. Our system achieves an overall F1 of 31.31\%
-for extracting explicit relations.
+for extracting explicit discourse relations.
 
 \section{Future Work}
 
@@ -70,8 +70,8 @@ future work that could be built upon our work.
 In our work, a two-stage pipeline system is built to disambiguate
 the discourse usages and the linking ambiguities. Although some linking
 information is used as features, the greedy algorithm still ranks
-each connective candidate individually. We believe a closer integration
-of these two stages and a algorithm that utilizes global relationship
+each connective candidate individually. We expect that a closer integration
+of these two stages and an algorithm that utilizes global relationship
 between different conflicting candidates may improve the performance
 for both tasks.
 
@@ -98,7 +98,7 @@ relations to improve the performance.
 However, implicit relations must also be identified in order
 to construct the complete discourse tree for a paragraph.
 Investigation must be done to examine how to integrate the implicit and
-explicit relation identification together, and whether our model could
+explicit relation identification together, and whether our model
 could help constructing the hierarchical discourse structure.
 Also, by taking the global discourse structure into
 consideration, it may also improve the determination of the argument interval
