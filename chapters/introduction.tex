@@ -17,7 +17,7 @@ As large-scale annotated datasets become available, researchers build upon each
 component and start to handle the complex discourse relations between textual units.
 
 In this thesis, we focus on several issues regarding Chinese discourse analysis
-including the identification explicit discourse connectives,
+including the identification of explicit discourse connectives,
 the identification of correct linkings between the connective components,
 the classification of relation types for connectives,
 and the extraction of their arguments.
@@ -48,7 +48,7 @@ In this thesis, we use CDTB as our corpus, so we will follow their taxonomy.
 The meanings of these relation types are briefly explained as follows:
 
 \begin{description}
-\item[Causality] Causality is used when an event in an argument cause the event
+\item[Causality] Causality is used when an event in an argument causes the event
     in another argument. It expresses the relationship between the cause
     and the effect.
 \item[Coordination] Coordination is used when the arguments are
@@ -90,7 +90,7 @@ denoted by [] markers in these examples.
 % Transition
 \begin{sent}{sent:transition}{}
     [假新闻\underline{虽然}为数甚少，] [\underline{但}影响极坏。]
-    (Although there are very few false news, it has a very bad influence.)
+    (Although there is very little false news, it has a very bad influence.)
 \end{sent}
 
 % Explanation
@@ -116,7 +116,7 @@ Each connective can be composed of one or more components. For example, ``虽然
 (although-but) is composed of two connective components: ``虽然'' (although)
 and ``但'' (but).
 
-As discourse relations can form hierarchy structures in a text, sometimes
+As discourse relations can form hierarchical structures in a text, sometimes
 a connective may be present for a sub-structure, but the higher-level relation
 is still implicit because the connective is not intended for that relation.
 For example, (S~\ref{sent:hierarchy}) contains (S~\ref{sent:transition})
@@ -129,7 +129,7 @@ is still implicit.
     [假新闻虽然为数甚少，但影响极坏。]
     (Similar false news not only appears on Hubei Daily, but can also be found on
     other newspapers as well as TV and radio.
-    Although there are very few false news, it has a very bad influence.)
+    Although there is very little false news, it has a very bad influence.)
 \end{sent}
 
 
@@ -208,7 +208,7 @@ the component candidates must be resolved. Therefore, our second task
 focuses on resolving the linking ambiguities.
 The third task is the classification of the relation type for each discourse
 relation.
-We will classify each relation represented by an explicit connective by top-level
+We will classify each relation represented by an explicit connective for top-level
 relation types and second level relation types.
 The fourth task is the extraction of the arguments for each discourse connective.
 Built upon these components, an end-to-end discourse parser for Chinese may
@@ -220,7 +220,7 @@ be built in future studies.
 \section{Structure}
 This thesis is organized as follows. In Chapter \ref{c:related}, we summarize
 the related work for discourse analysis, including the corpora and researches for
-English and Chinese. In Chapter \ref{c:datasets}, we discuss the data sets used in
+English and Chinese. In Chapter \ref{c:datasets}, we discuss the datasets used in
 this research, and provide some statistics and analysis. In Chapter \ref{c:method},
 we give an overview of our system, and discuss the design of various components.
 In Chapter \ref{c:exp}, we perform evaluation on our models and compare with

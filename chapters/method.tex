@@ -213,7 +213,7 @@ each other. Features for each connective candidate are extracted as specified in
 Section~\ref{s:connective-features} and binary
 classification can be carried out to identify discourse usages.
 Since there are more spurious connectives than real connectives, we balance the
-data set by oversampling the correct instances for three times when training. To evaluate on
+training set by oversampling the correct instances for three times. To evaluate on
 component level, we take the union of the components for all connective as the result.
 
 By eliminating unlikely connective candidates, some linking ambiguities 
@@ -319,7 +319,7 @@ Many of these candidates are incorrect. In particular, a component may involve i
 multiple different connective candidates by linking with different components,
 but only one of them could be correct. Moreover, some remaining component
 candidates may not actually have discourse usage, meaning that none of
-the connectives it forms is correct. We would like to extract the
+the connectives it forms are correct. We would like to extract the
 correct connectives from the paragraph despite the imperfect discourse usage
 disambiguation.
 
@@ -464,7 +464,7 @@ is used directly.
 Likewise, we also evaluate on component level to see if this increases
 the performance for discourse usage detection.
 
-\section{Relation Type Disambiguation}
+\section{Discourse Relation Type Disambiguation}
 
 After the connectives are extracted, the relation type each connective represents
 must be determined. Different classifiers are used to investigate whether the features in
@@ -499,8 +499,8 @@ arguments for ``其中'' (among them) are (b) and (c) while arguments for ``并'
     for rare earth minerals in Baotou. Baotou Steel Rare Earth has now completed three
     plants for rare earth production. Among them are the world's largest rare earth
     concentrate and rare earth alloy production plant. Baotou can now produce more than
-    eighty kinds of rare earth products. With its excellent properties, these products
-    are sold nationwide and exported to more than 10 countries and regions.
+    eighty kinds of rare earth products. With their excellent properties, these products
+    are sold nationwide and are exported to more than 10 countries and regions.
     The annual output value and profit tax is more
     than two billion yuan and three hundred million yuan, respectively.
     The export value is more than fifty million US dollars.)
@@ -538,7 +538,7 @@ we can divide the paragraph into segments that include all these boundaries.
 In fact, even if we simply use the tokens as the segments, we could still satisfy
 this requirement. One could improve the segmentation by making the observation
 that the EDU boundaries in CDTB only occur with certain symbols that separate
-phrases and sentences. The symbols include ”, …, ─, 、, 。, 」, ！, ，, ：, ； and ？.
+phrases and sentences. The symbols include ”, …, ─, 、, 。, 」, ！, ，, ：, ；, and ？.
 We would segment the paragraph by these symbols, and solve the sequence labelling
 problem on these segments.
 

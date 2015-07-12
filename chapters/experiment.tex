@@ -41,7 +41,7 @@ shown in Table~\ref{t:recognition-vectors}.
 
 \input{tables/recognition-vectors}
 
-GLOVE is trained with the Glove toolkit while SKIPGRAM and CBOW are trained
+GLOVE is trained with the GloVe toolkit while SKIPGRAM and CBOW are trained
 using word2vec as describe in Section~\ref{s:pn-corpus}. SKIPGRAM yields
 the best results. We have tried concatenating different embeddings,
 but the performance does not improve. Therefore, we will only use SKIPGRAM
@@ -85,7 +85,7 @@ component level.
 %t:recognition-connective-models
 \input{tables/recognition-connective-models}
 
-\section{Discourse Linking Disambiguation}
+\section{Connective Linking Disambiguation}
 \label{s:linking-exp}
 
 In this section, we discuss our investigation on linking ambiguities between connective
@@ -93,7 +93,7 @@ components. Evaluation is done by calculating the precision, recall, and F1 scor
 1,813 connective instances.
 The same 10-fold for paragraphs is used for the experiments.
 
-\subsection{Discourse Linking Disambiguation for Known Connective Components}
+\subsection{Connective Linking Disambiguation for Known Connective Components}
 
 We start by evaluating linking disambiguation individually by assuming all correct
 connective components are already known. The results are reported in
@@ -115,15 +115,15 @@ is insignificant.
 \input{tables/linking-perfect-methods}
 
 
-\cite{hu2011research} evaluated their algorithm on 79 sentences that have
+\cite{hu2011research} evaluated their algorithm on 99 sentences that have
 linking ambiguity, and they correctly resolved all linking ambiguity for 78
 sentences. In our corpus, there are 52 paragraphs that have linking ambiguity
-and are composed of only 1 sentence. We evaluate our non-learning \text{len+} model
+and are composed of only 1 sentence. We evaluate our non-learning \textit{len+} model
 directly on these 52 sentences and are able to correctly resolve all linking
 ambiguity in 51 sentences. Our relatively simple greedy algorithm is
 able to achieve similar results when the components are known.
 
-\subsection{Discourse Linking Disambiguation within the Pipeline System}
+\subsection{Connective Linking Disambiguation within the Pipeline System}
 
 For practical applications, it's difficult to know which component is correct in
 advance. Therefore, we also evaluate linking disambiguation within the pipeline
@@ -137,7 +137,7 @@ level as described in Section~\ref{s:discourse-disambig-component} and
 Section~\ref{s:discourse-disambig-component} are compared.
 Although it is not statistically significant, for both connective
 instances and components instances, the best results for disambiguation on connective
-level are higher to that for disambiguation on component level.
+level are higher than that for disambiguation on component level.
 In addition, it is also relatively computation-efficient as the same Logistic
 Regression predictions are used for both discourse usage disambiguation and ranking.
 Therefore, we choose the \textit{\#len-score} model for the next stage of our
@@ -178,9 +178,9 @@ datasets. Though it's not directly comparable with our work, the performance for
 and we have better accuracy.
 
 
-\section{Discourse Relation Disambiguation}
+\section{Discourse Relation Type Disambiguation}
 
-\subsection{Discourse Relation Disambiguation for Known Connectives}
+\subsection{Discourse Relation Type Disambiguation for Known Connectives}
 
 We will first evaluate our models using 10-fold cross-validation with the 1,813
 explicit connectives. We divide them into 10 splits
@@ -222,7 +222,7 @@ We are able to achieve higher performance on relation type classification.
 %t:sense-word-types
 \input{tables/sense-word-types}
 
-\subsection{Discourse Relation Disambiguation within the Pipeline System}
+\subsection{Discourse Relation Type Disambiguation within the Pipeline System}
 
 We also evaluate discourse relation disambiguation within the pipeline system.
 For each connective candidate extracted, we predict its relation type using
@@ -238,9 +238,9 @@ model for relation type disambiguation.
 %t:sense-types-pipeline
 \input{tables/sense-types-pipeline}
 
-\section{Explicit Discourse Relation Argument Extraction}
+\section{Connective Argument Extraction}
 
-\subsection{Argument Extraction for Known Connectives}
+\subsection{Connective Argument Extraction for Known Connectives}
 
 In this section, we discuss our evaluation on argument extraction when the
 connectives are already known. Since we have found that the relation type
@@ -279,8 +279,8 @@ significantly.
 
 We continue to inspect the errors produced by our model.
 Figure~\ref{i:argument-error-len} shows the distribution of the number
-of arguments and the number of connective components for each explicit relation
-and the respective error rates measured by connective accuracy.
+of arguments and the number of connective components for each explicit discourse
+relation and the respective error rates measured by connective accuracy.
 Our model can mostly only handle the relations
 that only have two arguments. For more arguments, the error rates are almost
 close to 1. We also examine whether it's important for
@@ -290,15 +290,15 @@ Figure~\ref{i:argument-error-len-c}, but no significant difference is observed.
 %i:argument-error-len
 \input{figures/argument-error-by-len}
 
-The arguments for an explicit relation span over a continuous argument interval that
-starts from the first argument boundary and ends at the last argument boundary.
+The arguments for an explicit discourse relation span over a continuous argument interval
+that starts from the first argument boundary and ends at the last argument boundary.
 There exist four types of relationships between the real interval and the predicted
 interval as shown in Figure~\ref{i:args-relationship}.
 
 %i:args-relationship
 \input{figures/args-relationship}
 
-We examine distribution of the error cases on these types of relationships and the
+We examine the distribution of the errors for these types of relationships and the
 results are shown in Figure~\ref{i:argument-error-type}. We found in most cases,
 the interval predicted is either too wide or too narrow.
 Only 139 error cases are caused entirely by the argument boundaries within the
@@ -323,7 +323,7 @@ of the other side of the interval.
 %i:argument-error-position
 \input{figures/argument-error-by-position}
 
-\subsection{Argument Extraction within the Pipeline System}
+\subsection{Connective Argument Extraction within the Pipeline System}
 
 Once argument extraction is integrated into the pipeline system, our end-to-end
 pipeline would be able to extract explicit relations for raw text. In particular,

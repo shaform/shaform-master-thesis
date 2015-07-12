@@ -31,7 +31,7 @@ This is represented by the children of an internal node. Each relation can
 either be binary or multi-child. Figure~\ref{i:rst-tree} shows an example sub-tree.
 Relation 1 has two arguments (a-b) and (c-d), and relation 2 has two
 arguments (a) and (b).
-The hierarchy annotations enable the analysis of the complex discourse structure.
+The hierarchical annotations enable the analysis of the complex discourse structure.
 
 %i:rst-tree
 \input{figures/rst-tree}
@@ -49,8 +49,8 @@ In addition, they annotated implicit relations for successive pairs of sentences
 \section{English Discourse Researches}
 
 Many groups have investigated different subtasks of English
-discourse parsing on PDTB2. \cite{pitler2009using} trained a maximum
-entropy classifier with various syntactic features to identify explicit discourse
+discourse parsing on PDTB2. \cite{pitler2009using} trained a Maximum
+Entropy classifier with various syntactic features to identify explicit discourse
 connectives and achieved the F1 of 94.19\%. Additionally, they used
 a Naive Bayes classifier to classify the relation type of each connective and
 achieved the accuracy of 94.15\%. Such high performance was already comparable to human
@@ -58,13 +58,13 @@ annotator agreement. They have found that the degree of relation type ambiguity
 for connectives is low in English. In fact, an accuracy of 93.67\% can be achieved
 by using the strings of connectives as the only features. \cite{wellner2009sequence}
 also experimented with constituency-based and dependency-based features to identify
-explicit connectives with logistic regression classifier. In addition, they proposed
+explicit connectives with Logistic Regression classifier. In addition, they proposed
 a sequential ranking model to jointly identify discourse connectives and their arguments.
 They developed a dependency-based discourse parsing system. \cite{faiz2013identifying} combined
 various feature sets to improve the results on connective identification. \cite{j2013disambig} pointed
-out that while a few connectives constitute most of connective instances, most articles contain
-at least one low-frequency connective. Therefore, using macro-average over different connectives
-may be a better metric. They also showed that simple lexical features such as POS tags perform
+out that while a few classes of connectives constitute most of connective instances, most articles contain
+at least one low-frequency connective. Therefore, macro-averaged scores over different connective
+classes may be a better metric. They also showed that simple lexical features such as POS tags perform
 well in this experimental setting when golden standard parsing tree is not available.
 
 \cite{dines2005attribution} used a tree subtraction algorithm to extract arguments for
@@ -78,7 +78,7 @@ and used Conditional Random Fields (CRFs) to tackle the problem.
 \cite{lin2014pdtb} build an end-to-end discourse parser for PDTB2.
 
 
-As RST-DT provides hierarchy discourse structure annotations. There are also many
+As RST-DT provides hierarchical discourse structure annotations. There are also many
 attempts to construct these discourse structures automatically. \cite{soricut2003sentence}
 investigated sentence-level discourse parsing. They built discourse segmenter to
 segment each sentence into EDUs using a statistical model with lexical and syntactic features.
@@ -88,8 +88,8 @@ They also constructed a discourse parser and showed that near-human level perfor
 if golden truth syntactic parsing tree and EDU segmentation were given. \cite{sporleder2005} focused
 on non-hierarchical discourse chunking and produced comparable results without the use of
 syntactic parsers. \cite{fisher2007utility} investigated whether the features derived from finite-state
-systems are enough for discourse segmentation and showed that combining features from syntactic tree
-can improve the performance. \cite{joty2012novel} applied a CYK-like parsing algorithm
+systems are enough for discourse segmentation and showed that combining features from the syntactic tree
+could improve the performance. \cite{joty2012novel} applied a CYK-like parsing algorithm
 to sentence-level discourse parsing. By avoiding a greedy approach, they were able to increase
 their performance.
 
@@ -149,7 +149,7 @@ Their reported F scores are 79.33\% and 71.63\%, respectively.
 between four relation types and non-discourse usage,
 and obtained overall accuracy of 70.20\%. \cite{li2015automatic} used CDTB to
 investigate detection and classification of connective components. They used
-maximum entropy and decision tree algorithms with various syntactic features.
+Maximum Entropy and decision tree algorithms with various syntactic features.
 The F1 for connective identification was 69.2\% and the classification
 accuracy among four top-level relation types was 89.1\% in the pipeline system.
 
@@ -158,11 +158,11 @@ that have multiple clauses and assumed all connective components in the sentence
 are correctly identified. They developed a method to prune the search tree
 to avoid the computation of all solutions while trying to find a connective
 set that includes all connective components. They were able to achieve 98.9\%
-accuracy in the 79 sentences that have linking ambiguities.
+accuracy in the 99 sentences that have linking ambiguities.
 
 \cite{huang2011chinese} investigated relation type disambiguation between
 two sentences. They used four-class classification with SVM, and their reported
-accuracy and macro-average F1 are 88.28\% and 63.69\% respectively.
+accuracy and macro-averaged F1 are 88.28\% and 63.69\% respectively.
 \cite{huang2012contingency} dealt with intra-sentential relations identification
 and tackled the relation structure prediction with a 49-way classification
 between different types of relation structures in a sentence.

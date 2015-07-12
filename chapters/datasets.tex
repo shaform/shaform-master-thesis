@@ -45,7 +45,7 @@ Sometimes there is no appropriate connective to be inserted. In such a case,
 the relation is only annotated with a second-level relation type.
 
 Consider the example sentences (S~\ref{sent:cdtb}) selected from CDTB. Its discourse
-structure is shown in Figure~\ref{i:cdtb-tree}. The continue relation between
+structure is shown in Figure~\ref{i:cdtb-tree}. The \textit{continue} relation between
 discourse units (a-b) and (c) is implicit, but ``以后'' (later) can be inserted
 as a connective as denoted by ``<以后>'' in (S~\ref{sent:cdtb}).
 On the other hand, the explanation relation between (d) and (e-g)
@@ -124,8 +124,8 @@ Figure~\ref{i:freq-detected}. We show the number of connective candidates
 detected if we use string matching with the connective lexicon to extract
 all connective candidates from the corpus. This problem is partly caused by the linking
 ambiguities but the large number of spurious component candidates is a worse problem.
-These spurious component candidates introduce a lot of connective candidates that
-do not actually have discourse meanings. In fact, if we could identify the correct
+These spurious component candidates form a lot of spurious connective candidates.
+In fact, if we could identify the correct
 connective components, the total number of connective candidates they form
 is only 2,249, and 1,813 of them are correct, which is about 80\% of these candidates.
 
@@ -196,8 +196,8 @@ dataset~\citep{callan2009clueweb09}. In NTU PN-Gram, there are totally 173,741,5
 web pages containing 141,179,769,123 tokens.
 
 Recently, efficient methods to estimate word embeddings have been developed.
-These methods learn the distributed representations for each word that encode
-syntactic and semantic patterns for each word in a fixed-dimensional vector.
+These methods learn the distributed representation for each word that encodes
+syntactic and semantic patterns in a fixed-dimensional vector.
 These vectors exhibit interesting properties. For example,
 \cite{mikolov2013linguistic} pointed out that there exist linear regularities
 between these vectors:
@@ -215,7 +215,7 @@ to train our word embeddings. These sentences were extracted on the basis of the
 \item Each of the two clauses must not have more than 20 Chinese characters.
 \end{enumerate}
 
-We use an intermediate result that contains 43,010,050 sentences and eliminated
+We use an intermediate result that contains 43,010,050 sentences and eliminate
 the duplicate sentences. The result are 21,217,147 sentences, containing
 326,996,602 tokens. These sentences are used to train word embeddings.
 We have created 400-dimensional embeddings by GloVe tool~\citep{pennington2014glove}
