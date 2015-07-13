@@ -18,7 +18,7 @@ component and start to handle the complex discourse relations between textual un
 
 In this thesis, we focus on several issues regarding Chinese discourse analysis
 including the identification of explicit discourse connectives,
-the identification of correct linkings between the connective components,
+the identification of correct linking between the connective components,
 the classification of relation types for connectives,
 and the extraction of their arguments.
 
@@ -101,7 +101,7 @@ denoted by [] markers in these examples.
 \end{sent}
 
 In addition to the relation types, each relation could also be classified
-as implicit or explicit. An explicit relation is signalled by a discourse connective.
+as implicit or explicit. An explicit relation is signaled by a discourse connective.
 For example, in (S~\ref{sent:transition}), there is a connective ``虽然-但''
 (although-but), so this is an explicit relation. On the other hand,
 (S~\ref{sent:causality}) does not have a connective, so the relation
@@ -164,18 +164,18 @@ Secondly, many Chinese connectives are parallel connectives that
 have multiple discontinuous components~\citep{zhou2012pdtb}.
 When there are multiple connectives present in a paragraph, their components
 can often link with each other in multiple possible ways.
-Finding the correct linkings between these components
+Finding the correct linking between these components
 can be useful for discourse analysis. Finally, the sentence boundaries for
 Chinese texts are not clearly defined. Because there is no
 requirement to always terminate a sentence under certain rules,
 sometimes there could exist very long sentences. Thus it's more difficult
-to detect discourse units and determine which are the arguments of a given relation.
+to detect discourse units and determine the arguments of a given relation.
 
 (S~\ref{sent:invest}) shows an example for linking ambiguities.
 There are five connective candidates, including (1) ``除了...还''
 (in addition to ... also), (2) ``还...也'' (also ... also),
 (3) ``除了'' (in addition to), (4) ``还'' (also), and (5) ``也'' (also).
-Figure~\ref{i:linking-ambiguity} illustrates the ambiguous linkings. Since each
+Figure~\ref{i:linking-ambiguity} illustrates the ambiguous linking. Since each
 component can only be a part of one connective, overlapped connectives could
 not coexist.  In other words, only candidates (1) and (5) are correct.
 

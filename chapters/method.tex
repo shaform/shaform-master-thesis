@@ -22,7 +22,7 @@ non-discourse usages for these component candidates. We then try to identify
 the correct connectives by resolving the linking ambiguity between the remaining
 component candidates.
 A different approach that eliminates non-discourse usages and disambiguates
-linkings both on the connective level is also experimented. The alternative
+linking both on the connective level is also experimented. The alternative
 approaches are illustrated in Figure~\ref{i:system-B}.
 Finally, we determine the relation types for each explicit
 connective and extract the arguments for each relation.
@@ -221,7 +221,7 @@ are also removed. In fact, if we can classify perfectly, we would have already
 solved the linking ambiguities completely as only the correct connectives remain.
 However, there may still exist some spurious candidates, some of which are
 caused by incorrect component candidates, and others caused by
-incorrect linkings.
+incorrect linking.
 In particular, some overlapped connective candidates that share the same
 connective component candidate remain. By resolving the linking
 ambiguities, we will have more capacity to identify the correct connectives. This
@@ -331,7 +331,7 @@ The algorithm filters the candidate set $C$ and produces a result set $A$ that
 contains only non-overlapped connective candidates. On line~\ref{a:lnk:compute}
 and \ref{a:lnk:check}, the algorithm computes the number of connective candidates
 each component candidate involves in the remaining $C$, and checks if there exists
-a component that does not have multiple possible linkings. When such a candidate
+a component that does not have multiple possible linking. When such a candidate
 is not found, we rank all connective candidates under some criteria
 and select the one with the highest priority.
 
@@ -418,9 +418,10 @@ explained in Section~\ref{s:linking-exp}.
     candidate first.
 \end{description}
 
-We explain two alternative pipeline approaches that correspond to two different
-discourse usage disambiguations as described in Section~\ref{s:discourse-disambig-component}
-and \ref{s:discourse-disambig-connective}.
+We explain two alternative pipeline approaches that correspond to
+two different ways for discourse usage disambiguation described
+in Section~\ref{s:discourse-disambig-component} and
+\ref{s:discourse-disambig-connective}.
 
 \subsubsection{A Pipeline Approach with Discourse Usage Disambiguation on Component Level}
 \label{s:pipeline1}
@@ -453,7 +454,7 @@ provide additional clues for detecting discourse usage.
 In Section~\ref{s:discourse-disambig-component}, we generate all possible
 connective candidates and eliminate the ones that are unlikely to be correct.
 In the process, we eliminate some non-discourse candidates and some incorrect
-linkings.
+linking.
 
 Afterwards, there remain some connective candidates that overlap with each other.
 That is, they share the same connective component. So we feed these candidates
@@ -478,7 +479,7 @@ clues for the connective's relation type.
 
 After the connective and its relation type are identified, we would like to extract
 its arguments. For example, in Figure~\ref{i:cdtb-tree2}, the discourse tree
-for (S~\ref{sent:rare-earth}) is shown. There exist two explicit relations signalled by
+for (S~\ref{sent:rare-earth}) is shown. There exist two explicit relations signaled by
 connectives ``其中'' (among them) and ``并'' (and). We would like to know the
 arguments for ``其中'' (among them) are (b) and (c) while arguments for ``并'' (and) are
 (d), (e), (f), (g) and (h).
