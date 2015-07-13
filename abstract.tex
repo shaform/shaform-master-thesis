@@ -1,30 +1,80 @@
 % 中文摘要
 \begin{abstractzh}
 
-篇章連接詞真的好重要。\\
+篇章關係指出了文字單位間如何有邏輯的彼此關聯。
+透過分析文章中的篇章結構，我們可以更了解文字的意義。
+也因此，篇章結構分析能夠被應用在很多領域，
+例如自然語言界面以及大規模的文件分析。
+
+雖然有英文的篇章語料集供研究者使用，中文的大規模語篇資料集一直
+到近年才終於被釋出。同時，中文的篇章結構分析有很多獨特的議題，
+例如中文的篇章連接詞的種類較多，且常有多個不連續詞語組成的
+多重連接詞，此外，中文的句子結構也更為複雜，使得正確辨識篇章結構更為困難。
+
+篇章連接詞是用來辨識中文文章中篇章關係的重要線索，可是由於連接詞
+本身的歧義性讓辨識篇章連接詞本身成為一個挑戰。在本篇論文中，
+我們研究了跟具有篇章連接詞的顯性篇章關係有關的四個議題：
+第一，我們處理篇章連接詞的辨識，在文章中找出可能的篇章連接詞。
+第二，我們探討了篇章連接詞的構成詞語間的多重連結關係。第三，我們研究
+每個篇章連接詞的篇章關係消歧。最後，我們辨識每個篇章連結詞的論元。
+
+我們提出了不同的特徵來訓練基於羅吉斯迴歸 (Logistic Regression)
+演算法的分類器來識別正確的篇章連接詞，以及辨識其篇章關係的種類。
+除此之外，我們也排序每個可能的候選連接詞，
+並利用一個貪婪的演算法 (greedy algorithm) 來解決連結詞的連結關係歧異性。
+最後，我們將論元辨識視為一個序列標記問題 (sequence labeling problem)，
+並利用條件隨機域 (Conditional Random Fields) 來找出論元的邊界。
+
+除了顯性篇章關係外，隱性篇章關係也需要進一步的研究來加以辨識。
+建立在這些元件的基礎上，一個完整的中文篇章結構分析器或能被建造出來。 \\
 
 \noindent
-關鍵字：篇章結構分析
+關鍵字：自然語言處理，中文篇章結構分析，篇章連接詞辨識，篇章關係消歧、
+論元辨識
 
 \end{abstractzh}
 
 % 英文摘要
 \begin{abstracten}
 
+Discourse relations represent how textual units logically connect
+with each other. Analyzing the discourse structure for texts
+could aid the understanding of the meaning behind the paragraphs.
+There are many potential applications such as natural language
+interface and large-scale content-analysis.
+
+Although there are popular English discourse corpora for researchers,
+large-scale Chinese discourse corpora have not been available until
+recently. In addition, Chinese discourse analysis has many
+unique issues including the variety of discourse connectives,
+the common occurrences of parallel connectives, and the complex
+sentence structures.
+
 Discourse connectives are important clues for identifying discourse
 relations in Chinese texts. However, the ambiguity involved makes
 it a challenge to extract true connectives. In this thesis, we investigate
-three types of ambiguities together. First, a connective component may have 
-discourse and non-discourse usages. Second, there may be multiple possible
-linkings for paired connectives. Third, a connective may have different
-meanings, signaling different discourse relations. A unified approach 
-to resolve these ambiguities in unrestricted text is
-proposed. The experimental results show that GloVe (Global Vectors for 
-Word Representation) is the most powerful feature set for both discourse 
-usage and linking disambiguation. The entire system achieves the 
-macro-average F1 of xx.xx\% on Chinese Discourse Treebank. \\ 
+four tasks regarding explicit discourse relations that are signalled
+by discourse connectives. Firstly, we deal with the extraction
+of explicit discourse connectives. Secondly, we investigate resolving
+linking ambiguities among connective components.
+Thirdly, we disambiguate the discourse relation type for each connective.
+Finally, we extract the arguments for each discourse connective.
+
+Several features are proposed to train Logistic Regression classifiers
+to disambiguate between discourse and non-disourse usages and
+the relation types for connectives. Additionally, we rank each
+connective candidate and develop a greedy algorithm to resolve
+linking ambiguities. Finally, the argument identification is formulated
+as a sequence labelling problem, and Conditional Random Fields are
+utilized to determine the argument boundaries.
+
+Besides explicit discourse relations, further investigation must be done
+to recognize implicit relations. Built upon these components,
+an end-to-end discourse parser for Chinese may be built in future studies. \\
 
 \noindent
-Keywords: Discourse Parsing, Discourse Connective
+Keywords: Natural Language Processiong, Chinese Discourse Analysis,
+Discourse Connective Recognition, Discourse Relation Disambiguation,
+Discourse Connective Argument Identification
 \end{abstracten}
 

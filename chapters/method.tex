@@ -506,9 +506,9 @@ arguments for ``其中'' (among them) are (b) and (c) while arguments for ``并'
     The export value is more than fifty million US dollars.)
 \end{sent}
 
-\subsubsection{Argument Extraction as a Sequence Labelling Problem}
+\subsubsection{Argument Extraction as a Sequence Labeling Problem}
 
-We could formulate argument extraction as a sequence labelling problem.
+We could formulate argument extraction as a sequence labeling problem.
 Figure~\ref{i:rare-args} shows the arguments and the corresponding labels
 for the four relations in Figure~\ref{i:cdtb-tree2}. Though we
 focus on explicit relations in this study, the implicit relations are also shown
@@ -539,16 +539,16 @@ In fact, even if we simply use the tokens as the segments, we could still satisf
 this requirement. One could improve the segmentation by making the observation
 that the EDU boundaries in CDTB only occur with certain symbols that separate
 phrases and sentences. The symbols include ”, …, ─, 、, 。, 」, ！, ，, ：, ；, and ？.
-We would segment the paragraph by these symbols, and solve the sequence labelling
+We would segment the paragraph by these symbols, and solve the sequence labeling
 problem on these segments.
 
 \subsection{Determination of Argument Boundaries}
 
-We use Conditional Random Fields (CRFs) to solve the sequence labelling problem.
+We use Conditional Random Fields (CRFs) to solve the sequence labeling problem.
 The implementation we use is CRFsuite~\citep{CRFsuite}. When training, each explicit
-relation with its corresponding labelling is used as a training case. When testing,
+relation with its corresponding labeling is used as a training case. When testing,
 CRFs are used to label the segments for each connective we extracted. Therefore,
-the same segments for a paragraph is labelled independently for each explicit relation
+the same segments for a paragraph is labeled independently for each explicit relation
 inside the paragraph. The resulting argument boundaries are used to extract the connective's
 arguments. Although we have tried some rule-based techniques to adjust the argument boundaries
 after they are extracted by utilizing their hierarchical relationships,
@@ -589,7 +589,7 @@ definition of self-category follows that of \textbf{CONTEXT}. Therefore,
 the self-category for the connective component may dominates additional tokens
 besides the component as well.
 In Figure~\ref{i:parse-segment2} we show another sub-parsing tree.
-The feature for the segment [现已建成包钢稀土一、] when labelling arguments
+The feature for the segment [现已建成包钢稀土一、] when labeling arguments
 for the connective ``其中'' (among them) would be
 \textbf{PATH-NP$\uparrow$IP$\uparrow$IP$\downarrow$IP}.
 
