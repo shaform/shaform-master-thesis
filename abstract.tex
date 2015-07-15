@@ -1,32 +1,32 @@
 % 中文摘要
 \begin{abstractzh}
 
-篇章關係指出了文字單位間如何有邏輯的彼此關聯。
-透過分析文章中的篇章結構，我們可以更了解文字的意義。
-也因此，篇章結構分析能夠被應用在很多領域，
+篇章關係指文字單位間如何有邏輯的彼此關聯。
+透過文章中的篇章結構分析，我們可以更了解文件的意義。
+因此，篇章結構分析被應用在很多領域，
 例如自然語言界面以及大規模的文件分析。
 
-雖然有英文的篇章語料集供研究者使用，中文的大規模篇章資料集一直
+相對於英文的篇章語料集早就提供研究者使用，中文的大規模篇章資料集一直
 到近年才終於被釋出。同時，中文的篇章結構分析有很多獨特的議題，
 例如中文的篇章連接詞的種類較多，且常有多個不連續詞語組成的
 多重連接詞，此外，中文的句子結構也更為複雜，使得正確辨識篇章結構更為困難。
 
-篇章連接詞是用來辨識中文文章中篇章關係的重要線索，可是由於連接詞
-本身的歧義性讓辨識篇章連接詞本身成為一個挑戰。在本篇論文中，
-我們研究了跟具有篇章連接詞的顯性篇章關係有關的四個議題：
+篇章連接詞是用來辨識中文文章中篇章關係的重要線索，但由於連接詞
+本身的歧義性讓辨識篇章連接詞本身成為一個挑戰議題。在本篇論文中，
+我們研究與篇章連接詞的顯性篇章關係有關的四個議題：
 第一，我們處理篇章連接詞的辨識，在文章中找出可能的篇章連接詞。
-第二，我們探討了篇章連接詞的構成詞語間的多重連結關係。第三，我們研究
+第二，我們探討篇章連接詞的構成詞語間的多重連結關係。第三，我們研究
 每個篇章連接詞的篇章關係消歧。最後，我們辨識每個篇章連結詞的論元。
 
-我們提出了不同的特徵來訓練基於羅吉斯迴歸 (Logistic Regression)
+我們提出不同的特徵來訓練基於羅吉斯迴歸 (Logistic Regression)
 演算法的分類器來識別正確的篇章連接詞，以及辨識其篇章關係的種類。
-除此之外，我們也排序每個可能的候選連接詞，
-並利用一個貪婪的演算法 (greedy algorithm) 來解決連結詞的連結關係歧異性。
+此外，我們也將每個可能的候選連接詞排序，
+並利用一個貪婪的演算法 (greedy algorithm) 來解決連結詞的連結關係歧義性。
 最後，我們將論元辨識視為一個序列標記問題 (sequence labeling problem)，
 並利用條件隨機域 (Conditional Random Fields) 來找出論元的邊界。
 
-除了顯性篇章關係外，隱性篇章關係也需要進一步的研究來加以辨識。
-建立在這些元件的基礎上，一個完整的中文篇章結構分析器或能被建造出來。 \\
+除了顯性篇章關係外，未來隱性篇章關係也需要進一步的研究，
+在這些元件的基礎上，建立一個完整的中文篇章結構分析器。 \\
 
 \noindent
 關鍵字：自然語言處理，中文篇章結構分析，篇章連接詞辨識，篇章關係消歧、
@@ -39,7 +39,7 @@
 
 Discourse relations represent how textual units logically connect
 with each other. Analyzing the discourse structure for texts
-could aid the understanding of the meaning behind the paragraphs.
+could aid the understanding of the meaning behind paragraphs.
 There are many potential applications such as natural language
 interface and large-scale content-analysis.
 
@@ -70,7 +70,8 @@ utilized to determine the argument boundaries.
 
 Besides explicit discourse relations, further investigation must be done
 to recognize implicit relations. Built upon these components,
-an end-to-end discourse parser for Chinese may be built in future studies. \\
+an end-to-end discourse parser for Chinese may be constructed
+in future studies. \\
 
 \noindent
 Keywords: Natural Language Processing, Chinese Discourse Analysis,
