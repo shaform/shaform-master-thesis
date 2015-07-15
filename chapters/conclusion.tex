@@ -44,7 +44,7 @@ over the segments.
 We achieve an F1 of 78.48\% for identifying
 argument boundaries, which outperforms the baseline system
 significantly. However, correctly identifying all arguments
-for an explicit discourse relation remains a difficult goal. Our
+for an explicit discourse relation remains a difficult task. Our
 system only achieves an accuracy of 40.74\%. We show
 the challenging issues include the determination of
 the interval the arguments span. Due to the hierarchical
@@ -60,8 +60,7 @@ the same dataset.
 
 \section{Future Work}
 
-While we studied some tasks for explicit discourse relations,
-there still exist some issues that need to be further investigated
+There still exist some issues that need to be further investigated
 before a Chinese discourse parser could be built. In this section,
 we discuss some improvement that could be made to our models and
 future work that could be built upon our work.
@@ -76,17 +75,19 @@ of these two stages and an algorithm that utilizes global relationship
 between different conflicting candidates may improve the performance
 for both tasks.
 
-\subsection{Utilizing Relation Arguments for Discourse Relation Disambiguation
+\subsection{Utilizing Connective Arguments for Discourse Relation Disambiguation
 and Discourse Usage Disambiguation}
 
 Although we did not find the relation type useful for
 argument extraction, the argument spans could be useful for determining
-the relation types.  Extra features that capture the relationship between
+the relation types.  Additional features that capture the relationship between
 different arguments may be utilized to disambiguate between different relation
-types. Likewise, being unable to extract the arguments might also suggest
-that the connective candidate being considered might not actually have discourse
-meaning. However, the accuracy for argument identification must be improved
-substantially to make it feasible to utilize the information.
+types. Likewise, the results for argument extraction might help
+discourse usage disambiguation. For example, being unable to extract the arguments for
+a particular connective candidate might suggest that the connective candidate
+being considered might not be an actual connective in the first place.
+However, the accuracy for argument identification must be improved
+substantially to make it feasible to utilize the arguments extracted as features.
 
 \subsection{Identifying the Implicit Relations for Discourse Parsing}
 
@@ -100,7 +101,8 @@ However, implicit relations must also be identified in order
 to construct the complete discourse tree for a paragraph.
 Investigation must be done to examine how to integrate the implicit and
 explicit relation identification together, and whether our model
-could help constructing the hierarchical discourse structure.
+could help construct the hierarchical discourse structure.
 Also, by taking the global discourse structure into
 consideration, it may also improve the determination of the argument interval
-for an explicit relation.
+for an explicit relation as its interval must be constrained by the
+argument boundaries its parent node in the discourse tree.

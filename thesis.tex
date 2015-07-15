@@ -50,7 +50,7 @@
 \setlength{\parindent}{2em}
 
 \usepackage{etoolbox}
-\newrobustcmd{\disambiguate}[3]{#2~#3}
+\newrobustcmd{\disambiguate}[3]{#2,~#3}
 
 \usepackage{mathtools}
 \newcommand\undermat[2]{%
@@ -138,6 +138,7 @@
 \renewcommand{\cftafterlottitle}{\hfill}
 
 % \titleformat{\chapter}{\centering\Huge\bfseries}{第\naiveZhNum{\thechapter}章}{1em}{}
+\titleformat{\chapter}[hang]{\Huge\bfseries}{\thechapter}{1em}{}
 \renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}} % dots for chapters
 \titlecontents{chapter}[0em]{}{\makebox[1.5em][l]{\thecontentslabel}}{}{\cftdotfill{\cftdotsep}\contentspage}
 

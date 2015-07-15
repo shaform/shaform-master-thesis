@@ -13,10 +13,10 @@ interface and large-scale content-analysis. However, NLP tasks are
 challenging because there exist various kinds of ambiguities at different processing levels
 including lexical analysis, syntactic analysis, semantic analysis, and discourse analysis.
 Real world knowledge may be required to fully understand the concepts involved in the text.
-As large-scale annotated datasets become available, researchers build upon each
-component and start to handle the complex discourse relations between textual units.
+As large-scale annotated datasets become available, researchers
+start to deal with the complex discourse relations between textual units.
 
-In this thesis, we focus on several issues regarding Chinese discourse analysis
+In this thesis, we focus on several issues regarding Chinese discourse analysis,
 including the identification of explicit discourse connectives,
 the identification of correct linking between the connective components,
 the classification of relation types for connectives,
@@ -27,7 +27,7 @@ and the extraction of their arguments.
 %
 \section{Background}
 
-Discourse refers to a coherent sequence of sentences or phrases.
+Discourse refers to a coherent sequence of sentences.
 Discourse analysis attempts to extract meaningful information from
 discourse units. Such discourse information includes exact boundaries
 between discourse units and the discourse relation types between
@@ -64,7 +64,7 @@ The meanings of these relation types are briefly explained as follows:
 
 We will take some sentences from CDTB~\citep{li2014building} to illustrate the issues
 in discourse analysis. The discourse relation types for the following examples
-(S~\ref{sent:causality}-\ref{sent:explanation}) are
+(S~\ref{sent:causality}-S~\ref{sent:explanation}) are
 Causality, Coordination, Transition, and Explanation, respectively.
 Each relation represents the relationship between two or more discourse units.
 The discourse units that a relation involves are called its arguments.
@@ -107,8 +107,8 @@ For example, in (S~\ref{sent:transition}), there is a connective ``虽然-但''
 (S~\ref{sent:causality}) does not have a connective, so the relation
 is represented implicitly.
 
-These discourse connectives explicitly signal the presence of a discourse relation,
-and therefore are important clues for discourse analysis.
+A discourse connective explicitly signals the presence of a discourse relation,
+and therefore it is an important clue for discourse analysis.
 In Chinese, there are many parallel connectives that have more than one
 component~\citep{zhou2012pdtb}.
 In this thesis, we call the components of a connective as its connective components.
@@ -127,7 +127,7 @@ is still implicit.
 \begin{sent}{sent:hierarchy}{}
     [类似的假新闻和半真半假的新闻，并非《湖北日报》上有，其他报纸，以及电视、广播中也曾有过。]
     [假新闻虽然为数甚少，但影响极坏。]
-    (Similar false news not only appears on Hubei Daily, but can also be found on
+    (Similar false news not only appears on Hubei Daily, but also is found on
     other newspapers as well as TV and radio.
     Although there is very little false news, it has a very bad influence.)
 \end{sent}
@@ -139,7 +139,7 @@ is still implicit.
 %
 \section{Motivation}
 
-Researches for English discourse relations has been progressing continuously. This is
+Researches for English discourse relations have been progressing continuously. This is
 partly due to the availability of large-scale English discourse corpora including
 \textit{Rhetorical Structure Theory Discourse Treebank (RST-DT)}~\citep{Carlson01building}
 and PDTB2~\citep{Prasad08thepenn}. Comparatively, the available resources for Chinese discourse
@@ -157,12 +157,13 @@ There are many unique challenges for Chinese language that are not present in
 English discourse studies. Firstly, there are more discourse connectives
 in Chinese than in English and their parts of speech have more
 varieties~\citep{huang2014interpretation}. Therefore, it's easier to find words
-that have the same surface forms as these connectives, but not actually have
-discourse meaning. Thus, there is need to disambiguate between
+that have the same surface forms as real connectives but do not function as
+discourse connectives.
+Thus, it is necessary to disambiguate between
 discourse and non-discourse usages.
 Secondly, many Chinese connectives are parallel connectives that
 have multiple discontinuous components~\citep{zhou2012pdtb}.
-When there are multiple connectives present in a paragraph, their components
+When multiple connectives are present in a paragraph, their components
 can often link with each other in multiple possible ways.
 Finding the correct linking between these components
 can be useful for discourse analysis. Finally, the sentence boundaries for
@@ -192,9 +193,9 @@ great effect in promoting the optimization of industries in Shanghai.'')
 \input{figures/linking-ambiguity}
 
 %
-%   Goal
+%   Goals
 %
-\section{Goal}
+\section{Goals}
 
 In this thesis, we aim at investigating these unique challenges for Chinese.
 The goal of this research is to build an end-to-end system to analyze
@@ -202,7 +203,7 @@ the explicit discourse relations in Chinese texts. In particular, we
 deal with four tasks. The first task is the extraction of explicit discourse
 connectives. This includes the extraction of candidates and the disambiguation
 between discourse and non-discourse usages. We will investigate the disambiguation
-both on the connective component level and connective level.
+on connective component level as well as on connective level.
 To correctly identify parallel connectives, linking ambiguities between
 the component candidates must be resolved. Therefore, our second task
 focuses on resolving the linking ambiguities.
@@ -212,7 +213,7 @@ We will classify each relation represented by an explicit connective for top-lev
 relation types and second level relation types.
 The fourth task is the extraction of the arguments for each discourse connective.
 Built upon these components, an end-to-end discourse parser for Chinese may
-be built in future studies.
+be constructed in future studies.
 
 %
 %   Structure
@@ -222,7 +223,7 @@ This thesis is organized as follows. In Chapter \ref{c:related}, we summarize
 the related work for discourse analysis, including the corpora and researches for
 English and Chinese. In Chapter \ref{c:datasets}, we discuss the datasets used in
 this research, and provide some statistics and analysis. In Chapter \ref{c:method},
-we give an overview of our system, and discuss the design of various components.
+we give an overview of our system, and discuss the design of each component.
 In Chapter \ref{c:exp}, we perform evaluation on our models and compare with
 other works. Finally, we conclude our work and discuss some future directions in
 Chapter \ref{c:future}.

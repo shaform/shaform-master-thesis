@@ -20,7 +20,7 @@ on discourse usage disambiguation. We evaluate our models using
 10-fold cross-validation. The 2,342 paragraphs are divided  into 10 splits
 while keeping the distribution for the number of explicit relations
 in each paragraph roughly equal. Most of the related works only
-deal with connective components, so we will also use the 2,131 annotated
+deal with connective components, so we also use the 2,131 annotated
 components to evaluate our models.
 The precision, recall, and F1 scores for the positive instances are computed
 for each fold, and the averaged results are reported.
@@ -54,7 +54,8 @@ is the most powerful feature set. Combining all features yields the best results
 \input{tables/recognition-features}
 
 We use Scikit-Learn library~\citep{scikit-learn} to experiment with
-several learning models with default parameters using all features.
+several learning models using all features. For each model, default parameters
+are used without tuning.
 Table~\ref{t:recognition-models} shows the results. The F1 score for Logistic
 Regression is the highest.
 
@@ -71,9 +72,8 @@ the union of all connective components among these candidates.
 Table~\ref{t:recognition-connective-features} shows the results with different features.
 As there remain many overlapped candidates, the precision for connective instances
 are relatively low compared to the precision for component instances. The best performance
-for component instances is slightly higher than that of disambiguation on component level in
-Table~\ref{t:recognition-features},
-but the difference is insignificant.
+for component instances (78.68\%) is slightly higher than that of disambiguation on component level
+(78.64\%) in Table~\ref{t:recognition-features}, but the difference is insignificant.
 
 %t:recognition-connective-features
 \input{tables/recognition-connective-features}
@@ -116,11 +116,11 @@ is insignificant.
 
 
 \cite{hu2011research} evaluated their algorithm on 99 sentences that have
-linking ambiguity, and they correctly resolved all linking ambiguity for 78
-sentences. In our corpus, there are 52 paragraphs that have linking ambiguity
-and are composed of only 1 sentence. We evaluate our non-learning \textit{len+} model
+linking ambiguity, and they correctly resolved all linking ambiguity for 98
+sentences. To evaluate our model on sentence level, 52 paragraphs that have linking ambiguity
+and are composed of only 1 sentence are selected. We evaluate our non-learning \textit{len+} model
 directly on these 52 sentences and are able to correctly resolve all linking
-ambiguity in 51 sentences. Our relatively simple greedy algorithm is
+ambiguity for 51 sentences. Our relatively simple greedy algorithm is
 able to achieve similar results when the components are known.
 
 \subsection{Connective Linking Disambiguation within the Pipeline System}
@@ -128,16 +128,19 @@ able to achieve similar results when the components are known.
 For practical applications, it's difficult to know which component is correct in
 advance. Therefore, we also evaluate linking disambiguation within the pipeline
 system. The results are shown in Table~\ref{t:linking-methods}. Unlike the case
-when all components are known, accepting candidates with linking ambiguity $=$ 1 actually
-decreases the performance.
+when all components are known, accepting candidates without linking ambiguity actually
+decreases the performance. The reason is that if the component itself is spurious,
+even if it has unique linking, the unique connective candidate it generates
+is still spurious.
 
 In addition, alternative approaches using discourse usage
 disambiguation on component level and connective
 level as described in Section~\ref{s:discourse-disambig-component} and
 Section~\ref{s:discourse-disambig-component} are compared.
 Although it is not statistically significant, for both connective
-instances and components instances, the best results for disambiguation on connective
-level are higher than that for disambiguation on component level.
+instances and components instances, the best F1 scores for disambiguation on connective
+level (\textit{\#len-score}) are higher than that for disambiguation on component level
+(\textit{@len-score}).
 In addition, it is also relatively computation-efficient as the same Logistic
 Regression predictions are used for both discourse usage disambiguation and ranking.
 Therefore, we choose the \textit{\#len-score} model for the next stage of our
@@ -188,7 +191,7 @@ while keeping the distribution for the relation types roughly equal for
 each fold, and use Logistic Regression to classify the relation types.
 Two sets of experiments for the four top-level
 categories and the second-level categories are examined. The second-level categories
-have 17 types, but there are three types (inference, background, evaluation)
+have 17 types, but there are three types (inference, background, and evaluation)
 that have less than 10 instances. Therefore, we eliminate these instances and only evaluate
 our models on the remaining 14 types. The resulting dataset contains 1,803 explicit
 connectives. The macro-averaged
@@ -209,7 +212,7 @@ feature set.
 
 In Table~\ref{t:sense-types}, we show the performance for different relation types
 using \textit{All-NUM} as features. For the second-level relation types, we only list
-those type that have more than 10 instances. We could notice that the
+those types that have more than 10 instances. We could notice that the
 number of instances affects the performance of the learning model. The
 lesser the instances, the worse the performance.
 
@@ -229,7 +232,7 @@ For each connective candidate extracted, we predict its relation type using
 Logistic Regression with \textit{All-NUM} as features.
 The same 10-fold for paragraphs is used, and the precision, recall, and F1 scores
 for positive instances are computed. The results are listed in
-Table~\ref{t:sense-types-pipeline} below. The micro-averaged F1 72.75\% can be seen
+Table~\ref{t:sense-types-pipeline}. The micro-averaged F1 72.75\% can be seen
 as the ability for our model to propose connective candidates along with the correct
 relation type. Compared with the original F1 score 74.97\% disregarding relation types,
 the performance only decreases a little, showing the effectiveness of our
@@ -243,8 +246,7 @@ model for relation type disambiguation.
 \subsection{Connective Argument Extraction for Known Connectives}
 
 In this section, we discuss our evaluation on argument extraction when the
-connectives are already known. Since we have found that the relation type
-is not helpful as a feature, only the positions for the connectives are required.
+positions of connectives are already known.
 
 We will use the same 10-fold for paragraphs for evaluation.
 The precision, recall, and F1 scores for the argument boundaries are
@@ -254,10 +256,10 @@ as correct if all argument boundaries for the given connective are correctly ide
 The averaged results over all folds are reported. Table~\ref{t:argument-features} shows
 the performance using different feature sets.
 
-The accuracy for the connectives is less than 50\%, showing a lot of spaces for
-improvement. On the other hand, the F1 score for connective boundaries is higher.
-It means that for each connective, we are able to recover most of its
-boundaries, but it's difficult to recover all of them correctly.
+While the best F1 score for connective boundaries is 78.48\%, the accuracy for
+the connectives is only 40.74\%, showing a lot of spaces for
+improvement. It means that for each connective, we are able to recover most of its
+argument boundaries, but it's difficult to recover all of them correctly.
 
 %t:argument-features
 \input{tables/argument-features}
@@ -277,7 +279,7 @@ significantly.
 
 \subsection{Error Analysis}
 
-We continue to inspect the errors produced by our model.
+We continue to analyze the errors produced by our model.
 Figure~\ref{i:argument-error-len} shows the distribution of the number
 of arguments and the number of connective components for each explicit discourse
 relation and the respective error rates measured by connective accuracy.
@@ -328,7 +330,7 @@ of the other side of the interval.
 Once argument extraction is integrated into the pipeline system, our end-to-end
 pipeline would be able to extract explicit relations for raw text. In particular,
 it proposes a set of explicit relation candidates, where each relation contains
-three entities: (1) the positions of the connective, (2) the relation type, and
+three items: (1) the positions of the connective, (2) the relation type, and
 (3) the arguments. We use the same 10-fold for paragraphs to evaluate our model
 using each relation
 as an instance. The precision, recall, and F1 scores are computed for each fold,
