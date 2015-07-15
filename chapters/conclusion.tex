@@ -87,7 +87,7 @@ discourse usage disambiguation. For example, being unable to extract the argumen
 a particular connective candidate might suggest that the connective candidate
 being considered might not be an actual connective in the first place.
 However, the accuracy for argument identification must be improved
-substantially to make it feasible to utilize the arguments extracted as features.
+substantially to make it feasible to utilize the arguments extracted.
 
 \subsection{Identifying the Implicit Relations for Discourse Parsing}
 
@@ -102,7 +102,9 @@ to construct the complete discourse tree for a paragraph.
 Investigation must be done to examine how to integrate the implicit and
 explicit relation identification together, and whether our model
 could help construct the hierarchical discourse structure.
-Also, by taking the global discourse structure into
-consideration, it may also improve the determination of the argument interval
-for an explicit relation as its interval must be constrained by the
-argument boundaries its parent node in the discourse tree.
+
+Also, an connective's argument interval is constrained by the
+argument boundaries of its parent node in the discourse tree. As
+the parent node could be an implicit relation, taking
+both implicit and explicit relations into consideration may also help
+the determination of the argument interval for each connective.

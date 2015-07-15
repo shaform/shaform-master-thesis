@@ -14,15 +14,17 @@
             ylabel=Error rate,
             xlabel=\#Arguments,
             nodes near coords,
+            xticklabel style={/pgf/number format/assume math mode},
+            yticklabel style={/pgf/number format/assume math mode},
             xtick=data
           ]
             \addplot[ybar,fill=blue,point meta=explicit symbolic] coordinates {
-            (2,958/1688) [$\frac{958}{1688}$]
-            (3,78/85) [$\frac{78}{85}$]
-            (4,32/33) [$\frac{32}{33}$]
-            (5,4/4)   [$\frac{4}{4}$]
-            (6,1/2)   [$\frac{1}{2}$]
-            (7,1/1)   [$\frac{1}{1}$]
+            (2,958/1688) [$\frac{\text{958}}{\text{1688}}$]
+            (3,78/85) [$\frac{\text{78}}{\text{85}}$]
+            (4,32/33) [$\frac{\text{32}}{\text{33}}$]
+            (5,4/4)   [$\frac{\text{4}}{\text{4}}$]
+            (6,1/2)   [$\frac{\text{1}}{\text{2}}$]
+            (7,1/1)   [$\frac{\text{1}}{\text{1}}$]
             };
         \end{axis}
     \end{tikzpicture}
@@ -48,12 +50,12 @@
             xtick=data
           ]
             \addplot[ybar,fill=blue,point meta=explicit symbolic] coordinates {
-            (1,918/1544) [$\frac{918}{1544}$]
-            (2,131/235) [$\frac{131}{235}$]
-            (3,18/24) [$\frac{18}{24}$]
-            (4,6/8)   [$\frac{6}{8}$]
-            (5,0/1)   [$\frac{0}{1}$] %6
-            (6,1/1)   [$\frac{1}{1}$] %7
+            (1,918/1544) [$\frac{\text{918}}{\text{1544}}$]
+            (2,131/235) [$\frac{\text{131}}{\text{235}}$]
+            (3,18/24) [$\frac{\text{18}}{\text{24}}$]
+            (4,6/8)   [$\frac{\text{6}}{\text{8}}$]
+            (5,0/1)   [$\frac{\text{0}}{\text{1}}$] %6
+            (6,1/1)   [$\frac{\text{1}}{\text{1}}$] %7
             };
         \end{axis}
     \end{tikzpicture}
@@ -83,8 +85,8 @@
             ytick=data
           ]
             \addplot[xbar,fill=blue,point meta=explicit symbolic] coordinates {
-            (128/229,1) [$\frac{128}{229}$]
-            (946/1584,2) [$\frac{946}{1584}$]
+            (128/229,1) [$\frac{\text{128}}{\text{229}}$]
+            (946/1584,2) [$\frac{\text{946}}{\text{1584}}$]
             };
         \end{axis}
     \end{tikzpicture}

@@ -14,11 +14,13 @@
             xmax=500,
             xbar=1pt,
             xlabel=Error cases,
-            nodes near coords,
+            nodes near coords={\pgfmathprintnumber[/pgf/number format/assume math mode]{\pgfplotspointmeta}},
             nodes near coords align={horizontal},
             every node near coord/.append style={
                 anchor=west}
             ,
+            xticklabel style={/pgf/number format/assume math mode},
+            yticklabel style={/pgf/number format/assume math mode},
             ytick=data
           ]
             \addplot[xbar,fill=blue] coordinates {
