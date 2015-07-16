@@ -11,6 +11,9 @@ In this chapter, we discuss the evaluation for our system. Each component
 is evaluated individually as well as within the pipeline system. For
 statistical significance, we use Wilcoxon signed-ranks test~\citep{wilcoxon1945individual}
 as suggested by \cite{demvsar2006statistical} at confidence level 0.05.
+For each experiment, we select the best model (denoted by !), and
+* is used to denote the scores that are significantly different.
+
 
 \section{Discourse Usage Disambiguation}
 \label{s:discourse-usage-exp}
@@ -107,9 +110,6 @@ We found that the ambiguity among the components is low. The simple
 baseline model already achieves an F1 of 87.97\%. The greedy
 Algorithm~\ref{a:linking-resolve} could improve the baseline
 model significantly, but once ranking is employed, it doesn't contribute much.
-The difference for F1 scores between \textit{score+} and \textit{len+} is statistically
-significant, but the difference between \textit{score+} and \textit{len-score+}
-is insignificant.
 
 %t:linking-perfect-methods
 \input{tables/linking-perfect-methods}
@@ -340,11 +340,12 @@ identified; otherwise, it is counted as false positive. We list the results
 in Table~\ref{t:final-results}. We could see that due to the difficulty
 of argument extraction, the performance has decreased significantly compared
 to the previous stage. We additionally list the performance of end-to-end
-parsers reported by \cite{lin2014pdtb} and \cite{kong2014a} for PDTB2 evaluated
-also on the F1 for the relations extracted. However, their works include the
-identification of implicit relations while our system focuses only on explicit relations.
-Also, the languages and annotation standards are different, so it's not actually
-directly comparable.
+parsers reported by \cite{lin2014pdtb} and \cite{kong2014a}. Their results
+were also evaluated on the F1 for the relations extracted.
+However, their works include the identification of implicit relations while
+our system focuses only on explicit relations.
+Also, as they used PDTB2, the language and annotation standard are different from
+ours, so it's not actually directly comparable.
 
 %t:final-results
 \input{tables/final-results}
