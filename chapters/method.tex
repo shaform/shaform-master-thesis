@@ -190,7 +190,7 @@ We normalize the numerical features by scaling each to zero mean and unit varian
 \subsubsection{VECTOR}
 
 This feature set is built using word embeddings we created.
-We have created 400-dimensional embeddings by GloVe tool~\citep{pennington2014glove}
+We created 400-dimensional embeddings by GloVe tool~\citep{pennington2014glove}
 and word2vec tool~\citep{mikolov2013efficient,mikolov2013distributed}.
 
 The vectors are used to construct three features: (1) the averaged vectors
@@ -372,7 +372,7 @@ However, we consider that not knowing
 which component candidate is correct is a more realistic experiment setting.
 When we use Algorithm~\ref{a:linking-resolve} in a pipeline system,
 there exist many component candidates in $C$ that do not have discourse meaning,
-and accepting any component without linking ambiguity, i.e, linking ambiguity $=$ 1,
+and accepting any component without linking ambiguity, i.e., linking ambiguity $=$ 1,
 is problematic. As the component may itself be spurious, the unique connective
 candidate it generates is also spurious.
 Therefore, we would just rank all
@@ -564,9 +564,11 @@ In this section, we discuss the features we use for each segment.
 This feature set is similar to the P \& N features, but we relax the
 definition of self-category since most segments do not have a node that
 dominates exactly its tokens. For each segment, we find the lowest node
-that dominates all of the tokens in the segment. If it has any ancestors
+that dominates all of the tokens in the segment.
+Let this node be denoted N\textsubscript{lowest}.
+If it has any ancestors
 that dominate the same tokens, the highest such ancestor is used as
-the self-category; otherwise, this node is used as the self-category.
+the self-category; otherwise, N\textsubscript{lowest} is used as the self-category.
 The resulting self-category may additionally dominates
 some tokens from other segments.
 In addition, we find the categories of the parent, the left-sibling, and
