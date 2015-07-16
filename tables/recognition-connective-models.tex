@@ -2,14 +2,14 @@
 \centering
 \begin{tabular}{|l|c|c|c|c|c|c|}
 \hline
-                            & \multicolumn{3}{c|}{Connective Instances} & \multicolumn{3}{c|}{Component Instances}  \\ \hline
-    Model                   &     Precision &     Recall &     F1-Score  &     Precision &     Recall &     F1-Score \\ \hline
-    Gaussian Naive Bayes    &     34.17     & \bf 94.68  &     50.20     &     41.84     & \bf 92.74  &     57.65    \\ \hline
-    SVM with RBF kernel     &     58.38     &     87.90  &     70.15     &     69.40     &     85.26  &     76.46    \\ \hline
-    SVM with linear kernel  &     64.80     &     78.80  &     71.10     &     74.40     &     77.75  &     76.02    \\ \hline
-    Decision Tree           &     70.03     &     66.99  &     68.43     &     76.23     &     66.24  &     70.84    \\ \hline
-    Random Forest           & \bf 73.06     &     68.49  &     70.69     & \bf 82.48     &     67.11  &     73.97    \\ \hline
-    Logistic Regression     &     66.13     &     82.44  & \bf 73.37     &     76.23     &     81.35  & \bf 78.68    \\ \hline
+                        & \multicolumn{3}{c|}{Connective Instances}                 & \multicolumn{3}{c|}{Component Instances}                  \\ \hline
+Model                   &     Precision &     Recall &     F1-Score                 &     Precision &     Recall &     F1-Score                 \\ \hline
+Gaussian Naive Bayes    &     34.17     & \bf 94.68  &     50.20\textsuperscript{*} &     41.84     & \bf 92.74  &     57.65\textsuperscript{*} \\ \hline
+SVM with RBF kernel     &     58.38     &     87.90  &     70.15\textsuperscript{*} &     69.40     &     85.26  &     76.46\textsuperscript{*} \\ \hline
+SVM with linear kernel  &     64.80     &     78.80  &     71.10\textsuperscript{*} &     74.37     &     77.75  &     76.00\textsuperscript{*} \\ \hline
+Decision Tree           &     70.10     &     67.55  &     68.77\textsuperscript{*} &     76.46     &     66.69  &     71.19\textsuperscript{*} \\ \hline
+Random Forest           & \bf 73.24     &     68.14  &     70.58\textsuperscript{*} & \bf 82.50     &     66.43  &     73.54\textsuperscript{*} \\ \hline
+Logistic Regression     &     66.13     &     82.44  & \bf 73.37\textsuperscript{!} &     76.23     &     81.35  & \bf 78.68\textsuperscript{!} \\ \hline
 
 \end{tabular}
 \caption{\label{t:recognition-connective-models} Performance of discourse usage

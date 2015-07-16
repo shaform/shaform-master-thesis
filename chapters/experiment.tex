@@ -232,7 +232,7 @@ For each connective candidate extracted, we predict its relation type using
 Logistic Regression with \textit{All-NUM} as features.
 The same 10-fold for paragraphs is used, and the precision, recall, and F1 scores
 for positive instances are computed. The results are listed in
-Table~\ref{t:sense-types-pipeline}. The micro-averaged F1 72.75\% can be seen
+Table~\ref{t:sense-types-pipeline}. The micro-averaged F1 72.64\% can be seen
 as the ability for our model to propose connective candidates along with the correct
 relation type. Compared with the original F1 score 74.97\% disregarding relation types,
 the performance only decreases a little, showing the effectiveness of our
@@ -339,7 +339,12 @@ counted as true positive only when the three items are all correctly
 identified; otherwise, it is counted as false positive. We list the results
 in Table~\ref{t:final-results}. We could see that due to the difficulty
 of argument extraction, the performance has decreased significantly compared
-to the previous stage.
+to the previous stage. We additionally list the performance of end-to-end
+parsers reported by \cite{lin2014pdtb} and \cite{kong2014a} for PDTB2 evaluated
+also on the F1 for the relations extracted. However, their works include the
+identification of implicit relations while our system focuses only on explicit relations.
+Also, the languages and annotation standards are different, so it's not actually
+directly comparable.
 
 %t:final-results
 \input{tables/final-results}
