@@ -28,6 +28,7 @@
 
 % Format the refs
 \usepackage[sort,comma]{natbib}
+\usepackage[hidelinks]{hyperref}
 
 \usepackage{titlesec}
 \usepackage{titletoc}
@@ -189,6 +190,7 @@
 % 以 \makecertification 產生
 %\makecertification
 % 或匯入外部.pdf檔
+\phantomsection
 \addcontentsline{toc}{chapter}{口試委員會審定書}
 \includepdf[pages={1}]{pdfs/cert.pdf}
 
@@ -223,11 +225,12 @@
 
 \backmatter
 
-\addcontentsline{toc}{chapter}{\bibname}
 \renewrobustcmd{\disambiguate}[3]{#1}
 \bibliographystyle{apa}
 
 % Your bibliography goes here
+\phantomsection
+\addcontentsline{toc}{chapter}{\bibname}
 \bibliography{thesis}
 
 \end{document}
