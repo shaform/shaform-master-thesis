@@ -103,7 +103,9 @@ connective components are already known. The results are reported in
 Table~\ref{t:linking-perfect-methods}.
 We evaluate different ranking criteria such as scores predicted by
 Logistic Regression, the lengths of the connective candidates, and the combination
-of the two. Ties are broken by the positions of the connective candidates.
+of the two\footnote{For \textit{len+score}, the candidates are ranked by lengths first,
+and the candidates that have the same length are ranked by their scores.}.
+Ties are broken by the positions of the connective candidates.
 Baseline models that only rank the candidates by their positions are also reported.
 
 We found that the ambiguity among the components is low. The simple
@@ -118,7 +120,7 @@ model significantly, but once ranking is employed, it doesn't contribute much.
 \cite{hu2011research} evaluated their algorithm on 99 sentences that have
 linking ambiguity, and they correctly resolved all linking ambiguity for 98
 sentences. To evaluate our model on sentence level, 52 paragraphs that have linking ambiguity
-and are composed of only 1 sentence are selected. We evaluate our non-learning \textit{len+} model
+and are composed of only 1 sentence are selected. We evaluate our non-learning \textit{len+\$} model
 directly on these 52 sentences and are able to correctly resolve all linking
 ambiguity for 51 sentences. Our relatively simple greedy algorithm is
 able to achieve similar results when the components are known.
@@ -139,11 +141,11 @@ level as described in Section~\ref{s:discourse-disambig-component} and
 Section~\ref{s:discourse-disambig-component} are compared.
 Although it is not statistically significant, for both connective
 instances and components instances, the best F1 scores for disambiguation on connective
-level (\textit{\#len-score}) are higher than that for disambiguation on component level
-(\textit{@len-score}).
+level (\textit{\#+len+score}) are higher than that for disambiguation on component level
+(\textit{@+len+score}).
 In addition, it is also relatively computation-efficient as the same Logistic
 Regression predictions are used for both discourse usage disambiguation and ranking.
-Therefore, we choose the \textit{\#len-score} model for the next stage of our
+Therefore, we choose the \textit{\#+len+score} model for the next stage of our
 pipeline system.
 
 %t:linking-methods
@@ -227,7 +229,8 @@ We are able to achieve higher performance on relation type classification.
 
 \subsection{Relation Type Disambiguation within the Pipeline System}
 
-We also evaluate discourse relation disambiguation within the pipeline system.
+We also evaluate discourse relation disambiguation within the pipeline system
+using the \textit{\#+len+score} model.
 For each connective candidate extracted, we predict its relation type using
 Logistic Regression with \textit{All-NUM} as features.
 The same 10-fold for paragraphs is used, and the precision, recall, and F1 scores
@@ -331,8 +334,9 @@ Once argument extraction is integrated into the pipeline system, our end-to-end
 pipeline would be able to extract explicit relations for raw text. In particular,
 it proposes a set of explicit relation candidates, where each relation contains
 three items: (1) the positions of the connective, (2) the relation type, and
-(3) the arguments. We use the same 10-fold for paragraphs to evaluate our model
-using each relation
+(3) the arguments. \textit{\#+len+score} is used for connective extraction, and
+\textit{All-NUM} is used to disambiguate 4 top-level relation types.
+We use the same 10-fold for paragraphs to evaluate our model using each relation
 as an instance. The precision, recall, and F1 scores are computed for each fold,
 and the averaged results are reported. Each explicit relation candidate is
 counted as true positive only when the three items are all correctly
