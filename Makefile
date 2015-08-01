@@ -1,4 +1,5 @@
 MAIN=thesis
+TMPTHESIS=thesis-tmp
 LIBVERSION=thesis-lib
 LATEX=xelatex
 BIBTEX=bibtex
@@ -23,8 +24,9 @@ ntulib: files
 	$(BIBTEX) $(MAIN)
 	$(LATEX) $(MAIN)
 	$(LATEX) $(MAIN)
-	pdftk $(MAIN).pdf output $(LIBVERSION).pdf owner_pw $(PDF_PWD) allow Printing allow ScreenReaders
-	$(RM) watermark.tex $(MAIN).pdf
+	pdftk A=$(MAIN).pdf cat A1 A3-end output $(TMPTHESIS).pdf
+	pdftk $(TMPTHESIS).pdf output $(LIBVERSION).pdf owner_pw $(PDF_PWD) allow Printing allow ScreenReaders
+	$(RM) watermark.tex $(MAIN).pdf $(TMPTHESIS).pdf
 
 files: *.tex chapters/*.tex ntuthesis.cls thesis.bib images/* tables/*.tex
 
