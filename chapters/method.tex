@@ -639,11 +639,15 @@ the end of this segment (i.e., just before the symbol that separates the segment
 \item COMPONENT-ONLY: This feature is set if this segment contains only
 the component and the separating symbol.
 
-\item PREV-COMPONENT: This feature is set if the previous segment has
-a connective component.
+\item BEFORE-COMPONENT: This feature is set if the current segment is before
+all connective components. Additionally, the distance to the first segment
+that contains a connective component is set as a binary feature.
+The distance is measured by adding 1 to the number of segments between the two
+segments.
 
-\item NEXT-COMPONENT: This feature is set if the next segment has
-a connective component.
+\item AFTER-COMPONENT: This feature is set if the current segment is after
+all connective components. Additionally, the distance to the last segment
+that contains a connective component is set as a binary feature.
 \end{enumerate}
 
 These features only concern with the current connective being considered, so
