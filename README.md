@@ -10,7 +10,7 @@ And copy some part of [台大碩博士論文LaTeX範本](https://code.google.com
 ## How to compile
 ### Ubuntu
 
-* 安裝XeLaTex
+* 安裝 XeLaTex
     * sudo apt-get install texlive texlive-xetex texlive-latex-recommended texlive-latex-extra texlive-bibtex-extra texlive-science texlive-humanities pdftk
 * 安裝字形（標楷體、Times New Roman）
     * sudo mkdir -p /usr/share/fonts/truetype/win/ 
@@ -25,8 +25,8 @@ And copy some part of [台大碩博士論文LaTeX範本](https://code.google.com
 
 ### Mac OS
 
-* 安裝[MacTEX](https://tug.org/mactex/)
-* 安裝[PDFtk](http://www.pdflabs.com/tools/pdftk-server/)
+* 安裝 [MacTEX](https://tug.org/mactex/)
+* 安裝 [PDFtk](http://www.pdflabs.com/tools/pdftk-server/)
 * 編譯
     * make
 * 編譯送圖書館版本（加上浮水印、保全）
@@ -34,4 +34,4 @@ And copy some part of [台大碩博士論文LaTeX範本](https://code.google.com
 
 ### Windows
 
-* 留下字形檔案，下載[Ubuntu](http://www.ubuntu.com/)並安裝或找一台[蘋果電腦](http://www.apple.com/tw/mac/)。
+* 留下字形檔案，下載 [Ubuntu](http://www.ubuntu.com/) 並安裝或找一台[蘋果電腦](http://www.apple.com/tw/mac/)。
